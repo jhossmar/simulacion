@@ -12,7 +12,7 @@ public class Simulador implements Runnable {
 	private Reloj reloj;
 	
 	private static final int VELOCIDAD_MAXIMA_SIMULACION = 100;
-	private static final int VELOCIDAD_MINIMA_SIMULACION = 1000;
+	private static final int VELOCIDAD_MINIMA_SIMULACION = 100;
 	
 	private int velocidadActualDeSimulacion;
 	
@@ -46,9 +46,10 @@ public class Simulador implements Runnable {
 				Thread.sleep(velocidadActualDeSimulacion);
 				System.out.println("Sala de Emergencias Atendiendo");
 				
-				System.out.println("HORA : " + tiempoTranscurrido);
+				System.out.println("HORA : " + reloj.toString());
 				
 				this.tiempoTranscurrido++;
+				this.reloj.actualizar(this.tiempoTranscurrido);
 				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
