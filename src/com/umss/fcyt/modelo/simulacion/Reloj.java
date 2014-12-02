@@ -1,15 +1,28 @@
 package com.umss.fcyt.modelo.simulacion;
 
 public class Reloj {
-	int cantidadMinutosDia;
+	private static final int CANTIDAD_MINUTOS_DIA = 1440;
+
+	int cantidadActualMinutos = 0;
 	
 	int hora;
 	int minuto;
 	
 	public Reloj() {
-		this.cantidadMinutosDia = 1440;
-		int segundos = transformarMinutosASegundos(cantidadMinutosDia);
+		int segundos = transformarMinutosASegundos(cantidadActualMinutos);
 		convertirSegundos(segundos);
+	}
+
+	public int getCantidadActualMinutos() {
+		return cantidadActualMinutos;
+	}
+
+	public void setCantidadActualMinutos(int cantidadActualMinutos) {
+		this.cantidadActualMinutos = cantidadActualMinutos;
+	}
+
+	public static int getCantidadMinutosDia() {
+		return CANTIDAD_MINUTOS_DIA;
 	}
 
 	public void actualizar(int minutos) {
@@ -43,9 +56,6 @@ public class Reloj {
 		return minutos * 60;
 	}
 	
-	public int getCantidadMinutosDia() {
-		return cantidadMinutosDia;
-	}
 
 	public void convertirSegundos(int segundos) {
 		int horas = segundos / 3600;
@@ -54,10 +64,6 @@ public class Reloj {
 		
 		this.hora = horas;
 		this.minuto = minutos;
-	}
-	
-	public void setCantidadMinutosDia(int cantidadMinutosDia) {
-		this.cantidadMinutosDia = cantidadMinutosDia;
 	}
 	
 //	public int horaAleatoria(int limite) {
