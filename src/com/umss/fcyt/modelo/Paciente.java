@@ -1,15 +1,25 @@
 package com.umss.fcyt.modelo;
 
-public class Paciente implements Runnable{
-	TipoPaciente tipo;
-	GravedadPaciente gravedad;
-	String nombre;
-	Cubiculo cubiculoPerteneciente;
+public class Paciente implements Runnable {
+	private TipoPaciente tipo;
+	private GravedadPaciente gravedad;
+	private String nombre;
+	private Cubiculo cubiculoPerteneciente;
+	
+	Thread procesoPaciente;
 	
 	public Paciente(String nombre) {
+		this.nombre = nombre;
 		this.tipo = null;
 		this.gravedad = null;
 		this.cubiculoPerteneciente = null;
+		
+		inicializarProcesoPaciente();
+	}
+	
+	private void inicializarProcesoPaciente() {
+		this.procesoPaciente = new Thread();
+		this.procesoPaciente.start();
 	}
 	
 	@Override
