@@ -23,6 +23,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -58,6 +59,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	public VentanaPrincipal() {
+		setResizable(false);
 		setTitle("Simulador Sala de Emergencias");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/icono1.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -155,6 +157,7 @@ public class VentanaPrincipal extends JFrame {
 		toolBar.add(btnReiniciar);
 		
 		JInternalFrame internalFrame = new JInternalFrame("Paleta de Herramientas");
+		internalFrame.setFrameIcon(new ImageIcon("imagenes/icono1.png"));
 		internalFrame.setBounds(10, 59, 194, 294);
 		contentPane.add(internalFrame);
 		internalFrame.getContentPane().setLayout(null);
