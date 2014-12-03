@@ -21,6 +21,8 @@ import javax.swing.JToolBar;
 import javax.swing.JSlider;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -152,7 +154,7 @@ public class VentanaPrincipal extends JFrame {
 		JButton btnReiniciar = new JButton("Reiniciar");
 		toolBar.add(btnReiniciar);
 		
-		JInternalFrame internalFrame = new JInternalFrame("New JInternalFrame");
+		JInternalFrame internalFrame = new JInternalFrame("Paleta de Herramientas");
 		internalFrame.setBounds(10, 59, 194, 294);
 		contentPane.add(internalFrame);
 		internalFrame.getContentPane().setLayout(null);
@@ -180,6 +182,15 @@ public class VentanaPrincipal extends JFrame {
 		JButton button_3 = new JButton("New button");
 		button_3.setBounds(92, 141, 59, 54);
 		internalFrame.getContentPane().add(button_3);
+		
+		JSlider slider = new JSlider();
+		slider.setBounds(10, 206, 158, 26);
+		internalFrame.getContentPane().add(slider);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Dia normal", "Fines de semana", "Dia feriado"}));
+		comboBox.setBounds(28, 243, 123, 20);
+		internalFrame.getContentPane().add(comboBox);
 		
 		
 		
