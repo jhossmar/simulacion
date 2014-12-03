@@ -18,7 +18,7 @@ public class Cubiculo {
 	public synchronized void atenderPaciente() {
 		if(cantidadDisponiblesDeCamillas == 0) {
 			try {
-				System.out.println("paciente en la cola");
+				System.out.println("un paciente en la cola");
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -26,7 +26,7 @@ public class Cubiculo {
 		}
 		
 		cantidadDisponiblesDeCamillas--;
-		System.out.println("paciente esta siendo atendido");
+		//System.out.println("paciente esta siendo atendido");
 	}
 	
 	//cuando un paciente termina de ser atendido

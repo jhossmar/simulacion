@@ -16,7 +16,7 @@ public class Paciente implements Runnable {
 		this.gravedad = null;
 		this.cubiculoPerteneciente = null;
 		
-		this.tiempoDeAtencion = (horaAleatoria(30)  + 10) * 1000;
+		this.tiempoDeAtencion = (horaAleatoria(30)  + 5) * 1000;//otra variable
 	}
 	
 	public void inicializarProcesoPaciente() {
@@ -35,10 +35,11 @@ public class Paciente implements Runnable {
 		cubiculoPerteneciente.atenderPaciente();//se ocupa la camilla
 		
 		try {
+			System.out.println("Paciente : " +nombre +" esta siendo atendido" + "por unos : " + tiempoDeAtencion);
 			Thread.sleep(tiempoDeAtencion);//paciete es atendido
 			
 			cubiculoPerteneciente.liberarSalaEmergencias();
-			System.out.println("termino de ser Atendido");
+			System.out.println("se termino de atender a : " + nombre);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

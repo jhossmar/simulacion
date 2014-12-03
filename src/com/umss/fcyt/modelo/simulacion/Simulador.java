@@ -76,7 +76,7 @@ public class Simulador implements Runnable {
 
 				System.out.println("un paciente ingresa a la sala de emergencia");
 				//aqui se crea un paciente  ojo cuidado con nullpointerException
-				Paciente paciente = new Paciente("beimar");
+				Paciente paciente = new Paciente("beimar" + contadorMinutos);
 				paciente.setCubiculoPerteneciente(salaDeEmergencias.getCubiculos().get(0));
 				paciente.inicializarProcesoPaciente();
 
