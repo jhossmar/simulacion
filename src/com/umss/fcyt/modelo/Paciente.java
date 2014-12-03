@@ -6,6 +6,8 @@ public class Paciente implements Runnable {
 	private String nombre;
 	private Cubiculo cubiculoPerteneciente;
 	
+	private int tiempoDeAtencion;
+	
 	Thread procesoPaciente;
 	
 	public Paciente(String nombre) {
@@ -14,16 +16,33 @@ public class Paciente implements Runnable {
 		this.gravedad = null;
 		this.cubiculoPerteneciente = null;
 		
-		inicializarProcesoPaciente();
+		this.tiempoDeAtencion = (horaAleatoria(30)  + 10) * 1000;
 	}
 	
-	private void inicializarProcesoPaciente() {
-		this.procesoPaciente = new Thread();
+	public void inicializarProcesoPaciente() {
+		this.procesoPaciente = new Thread(this);
 		this.procesoPaciente.start();
+	}
+	
+	public int horaAleatoria(int limite) {
+		int resultado = (int) (Math.random() * limite);
+		return resultado;
 	}
 	
 	@Override
 	public void run() {
+		
+		cubiculoPerteneciente.atenderPaciente();//se ocupa la camilla
+		
+		try {
+			Thread.sleep(tiempoDeAtencion);//paciete es atendido
+			
+			cubiculoPerteneciente.liberarSalaEmergencias();
+			System.out.println("termino de ser Atendido");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 	

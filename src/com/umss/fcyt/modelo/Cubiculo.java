@@ -14,6 +14,28 @@ public class Cubiculo {
 		this.cantidadDisponiblesDeCamillas = cantidadMaximaDeCamillas;
 	}
 
+	//consumir productos
+	public synchronized void atenderPaciente() {
+		if(cantidadDisponiblesDeCamillas == 0) {
+			try {
+				System.out.println("paciente en la cola");
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		cantidadDisponiblesDeCamillas--;
+		System.out.println("paciente esta siendo atendido");
+	}
+	
+	//cuando un paciente termina de ser atendido
+	public synchronized void liberarSalaEmergencias() {
+		this.cantidadDisponiblesDeCamillas++;
+		
+		notify();
+	}
+	
 	public TipoPaciente getTipoDePacienteParaAtender() {
 		return tipoDePacienteParaAtender;
 	}

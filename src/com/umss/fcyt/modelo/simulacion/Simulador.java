@@ -5,14 +5,14 @@ import com.umss.fcyt.modelo.Paciente;
 import com.umss.fcyt.modelo.SalaDeEspera;
 import com.umss.fcyt.modelo.SalaEmergencias;
 import com.umss.fcyt.modelo.TipoPaciente;
-
+//recorrer con agregar a todos los cubiculos cada minuto
 public class Simulador implements Runnable {
 	private SalaEmergencias salaDeEmergencias;
 
 	private Reloj reloj;
 
 	private static final int VELOCIDAD_MAXIMA_SIMULACION = 100;
-	private static final int VELOCIDAD_MINIMA_SIMULACION = 1;
+	private static final int VELOCIDAD_MINIMA_SIMULACION = 1000;
 
 	private int velocidadActualDeSimulacion;
 
@@ -21,7 +21,7 @@ public class Simulador implements Runnable {
 	private Thread procesoSimulacion;
 
 	public Simulador() {
-		this.salaDeEmergencias = salaDeEmergencias;
+		this.salaDeEmergencias = new SalaEmergencias();
 		this.reloj = new Reloj();
 		this.velocidadActualDeSimulacion = VELOCIDAD_MINIMA_SIMULACION;
 		this.tiempoTranscurrido = 0;
@@ -29,6 +29,9 @@ public class Simulador implements Runnable {
 
 	public Simulador(SalaEmergencias salaEmergencias) {
 		this.salaDeEmergencias = salaEmergencias;
+		this.reloj = new Reloj();
+		this.velocidadActualDeSimulacion = VELOCIDAD_MINIMA_SIMULACION;
+		this.tiempoTranscurrido = 0;
 	}
 
 	public void iniciarSimulacion() {
@@ -72,7 +75,10 @@ public class Simulador implements Runnable {
 				}
 
 				System.out.println("un paciente ingresa a la sala de emergencia");
-				//aqui se crea un paciente
+				//aqui se crea un paciente  ojo cuidado con nullpointerException
+				Paciente paciente = new Paciente("beimar");
+				paciente.setCubiculoPerteneciente(salaDeEmergencias.getCubiculos().get(0));
+				paciente.inicializarProcesoPaciente();
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -99,17 +105,17 @@ public class Simulador implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		Cubiculo c = new Cubiculo(3, TipoPaciente.QUEMADURAS);
-		Cubiculo c2 = new Cubiculo(3, TipoPaciente.QUEMADURAS);
+		Cubiculo c = new Cubiculo(2, TipoPaciente.QUEMADURAS);
+		Cubiculo c2 = new Cubiculo(2, TipoPaciente.PACIENTES_GRAVES);
 
-		Paciente p = new Paciente("Beimar");
-		Paciente p2 = new Paciente("juan");
+//		Paciente p = new Paciente("Beimar");
+//		Paciente p2 = new Paciente("juan");
 
 		SalaEmergencias sala = new SalaEmergencias();
 		sala.agregarCubiculo(c);
 		sala.agregarCubiculo(c2);
 
-		Simulador s = new Simulador();
+		Simulador s = new Simulador(sala);
 		s.iniciarSimulacion();
 		//System.out.println(s.horaAleatoria(5));
 	}
