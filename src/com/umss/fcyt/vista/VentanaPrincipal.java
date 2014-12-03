@@ -10,15 +10,33 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Toolkit;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Color;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JToolBar;
+import javax.swing.JSlider;
+import javax.swing.JInternalFrame;
+import javax.swing.JMenu;
 
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
+	private JToolBar toolBar;
+	private JButton btnGuardar;
+	private JButton btnGenerarrepote;
+	private JButton btnEjecutar;
+	private JButton btnPausar;
+	private JButton btnDetener;
 
 	
 	public static void main(String[] args) {
 		try {
-			UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 			//UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -38,13 +56,177 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	public VentanaPrincipal() {
+		setTitle("Simulador Sala de Emergencias");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/icono1.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 1100, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
+		table = new JTable();
+		table.setBounds(836, 319, -194, -180);
+		contentPane.add(table);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 550, 21);
+		contentPane.add(menuBar);
+		
+		JMenu mnArchivo = new JMenu("Archivo");
+		menuBar.add(mnArchivo);
+		
+		JMenuItem mntmGuardarDiseo = new JMenuItem("Guardar Dise\u00F1o");
+		mnArchivo.add(mntmGuardarDiseo);
+		
+		JMenuItem mntmAbrirDiseo = new JMenuItem("Abrir Dise\u00F1o");
+		mnArchivo.add(mntmAbrirDiseo);
+		
+		JMenuItem mntmCerrarPrograma = new JMenuItem("Cerrar Programa");
+		mnArchivo.add(mntmCerrarPrograma);
+		
+		JMenu mnEdicion = new JMenu("Edicion");
+		menuBar.add(mnEdicion);
+		
+		JMenu mnSimulacion = new JMenu("Simulacion");
+		menuBar.add(mnSimulacion);
+		
+		JMenuItem mntmEjecutar = new JMenuItem("Ejecutar");
+		mnSimulacion.add(mntmEjecutar);
+		
+		JMenuItem mntmPausar = new JMenuItem("Pausar");
+		mnSimulacion.add(mntmPausar);
+		
+		JMenuItem mntmReiniciar = new JMenuItem("Reiniciar");
+		mnSimulacion.add(mntmReiniciar);
+		
+		JMenuItem mntmDetener = new JMenuItem("Detener ");
+		mnSimulacion.add(mntmDetener);
+		
+		JMenuItem mntmAcelerar = new JMenuItem("Acelerar");
+		mnSimulacion.add(mntmAcelerar);
+		
+		JMenuItem mntmDesacelerar = new JMenuItem("Desacelerar");
+		mnSimulacion.add(mntmDesacelerar);
+		
+		JMenu mnReporte = new JMenu("Reporte");
+		menuBar.add(mnReporte);
+		
+		JMenuItem mntmCantidadPacientesAtendidos = new JMenuItem("Cantidad Pacientes Atendidos");
+		mnReporte.add(mntmCantidadPacientesAtendidos);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Tiempo Promedio de Atencion");
+		mnReporte.add(mntmNewMenuItem);
+		
+		JMenu mnAyuda = new JMenu("Ayuda");
+		menuBar.add(mnAyuda);
+		
+		JMenuItem mntmListaDeComandos = new JMenuItem("Lista de comandos");
+		mnAyuda.add(mntmListaDeComandos);
+		
+		JMenuItem mntmManualDeUsuario = new JMenuItem("Manual de usuario");
+		mnAyuda.add(mntmManualDeUsuario);
+		
+		JMenuItem mntmSobreNosotros = new JMenuItem("Sobre nosotros");
+		mnAyuda.add(mntmSobreNosotros);
+		
+		toolBar = new JToolBar();
+		toolBar.setBounds(0, 21, 550, 27);
+		contentPane.add(toolBar);
+		
+		btnGuardar = new JButton("Guardar");
+		toolBar.add(btnGuardar);
+		
+		btnGenerarrepote = new JButton("GenerarRepote");
+		toolBar.add(btnGenerarrepote);
+		
+		btnEjecutar = new JButton("Ejecutar");
+		toolBar.add(btnEjecutar);
+		
+		btnPausar = new JButton("Pausar");
+		toolBar.add(btnPausar);
+		
+		btnDetener = new JButton("Detener");
+		toolBar.add(btnDetener);
+		
+		JButton btnReiniciar = new JButton("Reiniciar");
+		toolBar.add(btnReiniciar);
+		
+		JInternalFrame internalFrame = new JInternalFrame("New JInternalFrame");
+		internalFrame.setBounds(10, 59, 194, 294);
+		contentPane.add(internalFrame);
+		internalFrame.getContentPane().setLayout(null);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(10, 11, 59, 54);
+		internalFrame.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.setBounds(92, 11, 59, 54);
+		internalFrame.getContentPane().add(btnNewButton_1);
+		
+		JButton button = new JButton("New button");
+		button.setBounds(10, 76, 59, 54);
+		internalFrame.getContentPane().add(button);
+		
+		JButton button_1 = new JButton("New button");
+		button_1.setBounds(92, 76, 59, 54);
+		internalFrame.getContentPane().add(button_1);
+		
+		JButton button_2 = new JButton("New button");
+		button_2.setBounds(10, 141, 59, 54);
+		internalFrame.getContentPane().add(button_2);
+		
+		JButton button_3 = new JButton("New button");
+		button_3.setBounds(92, 141, 59, 54);
+		internalFrame.getContentPane().add(button_3);
+		
+		
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.DARK_GRAY);
+		panel.setBounds(242, 90, 401, 203);
+		contentPane.add(panel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.DARK_GRAY);
+		panel_1.setBounds(673, 90, 401, 203);
+		contentPane.add(panel_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.DARK_GRAY);
+		panel_2.setBounds(242, 347, 401, 203);
+		contentPane.add(panel_2);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.DARK_GRAY);
+		panel_3.setBounds(673, 347, 401, 203);
+		contentPane.add(panel_3);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(Color.DARK_GRAY);
+		panel_4.setBounds(10, 402, 210, 134);
+		contentPane.add(panel_4);
+		
+		JLabel lblNewLabel = new JLabel("Cubiculo Quemados");
+		lblNewLabel.setBounds(253, 59, 116, 20);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblCubiculoPacientesGraves = new JLabel("Cubiculo Pacientes Graves");
+		lblCubiculoPacientesGraves.setBounds(672, 59, 116, 20);
+		contentPane.add(lblCubiculoPacientesGraves);
+		
+		JLabel lblCubiculoPacientesInfecciosos = new JLabel("Cubiculo Pacientes Infecciosos");
+		lblCubiculoPacientesInfecciosos.setBounds(242, 316, 151, 20);
+		contentPane.add(lblCubiculoPacientesInfecciosos);
+		
+		JLabel lblCubiculoPacientesNormales = new JLabel("Cubiculo Pacientes Normales");
+		lblCubiculoPacientesNormales.setBounds(672, 316, 174, 20);
+		contentPane.add(lblCubiculoPacientesNormales);
+		
+		JLabel lblTriaje = new JLabel("Triaje");
+		lblTriaje.setBounds(20, 371, 116, 20);
+		contentPane.add(lblTriaje);
+		internalFrame.setVisible(true);
 	}
-
 }
