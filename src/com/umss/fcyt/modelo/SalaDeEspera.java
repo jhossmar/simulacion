@@ -18,6 +18,10 @@ public class SalaDeEspera extends ArrayList<Paciente> {
 		}
 	}
 	
+	public void eliminarEnPosicion(int indice) {
+		this.remove(indice);
+	}
+	
 	public Paciente frente() {
 		Paciente datoAuxiliar = null;
 		if (this.size() > 0) {

@@ -2,6 +2,7 @@ package com.umss.fcyt.vista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,9 +11,12 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Toolkit;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 import java.awt.Color;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JMenuBar;
@@ -28,13 +32,17 @@ import javax.swing.ImageIcon;
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
 	private JToolBar toolBar;
 	private JButton btnGuardar;
 	private JButton btnGenerarrepote;
 	private JButton btnEjecutar;
 	private JButton btnPausar;
 	private JButton btnDetener;
+	 public JPanel panelQuemados;
+	 JPanel panelGraves;
+	 JPanel panelInfecciosos;
+	 JPanel panelNormales;
+	 JPanel panelTriaje;
 
 	
 	public static void main(String[] args) {
@@ -69,9 +77,6 @@ public class VentanaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
-		table = new JTable();
-		table.setBounds(836, 319, -194, -180);
-		contentPane.add(table);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 550, 21);
@@ -197,30 +202,30 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.DARK_GRAY);
-		panel.setBounds(242, 90, 401, 203);
-		contentPane.add(panel);
+		panelQuemados = new JPanel();
+		panelQuemados.setBackground(Color.DARK_GRAY);
+		panelQuemados.setBounds(242, 90, 401, 203);
+		contentPane.add(panelQuemados);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.DARK_GRAY);
-		panel_1.setBounds(673, 90, 401, 203);
-		contentPane.add(panel_1);
+		panelGraves = new JPanel();
+		panelGraves.setBackground(Color.DARK_GRAY);
+		panelGraves.setBounds(673, 90, 401, 203);
+		contentPane.add(panelGraves);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.DARK_GRAY);
-		panel_2.setBounds(242, 347, 401, 203);
-		contentPane.add(panel_2);
+		panelInfecciosos = new JPanel();
+		panelInfecciosos.setBackground(Color.DARK_GRAY);
+		panelInfecciosos.setBounds(242, 347, 401, 203);
+		contentPane.add(panelInfecciosos);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(Color.DARK_GRAY);
-		panel_3.setBounds(673, 347, 401, 203);
-		contentPane.add(panel_3);
+		panelNormales = new JPanel();
+		panelNormales.setBackground(Color.DARK_GRAY);
+		panelNormales.setBounds(673, 347, 401, 203);
+		contentPane.add(panelNormales);
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(Color.DARK_GRAY);
-		panel_4.setBounds(10, 402, 210, 134);
-		contentPane.add(panel_4);
+		panelTriaje = new JPanel();
+		panelTriaje.setBackground(Color.DARK_GRAY);
+		panelTriaje.setBounds(10, 402, 210, 134);
+		contentPane.add(panelTriaje);
 		
 		JLabel lblNewLabel = new JLabel("Cubiculo Quemados");
 		lblNewLabel.setBounds(253, 59, 116, 20);
@@ -242,5 +247,25 @@ public class VentanaPrincipal extends JFrame {
 		lblTriaje.setBounds(20, 371, 116, 20);
 		contentPane.add(lblTriaje);
 		internalFrame.setVisible(true);
+
+		agregarPaciente(panelTriaje);
+	}
+	
+	public void eliminarPaciente(JPanel panel) {
+		
+		if(panel.getComponents().length != 0) {
+			panel.remove(0);
+			System.out.println("no se puedo");
+		}
+		
+	}
+	
+	public void agregarPaciente(JPanel panel) {
+		panel.setLayout(new FlowLayout(1, 10,10));
+		
+		JLabel laabelPaciente = new JLabel();
+		laabelPaciente.setIcon(new ImageIcon("imagenes/icono1.png"));
+		laabelPaciente.setBounds(20, 371, 116, 20);
+		panel.add(laabelPaciente);
 	}
 }

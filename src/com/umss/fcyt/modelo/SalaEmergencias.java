@@ -9,7 +9,7 @@ public class SalaEmergencias {
 	private List<Medico> medicos;
 	private List<Enfermera> enfermeros;
 	private List<Cubiculo> cubiculos;
-	private SalaDeEspera pacientesEsperando;
+	private SalaDeEspera salaEspera;
 	
 	public SalaEmergencias() {
 		this.pacientes = null;
@@ -17,8 +17,22 @@ public class SalaEmergencias {
 		this.enfermeros = null;
 		this.cubiculos = null;
 		
-		
+		this.salaEspera = new SalaDeEspera();
 	}
+
+	
+	
+	public SalaDeEspera getSalaEspera() {
+		return salaEspera;
+	}
+
+
+
+	public void setSalaEspera(SalaDeEspera salaEspera) {
+		this.salaEspera = salaEspera;
+	}
+
+
 
 	public void agregarPaciente(Paciente paciente) {
 		if(pacientes == null) {
