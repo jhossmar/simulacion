@@ -183,9 +183,12 @@ public class VentanaPrincipal extends JFrame {
 		button_3.setBounds(92, 141, 59, 54);
 		internalFrame.getContentPane().add(button_3);
 		
-		JSlider slider = new JSlider();
-		slider.setBounds(10, 206, 158, 26);
-		internalFrame.getContentPane().add(slider);
+		sliderVelocidad = new JSlider(1,10,1);
+		sliderVelocidad.setFocusable(false);
+		sliderVelocidad.setMajorTickSpacing(1);
+		sliderVelocidad.setPaintTicks(true);
+		sliderVelocidad.setBounds(10, 206, 158, 26);
+		internalFrame.getContentPane().add(sliderVelocidad);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Dia normal", "Fines de semana", "Dia feriado"}));
@@ -250,6 +253,7 @@ public class VentanaPrincipal extends JFrame {
 		
 	}
 	int contador =0;
+	public JSlider sliderVelocidad;
 	
 	
 	public void agregarPaciente(JPanel panel) {
