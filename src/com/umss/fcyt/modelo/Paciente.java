@@ -14,7 +14,7 @@ public class Paciente {
 		this.tipo = TipoPaciente.QUEMADURAS;
 		this.gravedad = null;
 
-		this.tiempoDeAtencion = 6;// otra variable
+		this.tiempoDeAtencion = 10;// otra variable
 	}
 
 	public boolean equals(Object obj) {

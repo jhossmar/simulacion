@@ -1,6 +1,7 @@
 package com.umss.fcyt.vista;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 
@@ -8,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Toolkit;
@@ -19,6 +21,7 @@ import java.awt.Color;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.BorderFactory;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
@@ -39,10 +42,10 @@ public class VentanaPrincipal extends JFrame {
 	private JButton btnPausar;
 	private JButton btnDetener;
 	 public JPanel panelQuemados;
-	 JPanel panelGraves;
-	 JPanel panelInfecciosos;
-	 JPanel panelNormales;
-	 JPanel panelTriaje;
+	 public JPanel panelGraves;
+	 public JPanel panelInfecciosos;
+	 public JPanel panelNormales;
+	 public JPanel panelTriaje;
 
 	
 	public static void main(String[] args) {
@@ -248,7 +251,7 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(lblTriaje);
 		internalFrame.setVisible(true);
 
-		agregarPaciente(panelTriaje);
+		
 	}
 	
 	public void eliminarPaciente(JPanel panel) {
@@ -259,13 +262,16 @@ public class VentanaPrincipal extends JFrame {
 		}
 		
 	}
-	
+	int contador =0;
 	public void agregarPaciente(JPanel panel) {
 		panel.setLayout(new FlowLayout(1, 10,10));
 		
-		JLabel laabelPaciente = new JLabel();
-		laabelPaciente.setIcon(new ImageIcon("imagenes/icono1.png"));
-		laabelPaciente.setBounds(20, 371, 116, 20);
+		JLabel laabelPaciente = new JLabel(" "+contador);
+		laabelPaciente.setBorder(BorderFactory.createBevelBorder(1, Color.BLUE, Color.gray));
+		laabelPaciente.setIcon(new ImageIcon("imagenes/paciente.png"));
+		//laabelPaciente.setBounds(20, 371, 116, 20);
 		panel.add(laabelPaciente);
+		contador++;
+		panel.updateUI();
 	}
 }

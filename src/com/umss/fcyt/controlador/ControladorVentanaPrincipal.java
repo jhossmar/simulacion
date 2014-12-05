@@ -26,15 +26,19 @@ public class ControladorVentanaPrincipal implements Runnable{
 	private int velocidadActualDeSimulacion;
 
 	private Thread procesoSimulacion;
+	
+	private SalaEmergencias sala;
 
 	public ControladorVentanaPrincipal(VentanaPrincipal ventana) {
 		this.ventanaPrincipal = ventana;
 	
 		this.reloj = new Reloj();
 		
-		this.velocidadActualDeSimulacion = 3;
+		this.velocidadActualDeSimulacion = 1000;
 		
 		this.simulador = new SimuladorDos();
+		
+		this.sala = simulador.getSalaDeEmergencias();
 	}
 
 	//este constructor puede servir para guardar y abrir archivos
@@ -70,8 +74,10 @@ public class ControladorVentanaPrincipal implements Runnable{
 				
 				simulador.pasoSimulacion();
 				
+				actualizarVista();
 				
-				SwingUtilities.updateComponentTreeUI(ventanaPrincipal);
+				//SwingUtilities.updateComponentTreeUI(ventanaPrincipal);
+				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -81,6 +87,27 @@ public class ControladorVentanaPrincipal implements Runnable{
 		}
 	}
 
+	public void actualizarVista() {
+		
+		//primero en orden
+//		for(Cubiculo c: sala.getCubiculos()) {
+//			for (Paciente paciente : c.getPacientes()) {
+//				
+//			}
+//		}
+		ventanaPrincipal.panelQuemados.removeAll();
+		
+		for(Paciente p : sala.getCubiculos().get(0).getPacientes()) {
+			System.out.println("");
+			ventanaPrincipal.agregarPaciente(ventanaPrincipal.panelQuemados);
+		}
+		
+		System.out.println("jfksdjakfjalsjd :" + sala.getSalaEspera().size());
+		for(Paciente a : sala.getSalaEspera()) {
+			ventanaPrincipal.agregarPaciente(ventanaPrincipal.panelTriaje);
+		}
+	}
+	
 	public void pararSimulacion() {
 
 	}
