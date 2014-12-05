@@ -38,36 +38,25 @@ public class VentanaPrincipal extends JFrame {
 	private JToolBar toolBar;
 	private JButton btnGuardar;
 	private JButton btnGenerarrepote;
-	private JButton btnEjecutar;
-	private JButton btnPausar;
-	private JButton btnDetener;
+	
+	public JMenuItem itemEjecutar;
+	public JMenuItem itemPausar;
+	public JMenuItem itemContinuar;
+	public JMenuItem itemDetener;
+	
+	//comandos de simulacion
+	public JButton botonEjecutar;
+	public  JButton botonPausar;
+	public  JButton botonDetener;
+	 public JButton botonContinuar;
+	
+	 //panel de graficos
 	 public JPanel panelQuemados;
 	 public JPanel panelGraves;
 	 public JPanel panelInfecciosos;
 	 public JPanel panelNormales;
 	 public JPanel panelTriaje;
-
 	
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
-			//UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		VentanaPrincipal frame = new VentanaPrincipal();
-		frame.setVisible(true);
-	}
 
 	public VentanaPrincipal() {
 		setResizable(false);
@@ -103,17 +92,17 @@ public class VentanaPrincipal extends JFrame {
 		JMenu mnSimulacion = new JMenu("Simulacion");
 		menuBar.add(mnSimulacion);
 		
-		JMenuItem mntmEjecutar = new JMenuItem("Ejecutar");
-		mnSimulacion.add(mntmEjecutar);
+		itemEjecutar = new JMenuItem("Ejecutar");
+		mnSimulacion.add(itemEjecutar);
 		
-		JMenuItem mntmPausar = new JMenuItem("Pausar");
-		mnSimulacion.add(mntmPausar);
+		itemPausar = new JMenuItem("Pausar");
+		mnSimulacion.add(itemPausar);
 		
-		JMenuItem mntmReiniciar = new JMenuItem("Reiniciar");
-		mnSimulacion.add(mntmReiniciar);
+		itemContinuar = new JMenuItem("Continuar");
+		mnSimulacion.add(itemContinuar);
 		
-		JMenuItem mntmDetener = new JMenuItem("Detener ");
-		mnSimulacion.add(mntmDetener);
+		itemDetener = new JMenuItem("Detener ");
+		mnSimulacion.add(itemDetener);
 		
 		JMenuItem mntmAcelerar = new JMenuItem("Acelerar");
 		mnSimulacion.add(mntmAcelerar);
@@ -152,21 +141,21 @@ public class VentanaPrincipal extends JFrame {
 		btnGenerarrepote = new JButton("GenerarRepote");
 		toolBar.add(btnGenerarrepote);
 		
-		btnEjecutar = new JButton("Ejecutar");
-		toolBar.add(btnEjecutar);
+		botonEjecutar = new JButton("Ejecutar");
+		toolBar.add(botonEjecutar);
 		
-		btnPausar = new JButton("Pausar");
-		toolBar.add(btnPausar);
+		botonPausar = new JButton("Pausar");
+		toolBar.add(botonPausar);
 		
-		btnDetener = new JButton("Detener");
-		toolBar.add(btnDetener);
+		botonDetener = new JButton("Detener");
+		toolBar.add(botonDetener);
 		
-		JButton btnReiniciar = new JButton("Reiniciar");
-		toolBar.add(btnReiniciar);
+		botonContinuar = new JButton("Continuar");
+		toolBar.add(botonContinuar);
 		
 		JInternalFrame internalFrame = new JInternalFrame("Paleta de Herramientas");
 		internalFrame.setFrameIcon(new ImageIcon("imagenes/icono1.png"));
-		internalFrame.setBounds(10, 59, 194, 294);
+		internalFrame.setBounds(10, 66, 194, 294);
 		contentPane.add(internalFrame);
 		internalFrame.getContentPane().setLayout(null);
 		
@@ -202,8 +191,6 @@ public class VentanaPrincipal extends JFrame {
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Dia normal", "Fines de semana", "Dia feriado"}));
 		comboBox.setBounds(28, 243, 123, 20);
 		internalFrame.getContentPane().add(comboBox);
-		
-		
 		
 		panelQuemados = new JPanel();
 		panelQuemados.setBackground(Color.DARK_GRAY);
@@ -263,6 +250,8 @@ public class VentanaPrincipal extends JFrame {
 		
 	}
 	int contador =0;
+	
+	
 	public void agregarPaciente(JPanel panel) {
 		panel.setLayout(new FlowLayout(1, 10,10));
 		

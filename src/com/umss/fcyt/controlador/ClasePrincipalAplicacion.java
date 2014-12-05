@@ -33,6 +33,6 @@ public class ClasePrincipalAplicacion {
 		ControladorVentanaPrincipal controlador = new ControladorVentanaPrincipal(ventanaPrincipal);
 		
 		ventanaPrincipal.setVisible(true);
-		controlador.iniciarSimulacion();
+		//controlador.iniciarSimulacion();
 	}
 }
