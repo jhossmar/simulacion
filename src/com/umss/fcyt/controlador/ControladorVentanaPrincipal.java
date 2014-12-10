@@ -163,6 +163,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 
 	public void actualizarVista() {
 		ventanaPrincipal.panelQuemados.removeAll();
+		
 
 		for (Paciente p : sala.getCubiculos().get(0).getPacientes()) {
 			System.out.println("");
