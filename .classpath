@@ -3,5 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="librerias/JTattoo-1.6.11.jar"/>
+	<classpathentry kind="lib" path="forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
+	<classpathentry kind="lib" path="C:/Users/Pavillondv7/Desktop/Marce!/Taller de Simu/libreriasSimulacion/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Pavillondv7/Desktop/Marce!/Taller de Simu/libreriasSimulacion/jcommon-1.0.23.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
