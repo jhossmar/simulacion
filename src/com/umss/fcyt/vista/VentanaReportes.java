@@ -27,7 +27,7 @@ import org.jfree.chart.ChartPanel;
 
 import com.umss.fcyt.controlador.Reporte;
 
-public class Reportes extends JFrame {
+public class VentanaReportes extends JFrame {
 
 	private JPanel contentPane;
 
@@ -38,7 +38,7 @@ public class Reportes extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Reportes frame = new Reportes();
+					VentanaReportes frame = new VentanaReportes();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +50,7 @@ public class Reportes extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Reportes() {
+	public VentanaReportes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 546, 595);
 		contentPane = new JPanel();

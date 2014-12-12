@@ -14,7 +14,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import org.jfree.data.general.DefaultPieDataset;
 
-import com.umss.fcyt.vista.Reportes;
+import com.umss.fcyt.vista.VentanaReportes;
 import java.util.ArrayList; 
 public class Reporte {
 	
