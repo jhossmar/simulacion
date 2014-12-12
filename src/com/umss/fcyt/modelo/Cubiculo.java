@@ -1,17 +1,45 @@
 package com.umss.fcyt.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cubiculo {
 
 	
 	//faltan implementar dos metodos importantes
-	private int cantidadDisponiblesDeCamillas;
+	private int cantidadDisponiblesDeCamillas;//ya no es necesario
+	
 	private int cantidadMaximaDeCamillas;
 	private TipoPaciente tipoDePacienteParaAtender;
-
+	
+	private List<Paciente> pacientes;
+	
 	public Cubiculo(int cantidadDeCamillas, TipoPaciente tipoPaciente) {
 		this.tipoDePacienteParaAtender = tipoPaciente;
 		this.cantidadMaximaDeCamillas = cantidadDeCamillas;
-		this.cantidadDisponiblesDeCamillas = cantidadMaximaDeCamillas;
+		//this.cantidadDisponiblesDeCamillas = cantidadMaximaDeCamillas;//ya no es necesario
+		this.pacientes = new ArrayList<Paciente>();
+	}
+	
+	public boolean verificarEspacio() {
+		boolean respuesta = false;
+		if(this.pacientes.size() < cantidadMaximaDeCamillas) {
+			return true;
+		}
+		
+		return respuesta;
+	}
+	
+	public void agregarPaciente(Paciente paciente) {
+		this.pacientes.add(paciente);
+	}
+	
+	public List<Paciente> getPacientes() {
+		return pacientes;
+	}
+
+	public void setPacientes(List<Paciente> pacientes) {
+		this.pacientes = pacientes;
 	}
 
 	//consumir productos
@@ -26,7 +54,6 @@ public class Cubiculo {
 		}
 		
 		cantidadDisponiblesDeCamillas--;
-		//System.out.println("paciente esta siendo atendido");
 	}
 	
 	//cuando un paciente termina de ser atendido

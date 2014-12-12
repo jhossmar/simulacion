@@ -1,66 +1,53 @@
 package com.umss.fcyt.modelo;
 
-public class Paciente implements Runnable {
+public class Paciente {
 	private TipoPaciente tipo;
 	private GravedadPaciente gravedad;
 	private String nombre;
-	private Cubiculo cubiculoPerteneciente;
-	
+
 	private int tiempoDeAtencion;
-	
+
 	Thread procesoPaciente;
-	
+
 	public Paciente(String nombre) {
 		this.nombre = nombre;
-		this.tipo = null;
+		this.tipo = TipoPaciente.QUEMADURAS;
 		this.gravedad = null;
-		this.cubiculoPerteneciente = null;
-		
-		this.tiempoDeAtencion = (horaAleatoria(30)  + 5) * 1000;//otra variable
+
+		this.tiempoDeAtencion = 10;// otra variable
 	}
-	
-	public void inicializarProcesoPaciente() {
-		this.procesoPaciente = new Thread(this);
-		this.procesoPaciente.start();
-	}
-	
-	public int horaAleatoria(int limite) {
-		int resultado = (int) (Math.random() * limite);
-		return resultado;
-	}
-	
-	@Override
-	public void run() {
-		
-		cubiculoPerteneciente.atenderPaciente();//se ocupa la camilla
-		
-		try {
-			System.out.println("Paciente : " +nombre +" esta siendo atendido" + "por unos : " + tiempoDeAtencion);
-			Thread.sleep(tiempoDeAtencion);//paciete es atendido
-			
-			cubiculoPerteneciente.liberarSalaEmergencias();
-			System.out.println("se termino de atender a : " + nombre);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+
+	public boolean equals(Object obj) {
+		if (obj instanceof Paciente) {
+			Paciente tmpPersona = (Paciente) obj;
+			if (this.nombre.equals(tmpPersona.nombre)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
 		}
-		
-		
 	}
-	
+
+	public int getTiempoDeAtencion() {
+		return tiempoDeAtencion;
+	}
+
+	public void setTiempoDeAtencion(int tiempoDeAtencion) {
+		this.tiempoDeAtencion = tiempoDeAtencion;
+	}
+
+	public void reducirTiempoDeAtencion() {
+		this.tiempoDeAtencion = this.tiempoDeAtencion - 1;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public Cubiculo getCubiculoPerteneciente() {
-		return cubiculoPerteneciente;
-	}
-
-	public void setCubiculoPerteneciente(Cubiculo cubiculoPerteneciente) {
-		this.cubiculoPerteneciente = cubiculoPerteneciente;
 	}
 
 	public TipoPaciente getTipo() {
@@ -78,6 +65,5 @@ public class Paciente implements Runnable {
 	public void setGravedad(GravedadPaciente gravedad) {
 		this.gravedad = gravedad;
 	}
-	
-	
+
 }

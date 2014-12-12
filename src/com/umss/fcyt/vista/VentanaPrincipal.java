@@ -1,20 +1,31 @@
 package com.umss.fcyt.vista;
 
-import java.awt.BorderLayout;  
+// HEAD
+import java.awt.BorderLayout;   
+//=======
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+// branch 'master' of https://github.com/jhossmar/simulacion.git
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Toolkit;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 import java.awt.Color;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.BorderFactory;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
@@ -28,35 +39,28 @@ import javax.swing.ImageIcon;
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
 	private JToolBar toolBar;
 	private JButton btnGuardar;
 	private JButton btnGenerarrepote;
-	private JButton btnEjecutar;
-	private JButton btnPausar;
-	private JButton btnDetener;
-
 	
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
-			//UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		VentanaPrincipal frame = new VentanaPrincipal();
-		frame.setVisible(true);
-	}
+	public JMenuItem itemEjecutar;
+	public JMenuItem itemPausar;
+	public JMenuItem itemContinuar;
+	public JMenuItem itemDetener;
+	
+	//comandos de simulacion
+	public JButton botonEjecutar;
+	public  JButton botonPausar;
+	public  JButton botonDetener;
+	 public JButton botonContinuar;
+	
+	 //panel de graficos
+	 public JPanel panelQuemados;
+	 public JPanel panelGraves;
+	 public JPanel panelInfecciosos;
+	 public JPanel panelNormales;
+	 public JPanel panelTriaje;
+	
 
 	public VentanaPrincipal() {
 		setResizable(false);
@@ -69,9 +73,6 @@ public class VentanaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
-		table = new JTable();
-		table.setBounds(836, 319, -194, -180);
-		contentPane.add(table);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 550, 21);
@@ -95,17 +96,17 @@ public class VentanaPrincipal extends JFrame {
 		JMenu mnSimulacion = new JMenu("Simulacion");
 		menuBar.add(mnSimulacion);
 		
-		JMenuItem mntmEjecutar = new JMenuItem("Ejecutar");
-		mnSimulacion.add(mntmEjecutar);
+		itemEjecutar = new JMenuItem("Ejecutar");
+		mnSimulacion.add(itemEjecutar);
 		
-		JMenuItem mntmPausar = new JMenuItem("Pausar");
-		mnSimulacion.add(mntmPausar);
+		itemPausar = new JMenuItem("Pausar");
+		mnSimulacion.add(itemPausar);
 		
-		JMenuItem mntmReiniciar = new JMenuItem("Reiniciar");
-		mnSimulacion.add(mntmReiniciar);
+		itemContinuar = new JMenuItem("Continuar");
+		mnSimulacion.add(itemContinuar);
 		
-		JMenuItem mntmDetener = new JMenuItem("Detener ");
-		mnSimulacion.add(mntmDetener);
+		itemDetener = new JMenuItem("Detener ");
+		mnSimulacion.add(itemDetener);
 		
 		JMenuItem mntmAcelerar = new JMenuItem("Acelerar");
 		mnSimulacion.add(mntmAcelerar);
@@ -144,21 +145,21 @@ public class VentanaPrincipal extends JFrame {
 		btnGenerarrepote = new JButton("GenerarRepote");
 		toolBar.add(btnGenerarrepote);
 		
-		btnEjecutar = new JButton("Ejecutar");
-		toolBar.add(btnEjecutar);
+		botonEjecutar = new JButton("Ejecutar");
+		toolBar.add(botonEjecutar);
 		
-		btnPausar = new JButton("Pausar");
-		toolBar.add(btnPausar);
+		botonPausar = new JButton("Pausar");
+		toolBar.add(botonPausar);
 		
-		btnDetener = new JButton("Detener");
-		toolBar.add(btnDetener);
+		botonDetener = new JButton("Detener");
+		toolBar.add(botonDetener);
 		
-		JButton btnReiniciar = new JButton("Reiniciar");
-		toolBar.add(btnReiniciar);
+		botonContinuar = new JButton("Continuar");
+		toolBar.add(botonContinuar);
 		
 		JInternalFrame internalFrame = new JInternalFrame("Paleta de Herramientas");
 		internalFrame.setFrameIcon(new ImageIcon("imagenes/icono1.png"));
-		internalFrame.setBounds(10, 59, 194, 294);
+		internalFrame.setBounds(10, 66, 194, 294);
 		contentPane.add(internalFrame);
 		internalFrame.getContentPane().setLayout(null);
 		
@@ -186,41 +187,42 @@ public class VentanaPrincipal extends JFrame {
 		button_3.setBounds(92, 141, 59, 54);
 		internalFrame.getContentPane().add(button_3);
 		
-		JSlider slider = new JSlider();
-		slider.setBounds(10, 206, 158, 26);
-		internalFrame.getContentPane().add(slider);
+		sliderVelocidad = new JSlider(1,10,1);
+		sliderVelocidad.setFocusable(false);
+		sliderVelocidad.setMajorTickSpacing(1);
+		sliderVelocidad.setPaintTicks(true);
+		sliderVelocidad.setBounds(10, 206, 158, 26);
+		internalFrame.getContentPane().add(sliderVelocidad);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Dia normal", "Fines de semana", "Dia feriado"}));
 		comboBox.setBounds(28, 243, 123, 20);
 		internalFrame.getContentPane().add(comboBox);
 		
+		panelQuemados = new JPanel();
+		panelQuemados.setBackground(Color.DARK_GRAY);
+		panelQuemados.setBounds(242, 90, 401, 203);
+		contentPane.add(panelQuemados);
 		
+		panelGraves = new JPanel();
+		panelGraves.setBackground(Color.DARK_GRAY);
+		panelGraves.setBounds(673, 90, 401, 203);
+		contentPane.add(panelGraves);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.DARK_GRAY);
-		panel.setBounds(242, 90, 401, 203);
-		contentPane.add(panel);
+		panelInfecciosos = new JPanel();
+		panelInfecciosos.setBackground(Color.DARK_GRAY);
+		panelInfecciosos.setBounds(242, 347, 401, 203);
+		contentPane.add(panelInfecciosos);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.DARK_GRAY);
-		panel_1.setBounds(673, 90, 401, 203);
-		contentPane.add(panel_1);
+		panelNormales = new JPanel();
+		panelNormales.setBackground(Color.DARK_GRAY);
+		panelNormales.setBounds(673, 347, 401, 203);
+		contentPane.add(panelNormales);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.DARK_GRAY);
-		panel_2.setBounds(242, 347, 401, 203);
-		contentPane.add(panel_2);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(Color.DARK_GRAY);
-		panel_3.setBounds(673, 347, 401, 203);
-		contentPane.add(panel_3);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(Color.DARK_GRAY);
-		panel_4.setBounds(10, 402, 210, 134);
-		contentPane.add(panel_4);
+		panelTriaje = new JPanel();
+		panelTriaje.setBackground(Color.DARK_GRAY);
+		panelTriaje.setBounds(10, 402, 210, 134);
+		contentPane.add(panelTriaje);
 		
 		JLabel lblNewLabel = new JLabel("Cubiculo Quemados");
 		lblNewLabel.setBounds(253, 59, 116, 20);
@@ -242,5 +244,31 @@ public class VentanaPrincipal extends JFrame {
 		lblTriaje.setBounds(20, 371, 116, 20);
 		contentPane.add(lblTriaje);
 		internalFrame.setVisible(true);
+
+		
+	}
+	
+	public void eliminarPaciente(JPanel panel) {
+		
+		if(panel.getComponents().length != 0) {
+			panel.remove(0);
+			System.out.println("no se puedo");
+		}
+		
+	}
+	int contador =0;
+	public JSlider sliderVelocidad;
+	
+	
+	public void agregarPaciente(JPanel panel) {
+		panel.setLayout(new FlowLayout(1, 10,10));
+		
+		JLabel laabelPaciente = new JLabel(" "+contador);
+		laabelPaciente.setBorder(BorderFactory.createBevelBorder(1, Color.BLUE, Color.gray));
+		laabelPaciente.setIcon(new ImageIcon("imagenes/paciente.png"));
+		//laabelPaciente.setBounds(20, 371, 116, 20);
+		panel.add(laabelPaciente);
+		contador++;
+		panel.updateUI();
 	}
 }
