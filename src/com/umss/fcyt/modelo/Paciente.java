@@ -11,7 +11,7 @@ public class Paciente {
 
 	public Paciente(String nombre) {
 		this.nombre = nombre;
-		this.tipo = TipoPaciente.QUEMADURAS;
+		this.tipo = TipoPaciente.PACIENTES_GRAVES;
 		this.gravedad = null;
 
 		this.tiempoDeAtencion = 10;// otra variable

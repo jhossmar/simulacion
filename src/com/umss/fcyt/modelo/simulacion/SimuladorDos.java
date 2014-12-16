@@ -25,8 +25,10 @@ public class SimuladorDos {
 
 	public SimuladorDos() {
 		Cubiculo c = new Cubiculo(2, TipoPaciente.QUEMADURAS);
+		Cubiculo c2 = new Cubiculo(2, TipoPaciente.PACIENTES_GRAVES);
 		this.salaDeEmergencias = new SalaEmergencias();
 		this.salaDeEmergencias.agregarCubiculo(c);
+		this.salaDeEmergencias.agregarCubiculo(c2);
 
 		this.tiempoDeEntradaPaciente = 1;//variable aleatoria desde 1 a otro
 	}
