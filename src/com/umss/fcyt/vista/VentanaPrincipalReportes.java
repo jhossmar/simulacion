@@ -56,16 +56,7 @@ public class VentanaPrincipalReportes extends JFrame {
 		JLabel lblTipoDeReporte = new JLabel("Tipo de Reporte:");
 		lblTipoDeReporte.setBounds(45, 95, 121, 16);
 		contentPane.add(lblTipoDeReporte);
-		
-		final JComboBox diagra = new JComboBox();
-		diagra.setModel(new DefaultComboBoxModel(new String[] {"Diagrama de Barras", "Diagrama Circular", "Tablas"}));
-		diagra.setBounds(162, 92, 145, 22);
-		contentPane.add(diagra);
-		
-		JLabel lblNewLabel_1 = new JLabel("Variables:");
-		lblNewLabel_1.setBounds(45, 147, 75, 16);
-		contentPane.add(lblNewLabel_1);
-		
+
 		final JCheckBox cantidadPacientes = new JCheckBox("Cantidad de Pacientes");
 		cantidadPacientes.setBounds(154, 143, 166, 25);
 		contentPane.add(cantidadPacientes);
@@ -77,6 +68,47 @@ public class VentanaPrincipalReportes extends JFrame {
 		final JCheckBox tiempoAtencion = new JCheckBox("Tiempo de Atencion");
 		tiempoAtencion.setBounds(154, 224, 153, 25);
 		contentPane.add(tiempoAtencion);
+		
+		final JComboBox diagra = new JComboBox();
+		diagra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int grafico = diagra.getSelectedIndex();
+				if(grafico == 1){
+					cantidadPacientes.setEnabled(false);
+					tiempoEspera.setEnabled(false);
+					tiempoAtencion.setEnabled(false);
+				}
+				if(grafico == 0){
+					cantidadPacientes.setEnabled(true);
+					tiempoEspera.setEnabled(true);
+					tiempoAtencion.setEnabled(true);
+				}
+				if(grafico == 2){
+					cantidadPacientes.setEnabled(false);
+					tiempoEspera.setEnabled(false);
+					tiempoAtencion.setEnabled(false);
+				}
+			}
+		});
+		diagra.setModel(new DefaultComboBoxModel(new String[] {"Diagrama de Barras", "Diagrama Circular", "Tablas"}));
+		diagra.setBounds(162, 92, 145, 22);
+		contentPane.add(diagra);
+		
+		JLabel lblNewLabel_1 = new JLabel("Variables:");
+		lblNewLabel_1.setBounds(45, 147, 75, 16);
+		contentPane.add(lblNewLabel_1);
+		
+		//final JCheckBox cantidadPacientes = new JCheckBox("Cantidad de Pacientes");
+		//cantidadPacientes.setBounds(154, 143, 166, 25);
+		//contentPane.add(cantidadPacientes);
+		
+		//final JCheckBox tiempoEspera = new JCheckBox("Tiempo de Espera");
+		//tiempoEspera.setBounds(154, 182, 153, 25);
+		//contentPane.add(tiempoEspera);
+		
+		//final JCheckBox tiempoAtencion = new JCheckBox("Tiempo de Atencion");
+		//tiempoAtencion.setBounds(154, 224, 153, 25);
+		//contentPane.add(tiempoAtencion);
 		
 		final JCheckBox pacientesAlta = new JCheckBox("Pacientes dados de Alta");
 		pacientesAlta.setBounds(154, 265, 166, 25);
@@ -130,18 +162,24 @@ public class VentanaPrincipalReportes extends JFrame {
 					lista.add(pacientesConsultaExterna.getText());
 				}
 				Reporte reporte = new Reporte(grafico,lista);
-				reporte.grafica();
+				
 				if(grafico == 0){
+					reporte.graficarBarra();
+				}else{
+					if(grafico == 1){
+						
+						reporte.crearGraficoCircular();
+					}else{
+						VentanaReportes tabla = new VentanaReportes();
+						tabla.setVisible(true);
+						for(int i = 0;i<lista.size();i++){
+							
+							String [] aux = reporte.getTabla(lista.get(i));
+							tabla.model.addRow(aux);
+						}
+					}
+				}
 					
-					//reporte.setVisible(true);
-					
-				}//else{
-					//if(grafico == 1){
-							//crearGraficoCircular();
-					//}
-					//else{
-						//crearTabla();
-					//}
 				//}
 				
 			}
