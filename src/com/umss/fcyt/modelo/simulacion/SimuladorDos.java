@@ -127,6 +127,7 @@ public class SimuladorDos {
 						Paciente aux = salaDeEmergencias.getSalaEspera().get(indicePrimero);
 						if(aux.equals(p)&& (aux.getTipo() == cubiculo.getTipoDePacienteParaAtender())) {
 							cubiculo.agregarPaciente(p);
+							this.salaDeEmergencias.agregarPaciente(p);
 							this.salaDeEmergencias.getSalaEspera().eliminarEnPosicion(indicePrimero);
 							
 							System.out.println("El paciente :"+ p.getNombre()+ " esta siendo atendido  "+ "en el cubiculo de : "
@@ -193,6 +194,7 @@ public class SimuladorDos {
 		simuDos.pasoSimulacion();
 		simuDos.pasoSimulacion();
 		simuDos.pasoSimulacion();
+	
 	}
 
 }
