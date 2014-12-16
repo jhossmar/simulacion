@@ -1,7 +1,11 @@
 package com.umss.fcyt.vista;
 
+// HEAD
+import java.awt.BorderLayout;   
+//=======
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+// branch 'master' of https://github.com/jhossmar/simulacion.git
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 

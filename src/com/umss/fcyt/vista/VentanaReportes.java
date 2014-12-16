@@ -1,19 +1,27 @@
 package com.umss.fcyt.vista;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class VentanaReportes extends JFrame {
+	
+	// versión
+	private static final long serialVersionUID = 1L;
 
-	private JPanel contentPane;
+	// la tabla
+	public JTable table;
 
-	/**
-	 * Launch the application.
-	 */
+	// el modelo de tabla, aquí van a estar los datos.
+	public DefaultTableModel model;
+
+	// función principal
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -27,16 +35,35 @@ public class VentanaReportes extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	// constructor del frame que contruye toda la ventana...
 	public VentanaReportes() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-	}
+		//título
+		setTitle("Java Swing 9 El JTable");
+		// cuando cerramos la ventana se cierra la aplicación por completo
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// dimensiones y posición
+		setBounds(100, 100, 596, 331);
+		// establece una capa absoluta para posicionar los elementos donde queramos
+		getContentPane().setLayout(null);
 
+		// el panel con barras de scroll automáticas
+		JScrollPane scrollPane = new JScrollPane();
+		// dimensiones y posición del panel de scroll
+		scrollPane.setBounds(10, 11, 560, 227);
+		
+		// se añade el panel de scroll a la ventana 
+		getContentPane().add(scrollPane);
+
+		// nombre de las columnas 
+		String[] columnNames = { "Variables", "Valores"};
+
+		// creo un modelo de datos, sin datos por eso 'null' y establezco los
+		// nombres de columna
+		model = new DefaultTableModel(null, columnNames);
+		// creo la tabla con el modelo de datos creado
+		table = new JTable(model);
+		
+		// se pone la tabla en el scroll
+		scrollPane.setViewportView(table);
+	}
 }

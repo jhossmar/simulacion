@@ -1,6 +1,6 @@
 package com.umss.fcyt.modelo;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 import java.util.Queue;
 
@@ -94,6 +94,27 @@ public class SalaEmergencias {
 		this.cubiculos = cubiculos;
 	}
 	
+	public ArrayList<Integer> getDatos(){
+		ArrayList<Integer> valores = new ArrayList<>();
+		//valores.add(pacientes.size());
+		//valores.add(tiempoEspera.size());
+		//valores.add(tiempoAtencion.size());
+		//valores.add(pacientesAlta.size());
+		//valores.add(pacientesInternados.size());
+		//valores.add(pacientesReprogramados.size());
+		//valores.add(pacientesFallecidos.size());
+		//valores.add(pacientesFechasReprogramadas.size());
+		
+		valores.add(15);
+		valores.add(10);
+		valores.add(25);
+		valores.add(5);
+		valores.add(2);
+		valores.add(2);
+		valores.add(3);
+		valores.add(3);
+		return valores;
+	}
 	
 	
 }
