@@ -16,6 +16,7 @@ import com.umss.fcyt.modelo.TipoPaciente;
 import com.umss.fcyt.modelo.simulacion.Reloj;
 import com.umss.fcyt.modelo.simulacion.SimuladorDos;
 import com.umss.fcyt.vista.VentanaPrincipal;
+import com.umss.fcyt.vista.VentanaPrincipalReportes;
 
 public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 
@@ -60,6 +61,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 		ventanaPrincipal.itemPausar.addActionListener(this);
 		ventanaPrincipal.itemDetener.addActionListener(this);
 		ventanaPrincipal.itemContinuar.addActionListener(this);
+		ventanaPrincipal.btnGenerarrepote.addActionListener(this);
 
 		ventanaPrincipal.sliderVelocidad
 				.addChangeListener(new ChangeListener() {
@@ -151,7 +153,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 				actualizarVista();
 
 				contadorTiempo++;
-				SwingUtilities.updateComponentTreeUI(ventanaPrincipal);
+				//SwingUtilities.updateComponentTreeUI(ventanaPrincipal);
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -162,7 +164,6 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 	}
 
 	public void actualizarVista() {
-		//ventanaPrincipal.panelQuemados.removeAll();
 		
 		ventanaPrincipal.textoDescripcion.setText(simulador.descripcionSimulacion.toString());
 		
@@ -174,16 +175,6 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 		
 		int cantidad3 = sala.getSalaEspera().size();
 		ventanaPrincipal.mostrar(ventanaPrincipal.panelTriaje, cantidad3);
-		
-//		for (Paciente p : sala.getCubiculos().get(0).getPacientes()) {
-//			System.out.println("");
-//			ventanaPrincipal.agregarPaciente(ventanaPrincipal.panelQuemados);
-//		}
-//
-//		System.out.println("jfksdjakfjalsjd :" + sala.getSalaEspera().size());
-//		for (Paciente a : sala.getSalaEspera()) {
-//			ventanaPrincipal.agregarPaciente(ventanaPrincipal.panelTriaje);
-//		}
 	}
 
 	public void pausarSimulacion() {
@@ -224,5 +215,9 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 			this.continuarSimulacion();
 		}
 
+		if(e.getSource() == ventanaPrincipal.btnGenerarrepote) {
+			VentanaPrincipalReportes ventana = new VentanaPrincipalReportes();
+			ventana.setVisible(true);
+		}
 	}
 }

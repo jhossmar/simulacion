@@ -45,7 +45,7 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JToolBar toolBar;
 	private JButton btnGuardar;
-	private JButton btnGenerarrepote;
+	public JButton btnGenerarrepote;
 	
 	public JMenuItem itemEjecutar;
 	public JMenuItem itemPausar;
@@ -255,7 +255,7 @@ public class VentanaPrincipal extends JFrame {
 		textoDescripcion = new JTextArea();
 		textoDescripcion.setEditable(false);
 		textoDescripcion.setBounds(242, 515, 832, 95);
-		contentPane.add(textoDescripcion);
+		//contentPane.add(textoDescripcion);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(textoDescripcion);
@@ -265,15 +265,6 @@ public class VentanaPrincipal extends JFrame {
 
 		
 		agregarCubiculos();
-		
-	}
-	
-	public void eliminarPaciente(JPanel panel) {
-		
-		if(panel.getComponents().length != 0) {
-			panel.remove(0);
-			System.out.println("no se puedo");
-		}
 		
 	}
 	
@@ -300,7 +291,7 @@ public class VentanaPrincipal extends JFrame {
 			j = i;
 		}
 		
-		for (int i = j; i < components.length; i++) {
+		for (int i = j + 1; i < components.length; i++) {
 			components[i].setVisible(false);
 		}
 	}
@@ -311,18 +302,6 @@ public class VentanaPrincipal extends JFrame {
 		agregarAPanel(panelInfecciosos, 2);
 		agregarAPanel(panelNormales, 2);
 		
-		agregarAPanel(panelTriaje, 10);
-	}
-	
-	public void agregarPaciente(JPanel panel) {
-		panel.setLayout(new FlowLayout(1, 10,10));
-		
-		JLabel laabelPaciente = new JLabel(" "+contador);
-		laabelPaciente.setBorder(BorderFactory.createBevelBorder(1, Color.BLUE, Color.gray));
-		laabelPaciente.setIcon(new ImageIcon("imagenes/paciente.png"));
-		//laabelPaciente.setBounds(20, 371, 116, 20);
-		panel.add(laabelPaciente);
-		contador++;
-		panel.updateUI();
+		agregarAPanel(panelTriaje, 20);
 	}
 }
