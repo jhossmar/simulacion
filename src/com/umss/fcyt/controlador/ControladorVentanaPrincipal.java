@@ -28,7 +28,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 	private Reloj reloj;
 
 	private static final int VELOCIDAD_MAXIMA_SIMULACION = 100;
-	private static final int VELOCIDAD_MINIMA_SIMULACION = 1000;
+	private static final int VELOCIDAD_MINIMA_SIMULACION = 2000;
 
 	private int velocidadActualDeSimulacion;
 
@@ -140,18 +140,18 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 	@Override
 	public void run() {
 		int contadorTiempo = 0;
-
+		
 		while (contadorTiempo <= tiempoDuracionSimulacion) {
 
 			try {
 				Thread.sleep(velocidadActualDeSimulacion);
 
 				simulador.pasoSimulacion();
-
+				
 				actualizarVista();
 
 				contadorTiempo++;
-				// SwingUtilities.updateComponentTreeUI(ventanaPrincipal);
+				SwingUtilities.updateComponentTreeUI(ventanaPrincipal);
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -162,18 +162,28 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 	}
 
 	public void actualizarVista() {
-		ventanaPrincipal.panelQuemados.removeAll();
+		//ventanaPrincipal.panelQuemados.removeAll();
 		
-
-		for (Paciente p : sala.getCubiculos().get(0).getPacientes()) {
-			System.out.println("");
-			ventanaPrincipal.agregarPaciente(ventanaPrincipal.panelQuemados);
-		}
-
-		System.out.println("jfksdjakfjalsjd :" + sala.getSalaEspera().size());
-		for (Paciente a : sala.getSalaEspera()) {
-			ventanaPrincipal.agregarPaciente(ventanaPrincipal.panelTriaje);
-		}
+		ventanaPrincipal.textoDescripcion.setText(simulador.descripcionSimulacion.toString());
+		
+		int cantidad = sala.getCubiculos().get(0).getPacientes().size(); 
+		ventanaPrincipal.mostrar(ventanaPrincipal.panelQuemados, cantidad);
+		
+		int cantidad2 = sala.getCubiculos().get(1).getPacientes().size(); 
+		ventanaPrincipal.mostrar(ventanaPrincipal.panelGraves, cantidad2);
+		
+		int cantidad3 = sala.getSalaEspera().size();
+		ventanaPrincipal.mostrar(ventanaPrincipal.panelTriaje, cantidad3);
+		
+//		for (Paciente p : sala.getCubiculos().get(0).getPacientes()) {
+//			System.out.println("");
+//			ventanaPrincipal.agregarPaciente(ventanaPrincipal.panelQuemados);
+//		}
+//
+//		System.out.println("jfksdjakfjalsjd :" + sala.getSalaEspera().size());
+//		for (Paciente a : sala.getSalaEspera()) {
+//			ventanaPrincipal.agregarPaciente(ventanaPrincipal.panelTriaje);
+//		}
 	}
 
 	public void pausarSimulacion() {

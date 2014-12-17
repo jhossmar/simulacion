@@ -87,6 +87,7 @@ public class SimuladorDos {
 							indicePrimero = j;
 							Paciente paciente = salaDeEmergencias.getSalaEspera().get(indicePrimero);
 							if(cubiculo.agregarPaciente(paciente)){
+								this.salaDeEmergencias.agregarPaciente(paciente);
 								this.salaDeEmergencias.getSalaEspera().eliminarEnPosicion(indicePrimero);
 								descripcionSimulacion.append("El paciente :"+ paciente.getNombre()+ " esta siendo atendido  "+ "en el cubiculo de : "
 										+ cubiculo.getTipoDePacienteParaAtender().toString() + " por unos :"+paciente.getTiempoDeAtencion()+ " minutos .....\n");
@@ -241,7 +242,11 @@ public class SimuladorDos {
 		}
 		
 		
-		
+		System.out.println("=====================");
+		for (Paciente p : simuDos.getSalaDeEmergencias().getPacientes()) {
+			System.out.println(" " + p.getNombre());
+		}
+		//solo estan entrando los primeros con el metodo separado raro!!!
 //		Reloj r = new Reloj();
 //		r.actualizar(12);
 //		System.out.println(r.toString());

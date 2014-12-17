@@ -4,6 +4,7 @@ package com.umss.fcyt.vista;
 import java.awt.BorderLayout;   
 //=======
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 // branch 'master' of https://github.com/jhossmar/simulacion.git
 import java.awt.EventQueue;
@@ -26,6 +27,7 @@ import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
@@ -35,6 +37,8 @@ import javax.swing.JMenu;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -62,12 +66,16 @@ public class VentanaPrincipal extends JFrame {
 	 public JPanel panelTriaje;
 	
 
+	int contador =0;
+	public JSlider sliderVelocidad;
+	public JTextArea textoDescripcion;
+	 
 	public VentanaPrincipal() {
 		setResizable(false);
 		setTitle("Simulador Sala de Emergencias");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/icono1.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1100, 600);
+		setBounds(100, 100, 1100, 650);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -201,22 +209,22 @@ public class VentanaPrincipal extends JFrame {
 		
 		panelQuemados = new JPanel();
 		panelQuemados.setBackground(Color.DARK_GRAY);
-		panelQuemados.setBounds(242, 90, 401, 203);
+		panelQuemados.setBounds(242, 110, 401, 175);
 		contentPane.add(panelQuemados);
 		
 		panelGraves = new JPanel();
 		panelGraves.setBackground(Color.DARK_GRAY);
-		panelGraves.setBounds(673, 90, 401, 203);
+		panelGraves.setBounds(673, 110, 401, 175);
 		contentPane.add(panelGraves);
 		
 		panelInfecciosos = new JPanel();
 		panelInfecciosos.setBackground(Color.DARK_GRAY);
-		panelInfecciosos.setBounds(242, 347, 401, 203);
+		panelInfecciosos.setBounds(242, 316, 401, 175);
 		contentPane.add(panelInfecciosos);
 		
 		panelNormales = new JPanel();
 		panelNormales.setBackground(Color.DARK_GRAY);
-		panelNormales.setBounds(673, 347, 401, 203);
+		panelNormales.setBounds(673, 316, 401, 175);
 		contentPane.add(panelNormales);
 		
 		panelTriaje = new JPanel();
@@ -225,26 +233,38 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(panelTriaje);
 		
 		JLabel lblNewLabel = new JLabel("Cubiculo Quemados");
-		lblNewLabel.setBounds(253, 59, 116, 20);
+		lblNewLabel.setBounds(242, 79, 116, 20);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblCubiculoPacientesGraves = new JLabel("Cubiculo Pacientes Graves");
-		lblCubiculoPacientesGraves.setBounds(672, 59, 116, 20);
+		lblCubiculoPacientesGraves.setBounds(673, 79, 116, 20);
 		contentPane.add(lblCubiculoPacientesGraves);
 		
 		JLabel lblCubiculoPacientesInfecciosos = new JLabel("Cubiculo Pacientes Infecciosos");
-		lblCubiculoPacientesInfecciosos.setBounds(242, 316, 151, 20);
+		lblCubiculoPacientesInfecciosos.setBounds(242, 296, 151, 20);
 		contentPane.add(lblCubiculoPacientesInfecciosos);
 		
 		JLabel lblCubiculoPacientesNormales = new JLabel("Cubiculo Pacientes Normales");
-		lblCubiculoPacientesNormales.setBounds(672, 316, 174, 20);
+		lblCubiculoPacientesNormales.setBounds(673, 296, 174, 20);
 		contentPane.add(lblCubiculoPacientesNormales);
 		
 		JLabel lblTriaje = new JLabel("Triaje");
 		lblTriaje.setBounds(20, 371, 116, 20);
 		contentPane.add(lblTriaje);
+		
+		textoDescripcion = new JTextArea();
+		textoDescripcion.setEditable(false);
+		textoDescripcion.setBounds(242, 515, 832, 95);
+		contentPane.add(textoDescripcion);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportView(textoDescripcion);
+		scrollPane.setBounds(242, 500, 832, 110);
+		contentPane.add(scrollPane);
 		internalFrame.setVisible(true);
 
+		
+		agregarCubiculos();
 		
 	}
 	
@@ -256,9 +276,43 @@ public class VentanaPrincipal extends JFrame {
 		}
 		
 	}
-	int contador =0;
-	public JSlider sliderVelocidad;
 	
+	public void agregarAPanel(JPanel panel, int cantidad) {
+		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 10 , 10));
+		
+		for (int i = 0; i < cantidad; i++) {
+			JLabel labelPaciente = new JLabel();
+			labelPaciente.setVisible(false);
+			labelPaciente.setBorder(BorderFactory.createBevelBorder(1, Color.BLUE, Color.gray));
+			labelPaciente.setIcon(new ImageIcon("imagenes/paciente.png"));
+			panel.add(labelPaciente);
+		}
+		
+		panel.updateUI();
+	}
+	
+	public void mostrar(JPanel panel ,int cantidad) {
+		
+		Component[] components = panel.getComponents();
+		int j = 0;
+		for (int i = 0; i < cantidad; i++) {
+			components[i].setVisible(true);
+			j = i;
+		}
+		
+		for (int i = j; i < components.length; i++) {
+			components[i].setVisible(false);
+		}
+	}
+	
+	public void agregarCubiculos() {
+		agregarAPanel(panelGraves, 2);
+		agregarAPanel(panelQuemados, 2);
+		agregarAPanel(panelInfecciosos, 2);
+		agregarAPanel(panelNormales, 2);
+		
+		agregarAPanel(panelTriaje, 10);
+	}
 	
 	public void agregarPaciente(JPanel panel) {
 		panel.setLayout(new FlowLayout(1, 10,10));
