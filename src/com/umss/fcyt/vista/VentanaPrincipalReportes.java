@@ -24,7 +24,8 @@ import java.util.ArrayList;
 public class VentanaPrincipalReportes extends JFrame {
 
 	private JPanel contentPane;
-	SalaEmergencias sala;
+	private SalaEmergencias sala;
+	private ArrayList<String> nombres;
 	/**
 	 * Launch the application.
 	 */
@@ -46,6 +47,8 @@ public class VentanaPrincipalReportes extends JFrame {
 	 */
 	public VentanaPrincipalReportes(SalaEmergencias sala) {
 		this.sala = sala;
+		final ArrayList<String> nombres = sala.getNombres();
+		this.nombres = nombres;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 526, 593);
 		contentPane = new JPanel();
@@ -145,7 +148,8 @@ public class VentanaPrincipalReportes extends JFrame {
 				if(pacientesConsultaExterna.isSelected()){
 					lista.add(pacientesConsultaExterna.getText());
 				}
-				Reporte reporte = new Reporte(lista, sala);
+				
+				Reporte reporte = new Reporte(lista,sala);
 				
 				if(grafico == 0){
 					reporte.graficarBarra();
@@ -169,6 +173,14 @@ public class VentanaPrincipalReportes extends JFrame {
 						}
 						
 					}else{
+						VentanaTabla tabla = new VentanaTabla();
+						tabla.setVisible(true);
+						for(int i = 0;i<nombres.size();i++){
+							
+							String [] aux = reporte.getTabla(lista.get(i));
+							tabla.model.addRow(aux);
+						}
+						
 						VentanaReportes tabla = new VentanaReportes();
 						tabla.setVisible(true);
 						for(int i = 0;i<lista.size();i++){

@@ -10,20 +10,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class VentanaReportes extends JFrame {
+public class VentanaTabla extends JFrame {
 
-	// la tabla
 	public JTable table;
-
-	// el modelo de tabla, aquí van a estar los datos.
+	
 	public DefaultTableModel model;
 
-	// función principal
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaReportes frame = new VentanaReportes();
+					VentanaTabla frame = new VentanaTabla();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,33 +29,21 @@ public class VentanaReportes extends JFrame {
 		});
 	}
 
-	// constructor del frame que contruye toda la ventana...
-	public VentanaReportes() {
-		//título
+	/**
+	 * Create the frame.
+	 */
+	public VentanaTabla() {
 		setTitle("TABLA CON LOS DATOS");
-		// dimensiones y posición
-		setBounds(100, 100, 596, 331);
-		// establece una capa absoluta para posicionar los elementos donde queramos
+		setBounds(100, 100, 643, 300);
 		getContentPane().setLayout(null);
-
-		// el panel con barras de scroll automáticas
 		JScrollPane scrollPane = new JScrollPane();
-		// dimensiones y posición del panel de scroll
 		scrollPane.setBounds(10, 11, 560, 227);
-		
-		// se añade el panel de scroll a la ventana 
 		getContentPane().add(scrollPane);
-
-		// nombre de las columnas 
-		String[] columnNames = { "Variables", "Valores"};
-
-		// creo un modelo de datos, sin datos por eso 'null' y establezco los
-		// nombres de columna
+		String[] columnNames = { "Nombre del Paciente", "Tiempo de Atencion","Cubiculo","Hora de entrada","Hora de Salida","Estado Final"};
 		model = new DefaultTableModel(null, columnNames);
-		// creo la tabla con el modelo de datos creado
 		table = new JTable(model);
 		
-		// se pone la tabla en el scroll
 		scrollPane.setViewportView(table);
 	}
+
 }
