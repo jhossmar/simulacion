@@ -42,6 +42,10 @@ public class SimuladorDos {
 		//libero cubiculos
 		for(int i=0;i < salaDeEmergencias.getCubiculos().size();i++) {
 			Cubiculo c = salaDeEmergencias.getCubiculos().get(i);
+			System.out.println("El cubiculo de " +c.getTipoDePacienteParaAtender() + "esta atendiendo a: "+c.getPacientes().size()
+					+"  pacientes");
+			System.out.println("Y tiene : " + c.retornarCantidadCamillasDisponibles() + " camillas disponibles");
+
 			for(int j = 0;j < c.getPacientes().size();j++) {
 				Paciente paciente = c.getPacientes().get(j);
 				//System.out.println("El paciente ");
@@ -58,25 +62,24 @@ public class SimuladorDos {
 			Cubiculo cubiculo = salaDeEmergencias.getCubiculos().get(i);
 			//System.out.println(salaDeEmergencias.getCubiculos().size());
 			if(cubiculo.verificarEspacio()) {
-				System.out.println("Tamano :" + cubiculo.getPacientes().size());
-				
+				//System.out.println("Tamano :" + cubiculo.getPacientes().size());
 					int indicePrimero = 0;
 					for(int j = 0 ;j < salaDeEmergencias.getSalaEspera().size();j++) {
 						Paciente aux = salaDeEmergencias.getSalaEspera().get(j);
 						if((aux.getTipo() == cubiculo.getTipoDePacienteParaAtender())) {
 							indicePrimero = j;
 							Paciente paciente = salaDeEmergencias.getSalaEspera().get(indicePrimero);
-							cubiculo.agregarPaciente(paciente);
-							this.salaDeEmergencias.getSalaEspera().eliminarEnPosicion(indicePrimero);
+							if(cubiculo.agregarPaciente(paciente)){
+								this.salaDeEmergencias.getSalaEspera().eliminarEnPosicion(indicePrimero);
 								
-							System.out.println("El paciente :"+ paciente.getNombre()+ " esta siendo atendido  "+ "en el cubiculo de : "
-												+ cubiculo.getTipoDePacienteParaAtender().toString() + " por unos :"+paciente.getTiempoDeAtencion()+ " minutos .....");
+								System.out.println("El paciente :"+ paciente.getNombre()+ " esta siendo atendido  "+ "en el cubiculo de : "
+													+ cubiculo.getTipoDePacienteParaAtender().toString() + " por unos :"+paciente.getTiempoDeAtencion()+ " minutos .....");
+
+							}
+														//System.out.println("beimar" + j);
+							//break;//solo para romper el bucle
 						}
 					}
-					
-					
-				
-				
 			}
 			
 		}
@@ -109,10 +112,11 @@ public class SimuladorDos {
 			System.out.println("un paciente llega al hospital y se pone en la sala de espera");
 
 			for (Cubiculo cubiculo : salaDeEmergencias.getCubiculos()) {
-				System.out.println("Realizando Triaje : que tipo de paciente es.... ");
+				
 				if (cubiculo.getTipoDePacienteParaAtender() == p.getTipo()) {//se verifica a que cubiculo entra
 					System.out.println("Paciente :  "+ p.getNombre()+ " pertenece a "+ cubiculo.getTipoDePacienteParaAtender()
 									.toString());
+					System.out.println("Realizando Triaje : que tipo de paciente es.... ");
 					if (cubiculo.verificarEspacio()) {//falla verificar si el primero de todos los quemados
 						
 						
@@ -126,6 +130,7 @@ public class SimuladorDos {
 						}
 						Paciente aux = salaDeEmergencias.getSalaEspera().get(indicePrimero);
 						if(aux.equals(p)&& (aux.getTipo() == cubiculo.getTipoDePacienteParaAtender())) {
+							
 							cubiculo.agregarPaciente(p);
 							this.salaDeEmergencias.agregarPaciente(p);
 							this.salaDeEmergencias.getSalaEspera().eliminarEnPosicion(indicePrimero);
@@ -180,20 +185,27 @@ public class SimuladorDos {
 	public static void main(String[] args) {
 		SimuladorDos simuDos = new SimuladorDos();
 
-		simuDos.pasoSimulacion();//tiempo 0(no hace nada)
-		simuDos.pasoSimulacion();//tiempo uno etc... entra paciente
-		simuDos.pasoSimulacion();
-		simuDos.pasoSimulacion();
-		simuDos.pasoSimulacion();//entra paciente
-		simuDos.pasoSimulacion();//
-		simuDos.pasoSimulacion();
-		simuDos.pasoSimulacion();//entra paciente   //por aqui deberia salir el primer paciente
-		simuDos.pasoSimulacion();
-		simuDos.pasoSimulacion();
-		simuDos.pasoSimulacion();
-		simuDos.pasoSimulacion();
-		simuDos.pasoSimulacion();
-		simuDos.pasoSimulacion();
+//		simuDos.pasoSimulacion();//tiempo 0(no hace nada)
+//		simuDos.pasoSimulacion();//tiempo uno etc... entra paciente
+//		simuDos.pasoSimulacion();
+//		simuDos.pasoSimulacion();
+//		simuDos.pasoSimulacion();//entra paciente
+//		simuDos.pasoSimulacion();//
+//		simuDos.pasoSimulacion();
+//		simuDos.pasoSimulacion();//entra paciente   //por aqui deberia salir el primer paciente
+//		simuDos.pasoSimulacion();
+//		simuDos.pasoSimulacion();
+//		simuDos.pasoSimulacion();
+//		simuDos.pasoSimulacion();
+//		simuDos.pasoSimulacion();
+//		simuDos.pasoSimulacion();
+		for (int i = 0; i < 45; i++) {
+			simuDos.pasoSimulacion();
+		}
+		
+		for (Paciente p : simuDos.getSalaDeEmergencias().getSalaEspera()) {
+			System.out.println(" " + p.getNombre());
+		}
 	
 	}
 

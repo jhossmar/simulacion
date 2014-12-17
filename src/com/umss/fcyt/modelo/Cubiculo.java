@@ -21,6 +21,10 @@ public class Cubiculo {
 		this.pacientes = new ArrayList<Paciente>();
 	}
 	
+	public String retornarCantidadCamillasDisponibles() {
+		return ""+ (cantidadMaximaDeCamillas - pacientes.size());//retorna mal cuando metes a mas pacientes de lo que debes
+	}
+	
 	public boolean verificarEspacio() {
 		boolean respuesta = false;
 		if(this.pacientes.size() < cantidadMaximaDeCamillas) {
@@ -30,8 +34,12 @@ public class Cubiculo {
 		return respuesta;
 	}
 	
-	public void agregarPaciente(Paciente paciente) {
-		this.pacientes.add(paciente);
+	public boolean agregarPaciente(Paciente paciente) {
+		if(verificarEspacio()) {
+			this.pacientes.add(paciente);
+			return true;
+		}
+		return false;
 	}
 	
 	public List<Paciente> getPacientes() {
