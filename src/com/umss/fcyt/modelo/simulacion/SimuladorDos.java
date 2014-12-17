@@ -18,6 +18,8 @@ public class SimuladorDos {
 	private int tiempoTranscurrido = 0;
 
 	private int tiempoDeEntradaPaciente;
+	
+	private StringBuffer descripcionSimulacion;
 
 	public SimuladorDos(SalaEmergencias sala) {
 		this.salaDeEmergencias = sala;
@@ -29,12 +31,20 @@ public class SimuladorDos {
 		this.salaDeEmergencias = new SalaEmergencias();
 		this.salaDeEmergencias.agregarCubiculo(c);
 		this.salaDeEmergencias.agregarCubiculo(c2);
+		
+		this.descripcionSimulacion = new StringBuffer();
+		
+		this.reloj = new Reloj();
 
 		this.tiempoDeEntradaPaciente = 1;//variable aleatoria desde 1 a otro
 	}
 
 	public void pasoSimulacion() {
+		this.descripcionSimulacion = null;
 		// liberarCubiculos
+		descripcionSimulacion.append("================================================== \n");
+		reloj.actualizar(tiempoTranscurrido);
+		descripcionSimulacion.append("Hora : " + reloj.toString() + "\n");
 		System.out.println("==================================================");
 		System.out.println("Tiempo : " + tiempoTranscurrido);
 
@@ -42,6 +52,9 @@ public class SimuladorDos {
 		//libero cubiculos
 		for(int i=0;i < salaDeEmergencias.getCubiculos().size();i++) {
 			Cubiculo c = salaDeEmergencias.getCubiculos().get(i);
+			descripcionSimulacion.append("El cubiculo de " +c.getTipoDePacienteParaAtender() + "esta atendiendo a: "+c.getPacientes().size()
+					+"  pacientes \n" + "Y tiene : " + c.retornarCantidadCamillasDisponibles() + " camillas disponibles \n");
+			
 			System.out.println("El cubiculo de " +c.getTipoDePacienteParaAtender() + "esta atendiendo a: "+c.getPacientes().size()
 					+"  pacientes");
 			System.out.println("Y tiene : " + c.retornarCantidadCamillasDisponibles() + " camillas disponibles");
@@ -50,6 +63,8 @@ public class SimuladorDos {
 				Paciente paciente = c.getPacientes().get(j);
 				//System.out.println("El paciente ");
 				if(paciente.getTiempoDeAtencion() == 0) {
+					descripcionSimulacion.append("Se termino de atender al paciente : " + paciente.getNombre() + "\n");
+					
 					System.out.println("Se termino de atender al paciente : " + paciente.getNombre());
 					c.getPacientes().remove(j);
 					System.out.println(c.getPacientes().size());
@@ -199,13 +214,19 @@ public class SimuladorDos {
 //		simuDos.pasoSimulacion();
 //		simuDos.pasoSimulacion();
 //		simuDos.pasoSimulacion();
-		for (int i = 0; i < 45; i++) {
-			simuDos.pasoSimulacion();
-		}
 		
-		for (Paciente p : simuDos.getSalaDeEmergencias().getSalaEspera()) {
-			System.out.println(" " + p.getNombre());
-		}
+		
+//		for (int i = 0; i < 45; i++) {
+//			simuDos.pasoSimulacion();
+//		}
+//		
+//		for (Paciente p : simuDos.getSalaDeEmergencias().getSalaEspera()) {
+//			System.out.println(" " + p.getNombre());
+//		}
+		
+		Reloj r = new Reloj();
+		r.actualizar(12);
+		System.out.println(r.toString());
 	
 	}
 
