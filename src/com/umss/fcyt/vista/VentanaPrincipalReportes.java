@@ -84,9 +84,9 @@ public class VentanaPrincipalReportes extends JFrame {
 					tiempoAtencion.setEnabled(true);
 				}
 				if(grafico == 2){
-					cantidadPacientes.setEnabled(false);
-					tiempoEspera.setEnabled(false);
-					tiempoAtencion.setEnabled(false);
+					cantidadPacientes.setEnabled(true);
+					tiempoEspera.setEnabled(true);
+					tiempoAtencion.setEnabled(true);
 				}
 			}
 		});
@@ -161,10 +161,17 @@ public class VentanaPrincipalReportes extends JFrame {
 				if(pacientesConsultaExterna.isSelected()){
 					lista.add(pacientesConsultaExterna.getText());
 				}
-				Reporte reporte = new Reporte(grafico,lista);
+				Reporte reporte = new Reporte(lista);
 				
 				if(grafico == 0){
 					reporte.graficarBarra();
+					VentanaReportes tabla = new VentanaReportes();
+					tabla.setVisible(true);
+					for(int i = 0;i<lista.size();i++){
+						
+						String [] aux = reporte.getTabla(lista.get(i));
+						tabla.model.addRow(aux);
+					}
 				}else{
 					if(grafico == 1){
 						

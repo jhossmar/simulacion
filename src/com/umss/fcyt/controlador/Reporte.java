@@ -21,15 +21,22 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 public class Reporte {
 	
-	private int grafico;
 	private ArrayList<String>lista;
 	private ArrayList<Integer>valores;
-	public Reporte(int grafico,ArrayList<String>lista){
-		 this.grafico = grafico;
+	private ArrayList<String> nombres;
+	private ArrayList<Integer> tiemposEspera;
+	private ArrayList<Integer> tiemposAtencion;
+	public Reporte(ArrayList<String>lista){
 		 this.lista = lista;
 		 SalaEmergencias sala = new SalaEmergencias();
 		 ArrayList<Integer>valores = sala.getDatos();
 		 this.valores = valores;
+		 ArrayList<String> nombres = sala.getNombres();
+		 this.nombres = nombres;
+		 ArrayList<Integer> tiemposEspera = sala.getTiempoEspera();
+		 this.tiemposEspera = tiemposEspera;
+		 ArrayList<Integer> tiemposAtencion = sala.getTiempoAtencion();
+		 this.tiemposAtencion = tiemposAtencion;
 	}
 	public void crearGraficoCircular(){
 		
@@ -85,12 +92,14 @@ public class Reporte {
 				data.addValue(valor, variable, variable);
 			}else{
 				if(variable == "Tiempo de Espera"){
-					int valor = valores.get(1);
-					data.addValue(valor, variable, variable+" en minutos");
+					
+					graficarBarraTiempoEspera(nombres,tiemposEspera);
+					
 				}else{
 					if(variable == "Tiempo de Atencion"){
-						int valor = valores.get(2);
-						data.addValue(valor, variable, variable+" en minutos");
+						
+						graficarBarraTiempoAtencion(nombres,tiemposAtencion);
+						
 					}else{
 						if(variable == "Pacientes dados de Alta"){
 							int valor = valores.get(3);
@@ -140,6 +149,62 @@ public class Reporte {
         frame.pack();
         frame.setVisible(true);
 	}
+	
+	public void graficarBarraTiempoEspera(ArrayList<String>nombres,ArrayList<Integer>tiemposEspera){
+		ChartPanel panel;
+		JFreeChart chart = null;
+		DefaultCategoryDataset data = new DefaultCategoryDataset();
+		for(int i = 0; i<nombres.size(); i++){
+			data.addValue(tiemposEspera.get(i), nombres.get(i), nombres.get(i));
+		}
+		chart = ChartFactory.createBarChart("REPORTE EN GRAFICO DE BARRAS DE LOS TIEMPOS DE ESPERA",
+				"",
+				"",
+				data,
+				PlotOrientation.VERTICAL,
+				true,
+				true,
+				false);
+		chart.setBackgroundPaint(Color.cyan);
+        chart.getTitle().setPaint(Color.black);
+        CategoryPlot p = chart.getCategoryPlot();
+        p.setRangeGridlinePaint(Color.red);
+		
+		panel = new ChartPanel(chart);
+		panel.setBounds(5, 10, 410, 400);
+		
+		ChartFrame frame = new ChartFrame("JFreeChart", chart);
+        frame.pack();
+        frame.setVisible(true);
+	}
+	public void graficarBarraTiempoAtencion(ArrayList<String>nombres,ArrayList<Integer>tiemposAtencion){
+		ChartPanel panel;
+		JFreeChart chart = null;
+		DefaultCategoryDataset data = new DefaultCategoryDataset();
+		for(int i = 0; i<nombres.size(); i++){
+			data.addValue(tiemposAtencion.get(i), nombres.get(i), nombres.get(i));
+		}
+		chart = ChartFactory.createBarChart("REPORTE EN GRAFICO DE BARRAS DE LOS TIEMPOS DE ATENCION",
+				"",
+				"",
+				data,
+				PlotOrientation.VERTICAL,
+				true,
+				true,
+				false);
+		chart.setBackgroundPaint(Color.cyan);
+        chart.getTitle().setPaint(Color.black);
+        CategoryPlot p = chart.getCategoryPlot();
+        p.setRangeGridlinePaint(Color.red);
+		
+		panel = new ChartPanel(chart);
+		panel.setBounds(500, 50, 510, 500);
+		
+		ChartFrame frame = new ChartFrame("JFreeChart", chart);
+        frame.pack();
+        frame.setVisible(true);
+	}
+	
 	public String[] getTabla(String variable){
 		String [] res = new String [2];
 		
