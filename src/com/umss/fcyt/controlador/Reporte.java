@@ -43,6 +43,16 @@ public class Reporte {
 		DefaultPieDataset data = new DefaultPieDataset();
 		for(int i = 0;i<lista.size();i++){
 			String variable = lista.get(i);
+			if(variable == "Tiempo de Espera"){
+				
+				graficarCircularTiempoEspera(nombres,tiemposEspera);
+				
+			}else{
+				if(variable == "Tiempo de Atencion"){
+					
+					graficarCircularTiempoAtencion(nombres,tiemposAtencion);
+					
+				}else{
 			if(variable == "Pacientes dados de Alta"){
 				int valor = valores.get(3);
 				data.setValue(variable, valor);
@@ -65,11 +75,13 @@ public class Reporte {
 							}
 						}
 					}
+					}
+				}
 				}
 			}
 			}
 		JFreeChart chart = ChartFactory.createPieChart(
-		         "REPORTE EN GRAFICO CIRCULAR DE LA SIMULACION",
+		         "REPORTE EN GRAFICO CIRCULAR DE LOS RESULTADOS DE LOS PACIENTES",
 		         data,
 		         true,
 		         true,
@@ -78,6 +90,36 @@ public class Reporte {
         frame.pack();
         frame.setVisible(true);
         
+	}
+	public void graficarCircularTiempoAtencion(ArrayList<String>nombres,ArrayList<Integer>tiemposAtencion){
+		DefaultPieDataset data = new DefaultPieDataset();
+		for(int i = 0;i<nombres.size();i++){
+			data.setValue(nombres.get(i), tiemposAtencion.get(i));
+		}
+		JFreeChart chart = ChartFactory.createPieChart(
+		         "REPORTE EN GRAFICO CIRCULAR DE LOS TIEMPOS DE ATENCION",
+		         data,
+		         true,
+		         true,
+		         false);
+		ChartFrame frame = new ChartFrame("JFreeChart", chart);
+       frame.pack();
+       frame.setVisible(true);
+	}
+	public void graficarCircularTiempoEspera(ArrayList<String>nombres,ArrayList<Integer>tiemposEspera){
+		DefaultPieDataset data = new DefaultPieDataset();
+		for(int i = 0;i<nombres.size();i++){
+			data.setValue(nombres.get(i), tiemposEspera.get(i));
+		}
+		JFreeChart chart = ChartFactory.createPieChart(
+		         "REPORTE EN GRAFICO CIRCULAR DE LOS TIEMPOS DE ESPERA",
+		         data,
+		         true,
+		         true,
+		         false);
+		ChartFrame frame = new ChartFrame("JFreeChart", chart);
+       frame.pack();
+       frame.setVisible(true);
 	}
 	public void graficarBarra(){
 		

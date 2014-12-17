@@ -70,26 +70,6 @@ public class VentanaPrincipalReportes extends JFrame {
 		contentPane.add(tiempoAtencion);
 		
 		final JComboBox diagra = new JComboBox();
-		diagra.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				int grafico = diagra.getSelectedIndex();
-				if(grafico == 1){
-					cantidadPacientes.setEnabled(false);
-					tiempoEspera.setEnabled(false);
-					tiempoAtencion.setEnabled(false);
-				}
-				if(grafico == 0){
-					cantidadPacientes.setEnabled(true);
-					tiempoEspera.setEnabled(true);
-					tiempoAtencion.setEnabled(true);
-				}
-				if(grafico == 2){
-					cantidadPacientes.setEnabled(true);
-					tiempoEspera.setEnabled(true);
-					tiempoAtencion.setEnabled(true);
-				}
-			}
-		});
 		diagra.setModel(new DefaultComboBoxModel(new String[] {"Diagrama de Barras", "Diagrama Circular", "Tablas"}));
 		diagra.setBounds(162, 92, 145, 22);
 		contentPane.add(diagra);
@@ -176,6 +156,14 @@ public class VentanaPrincipalReportes extends JFrame {
 					if(grafico == 1){
 						
 						reporte.crearGraficoCircular();
+						VentanaReportes tabla = new VentanaReportes();
+						tabla.setVisible(true);
+						for(int i = 0;i<lista.size();i++){
+							
+							String [] aux = reporte.getTabla(lista.get(i));
+							tabla.model.addRow(aux);
+						}
+						
 					}else{
 						VentanaReportes tabla = new VentanaReportes();
 						tabla.setVisible(true);
