@@ -8,6 +8,7 @@ import com.umss.fcyt.modelo.Paciente;
 import com.umss.fcyt.modelo.SalaDeEspera;
 import com.umss.fcyt.modelo.SalaEmergencias;
 import com.umss.fcyt.modelo.TipoPaciente;
+import com.umss.fcyt.modelo.modelosimulacion.GeneradorDeVariables;
 
 public class SimuladorDos {
 
@@ -18,17 +19,21 @@ public class SimuladorDos {
 	private int tiempoTranscurrido = 0;
 
 	private int tiempoDeEntradaPaciente;
+	
+	private GeneradorDeVariables generadorDeVariables;
 
 	public SimuladorDos(SalaEmergencias sala) {
 		this.salaDeEmergencias = sala;
+		generadorDeVariables = new GeneradorDeVariables();
 	}
 
 	public SimuladorDos() {
 		Cubiculo c = new Cubiculo(2, TipoPaciente.QUEMADURAS);
 		this.salaDeEmergencias = new SalaEmergencias();
 		this.salaDeEmergencias.agregarCubiculo(c);
-
+		generadorDeVariables = new GeneradorDeVariables();
 		this.tiempoDeEntradaPaciente = 1;//variable aleatoria desde 1 a otro
+	
 	}
 
 	public void pasoSimulacion() {
@@ -71,11 +76,7 @@ public class SimuladorDos {
 												+ cubiculo.getTipoDePacienteParaAtender().toString() + " por unos :"+paciente.getTiempoDeAtencion()+ " minutos .....");
 						}
 					}
-					
-					
-				
-				
-			}
+		   }
 			
 		}
 		
@@ -140,8 +141,13 @@ public class SimuladorDos {
 				}
 			}
 
-			// despues de haber transcurrido el tiempo de entrada del paciente(aqui va la variable aleatoria ese tres)
-			this.tiempoDeEntradaPaciente = this.tiempoDeEntradaPaciente + 3;// ojo parece que mas tres
+			//despues de haber transcurrido el tiempo de entrada del paciente(aqui va la variable aleatoria ese tres)
+			//this.tiempoDeEntradaPaciente = this.tiempoDeEntradaPaciente + 3;// ojo parece que mas tres
+			 int valorgenerado=this.generadorDeVariables.getVarTiempoDeLlegada();
+		     this.tiempoDeEntradaPaciente = this.tiempoDeEntradaPaciente+valorgenerado;              
+		   
+		    System.out.println("##marce##valor de tiempoDeLLegada generado = "+valorgenerado );
+		    System.out.println("##marce###el siguiente pasiente llegara dentro de :"+tiempoDeEntradaPaciente);
 		}
 	}
 	

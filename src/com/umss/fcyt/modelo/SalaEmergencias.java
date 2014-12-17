@@ -95,7 +95,7 @@ public class SalaEmergencias {
 	}
 	
 	public ArrayList<Integer> getDatos(){
-		ArrayList<Integer> valores = new ArrayList<>();
+		ArrayList<Integer> valores = new ArrayList<Integer>();
 		//valores.add(pacientes.size());
 		//valores.add(tiempoEspera.size());
 		//valores.add(tiempoAtencion.size());

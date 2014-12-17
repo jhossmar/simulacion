@@ -16,14 +16,9 @@ public GeneradorDeVariables(){
 
 /**
  * determina el tipo de paciente
- * @return tipo de Paciente:
- *  DERIVADORS_OTRO_HOSPITAL,
-	ACCIDENTE_TRANSITO,
-	QUEMADURAS,
-	CONTAGIOSOS,
-	PACIENTES_GRAVES o 
-	PACIENTES_NORMALES
-  */
+ * @return tipo de Paciente: DERIVADORS_OTRO_HOSPITAL,ACCIDENTE_TRANSITO,QUEMADURAS,
+ *	        CONTAGIOSOS,PACIENTES_GRAVES o PACIENTES_NORMALES
+ **/
 public TipoPaciente getVarTipoDePaciente(){
 
 	return  TipoPaciente.PACIENTES_NORMALES;
@@ -36,9 +31,14 @@ public TipoPaciente getVarTipoDePaciente(){
  * @return tiempo de llegada en minutos
  */
 public int  getVarTiempoDeLlegada(){
+	double res;
+    DistribucionExponencial distribucionExp = new DistribucionExponencial();
+    distribucionExp.generarValor(25);//dado que en el informe esta variable sige una distribucion exponencial con media = 25
+    res = distribucionExp.getValor();
+    System.out.println("##marce###valor generado "+res);
+	return (int)res;
 	
 	
-	return  0;
 }
 
 /**
@@ -47,9 +47,8 @@ public int  getVarTiempoDeLlegada(){
  * @return tiempo de atencion en minutos
  * */
 public int getVarTiempoDeAtencion(TipoPaciente tipoDePaciente ){
-
- return 0;
-	
+    return 10;//solo por decir
+    
 }
 
 /**
@@ -107,10 +106,7 @@ public boolean medicoEspecialistaDisponible(TipoPaciente tipoDePaciente){
  *     especialista segun necesidad que tenga-> ? es una variable?
  *   9 disponibilidad del medico especialista
  *   10 tiempo en que se  desocupa una cama-> depende de las variables 4, 5 o 6,
- *  
- *  
- *  
- *  
+ * 
  * */
 
 
