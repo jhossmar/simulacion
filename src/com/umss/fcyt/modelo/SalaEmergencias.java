@@ -105,16 +105,41 @@ public class SalaEmergencias {
 		//valores.add(pacientesFallecidos.size());
 		//valores.add(pacientesFechasReprogramadas.size());
 		
-		valores.add(15);
+		valores.add(10);
 		valores.add(10);
 		valores.add(25);
-		valores.add(5);
-		valores.add(2);
 		valores.add(2);
 		valores.add(3);
-		valores.add(3);
+		valores.add(1);
+		valores.add(2);
+		valores.add(2);
 		return valores;
 	}
-	
-	
+	public ArrayList<String> getNombres(){
+		ArrayList<String> nombres = new ArrayList<String>();
+		
+		for(int i = 0; i < 10; i++){
+			nombres.add("kilo"+i);
+		}
+		
+		return nombres;
+	}
+	public ArrayList<Integer> getTiempoEspera(){
+		ArrayList<Integer> tiempos = new ArrayList<Integer>();
+		
+		for(int i = 0; i < 10; i++){
+			tiempos.add(i);
+		}
+		
+		return tiempos;
+	}
+	public ArrayList<Integer> getTiempoAtencion(){
+		ArrayList<Integer> tiempos = new ArrayList<Integer>();
+		
+		for(int i = 5; i < 15; i++){
+			tiempos.add(i);
+		}
+		
+		return tiempos;
+	}
 }
