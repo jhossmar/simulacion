@@ -4,6 +4,7 @@ public class Paciente {
 	private TipoPaciente tipo;
 	private GravedadPaciente gravedad;
 	private String nombre;
+	private EstadoFinal estadoFinal;
 
 	private int tiempoDeAtencion;
 
@@ -12,10 +13,26 @@ public class Paciente {
 	public Paciente(String nombre) {
 		this.nombre = nombre;
 		this.tipo = TipoPaciente.PACIENTES_GRAVES;
+		this.estadoFinal = EstadoFinal.DADO_ALTA;
 		this.gravedad = null;
 
 		this.tiempoDeAtencion = 10;// otra variable
+		
 	}
+
+	
+	
+	public EstadoFinal getEstadoFinal() {
+		return estadoFinal;
+	}
+
+
+
+	public void setEstadoFinal(EstadoFinal estadoFinal) {
+		this.estadoFinal = estadoFinal;
+	}
+
+
 
 	public boolean equals(Object obj) {
 		if (obj instanceof Paciente) {

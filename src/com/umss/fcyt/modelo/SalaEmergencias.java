@@ -96,25 +96,50 @@ public class SalaEmergencias {
 	
 	public ArrayList<Integer> getDatos(){
 		ArrayList<Integer> valores = new ArrayList<>();
-		//valores.add(pacientes.size());
-		//valores.add(tiempoEspera.size());
-		//valores.add(tiempoAtencion.size());
-		//valores.add(pacientesAlta.size());
+		valores.add(pacientes.size());
+		valores.add(15);
+		valores.add(calcularPromedio());
+		valores.add(calcularCantidadPacientesPorEstadoFinal(EstadoFinal.DADO_ALTA));
+		valores.add(calcularCantidadPacientesPorEstadoFinal(EstadoFinal.INTERNADO));
+		valores.add(calcularCantidadPacientesPorEstadoFinal(EstadoFinal.FECHA_REPROGRAMADA));
+		valores.add(calcularCantidadPacientesPorEstadoFinal(EstadoFinal.FALLECIDO));
+		valores.add(calcularCantidadPacientesPorEstadoFinal(EstadoFinal.CONSULTA_EXTERNA));
+
 		//valores.add(pacientesInternados.size());
 		//valores.add(pacientesReprogramados.size());
 		//valores.add(pacientesFallecidos.size());
 		//valores.add(pacientesFechasReprogramadas.size());
 		
-		valores.add(10);
-		valores.add(10);
-		valores.add(25);
-		valores.add(2);
-		valores.add(3);
-		valores.add(1);
-		valores.add(2);
-		valores.add(2);
+//		valores.add(10);
+//		valores.add(10);
+//		valores.add(25);
+//		valores.add(2);
+//		valores.add(3);
+//		valores.add(1);
+//		valores.add(2);
+//		valores.add(2);
 		return valores;
 	}
+	
+	public int calcularCantidadPacientesPorEstadoFinal(EstadoFinal estadoFinal) {
+		int cantidad = 0;
+		for (Paciente paciente : pacientes) {
+			if(paciente.getEstadoFinal() == estadoFinal) {
+				cantidad++;
+			}
+		}
+		return cantidad;
+	}
+	
+	public int calcularPromedio() {
+		int suma = 0;
+		for(Paciente p : pacientes) {
+			suma = suma + p.getTiempoDeAtencion();
+		}
+		
+		return suma / pacientes.size();
+	}
+	
 	public ArrayList<String> getNombres(){
 		ArrayList<String> nombres = new ArrayList<String>();
 		

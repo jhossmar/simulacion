@@ -12,36 +12,40 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JCheckBox;
 import javax.swing.JInternalFrame;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import com.umss.fcyt.controlador.Reporte;
+import com.umss.fcyt.modelo.SalaEmergencias;
+
 import java.util.ArrayList; 
 
 public class VentanaPrincipalReportes extends JFrame {
 
 	private JPanel contentPane;
-
+	SalaEmergencias sala;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPrincipalReportes frame = new VentanaPrincipalReportes();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					VentanaPrincipalReportes frame = new VentanaPrincipalReportes();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public VentanaPrincipalReportes() {
+	public VentanaPrincipalReportes(SalaEmergencias sala) {
+		this.sala = sala;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 526, 593);
 		contentPane = new JPanel();
@@ -141,7 +145,7 @@ public class VentanaPrincipalReportes extends JFrame {
 				if(pacientesConsultaExterna.isSelected()){
 					lista.add(pacientesConsultaExterna.getText());
 				}
-				Reporte reporte = new Reporte(lista);
+				Reporte reporte = new Reporte(lista, sala);
 				
 				if(grafico == 0){
 					reporte.graficarBarra();

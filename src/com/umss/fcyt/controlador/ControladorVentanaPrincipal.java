@@ -216,7 +216,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 		}
 
 		if(e.getSource() == ventanaPrincipal.btnGenerarrepote) {
-			VentanaPrincipalReportes ventana = new VentanaPrincipalReportes();
+			VentanaPrincipalReportes ventana = new VentanaPrincipalReportes(sala);
 			ventana.setVisible(true);
 		}
 	}

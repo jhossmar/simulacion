@@ -26,9 +26,12 @@ public class Reporte {
 	private ArrayList<String> nombres;
 	private ArrayList<Integer> tiemposEspera;
 	private ArrayList<Integer> tiemposAtencion;
-	public Reporte(ArrayList<String>lista){
+	
+	SalaEmergencias sala;
+	
+	public Reporte(ArrayList<String>lista, SalaEmergencias sala){
 		 this.lista = lista;
-		 SalaEmergencias sala = new SalaEmergencias();
+		 this.sala = sala;
 		 ArrayList<Integer>valores = sala.getDatos();
 		 this.valores = valores;
 		 ArrayList<String> nombres = sala.getNombres();
