@@ -5,8 +5,10 @@ public class Paciente {
 	private GravedadPaciente gravedad;
 	private String nombre;
 	private EstadoFinal estadoFinal;
-
+	private int tiempoEspera;
 	private int tiempoDeAtencion;
+	private int horaEntrada;
+	private int horaSalida;
 
 	Thread procesoPaciente;
 
@@ -17,7 +19,9 @@ public class Paciente {
 		this.gravedad = null;
 
 		this.tiempoDeAtencion = 10;// otra variable
-		
+		this.tiempoEspera = 2;
+		this.horaEntrada = 2;
+		this.horaSalida = 5;
 	}
 
 	
@@ -54,6 +58,12 @@ public class Paciente {
 	public void setTiempoDeAtencion(int tiempoDeAtencion) {
 		this.tiempoDeAtencion = tiempoDeAtencion;
 	}
+	public int getTiempoEspera(){
+		return tiempoEspera;
+	}
+	public void setTiempoEspera(int tiempoEspera){
+		this.tiempoEspera = tiempoEspera;
+	}
 
 	public void reducirTiempoDeAtencion() {
 		this.tiempoDeAtencion = this.tiempoDeAtencion - 1;
@@ -82,5 +92,16 @@ public class Paciente {
 	public void setGravedad(GravedadPaciente gravedad) {
 		this.gravedad = gravedad;
 	}
-
+	public int getHoraEntrada(){
+		return horaEntrada;
+	}
+	public void setHoraEntrada(int hora){
+		this.horaEntrada = hora;
+	}
+	public int getHoraSalida(){
+		return horaSalida;
+	}
+	public void setHoraSalida(int hora){
+		this.horaSalida = hora;
+	}
 }

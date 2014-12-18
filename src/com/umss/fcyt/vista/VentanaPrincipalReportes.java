@@ -45,11 +45,11 @@ public class VentanaPrincipalReportes extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaPrincipalReportes(SalaEmergencias sala) {
+	public VentanaPrincipalReportes(final SalaEmergencias sala) {
 		this.sala = sala;
 		final ArrayList<String> nombres = sala.getNombres();
 		this.nombres = nombres;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 526, 593);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -159,6 +159,7 @@ public class VentanaPrincipalReportes extends JFrame {
 						
 						String [] aux = reporte.getTabla(lista.get(i));
 						tabla.model.addRow(aux);
+						
 					}
 				}else{
 					if(grafico == 1){

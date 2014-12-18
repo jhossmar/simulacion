@@ -97,8 +97,8 @@ public class SalaEmergencias {
 	public ArrayList<Integer> getDatos(){
 		ArrayList<Integer> valores = new ArrayList<>();
 		valores.add(pacientes.size());
-		valores.add(15);
-		valores.add(calcularPromedio());
+		valores.add(calcularTiempoEspera());
+		valores.add(calcularTiempoAtencion());
 		valores.add(calcularCantidadPacientesPorEstadoFinal(EstadoFinal.DADO_ALTA));
 		valores.add(calcularCantidadPacientesPorEstadoFinal(EstadoFinal.INTERNADO));
 		valores.add(calcularCantidadPacientesPorEstadoFinal(EstadoFinal.FECHA_REPROGRAMADA));
@@ -120,6 +120,13 @@ public class SalaEmergencias {
 //		valores.add(2);
 		return valores;
 	}
+	public int calcularTiempoEspera(){
+		int tiempo = 0;
+		for(Paciente p : pacientes) {
+			tiempo = tiempo + p.getTiempoEspera();
+		}
+		return tiempo;
+	}
 	
 	public int calcularCantidadPacientesPorEstadoFinal(EstadoFinal estadoFinal) {
 		int cantidad = 0;
@@ -131,29 +138,27 @@ public class SalaEmergencias {
 		return cantidad;
 	}
 	
-	public int calcularPromedio() {
+	public int calcularTiempoAtencion() {
 		int suma = 0;
 		for(Paciente p : pacientes) {
 			suma = suma + p.getTiempoDeAtencion();
 		}
 		
-		return suma / pacientes.size();
+		return suma;
 	}
 	
 	public ArrayList<String> getNombres(){
 		ArrayList<String> nombres = new ArrayList<String>();
-		
-		for(int i = 0; i < 10; i++){
-			nombres.add("kilo"+i);
+		for(Paciente p : pacientes){
+			nombres.add(p.getNombre());
 		}
-		
 		return nombres;
 	}
 	public ArrayList<Integer> getTiempoEspera(){
 		ArrayList<Integer> tiempos = new ArrayList<Integer>();
 		
-		for(int i = 0; i < 10; i++){
-			tiempos.add(i);
+		for(Paciente p : pacientes){
+			tiempos.add(p.getTiempoEspera());
 		}
 		
 		return tiempos;
@@ -161,8 +166,8 @@ public class SalaEmergencias {
 	public ArrayList<Integer> getTiempoAtencion(){
 		ArrayList<Integer> tiempos = new ArrayList<Integer>();
 		
-		for(int i = 5; i < 15; i++){
-			tiempos.add(i);
+		for(Paciente p : pacientes){
+			tiempos.add(p.getTiempoDeAtencion());
 		}
 		
 		return tiempos;
@@ -170,29 +175,41 @@ public class SalaEmergencias {
 
 
 
-	public ArrayList<String> getCubiculo() {
-		
-		return null;
+	public ArrayList<TipoPaciente> getCubiculo() {
+		ArrayList<TipoPaciente> cubiculos = new ArrayList<TipoPaciente>();
+		for(Paciente p : pacientes){
+			cubiculos.add(p.getTipo());
+		}
+		return cubiculos;
 	}
 
 
 
 	public ArrayList<Integer> getHoraEntrada() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Integer> horaEntradas = new ArrayList<Integer>();
+		for(Paciente p : pacientes){
+			horaEntradas.add(p.getHoraEntrada());
+		}
+		return horaEntradas;
 	}
 
 
 
 	public ArrayList<Integer> getHoraSalida() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Integer> horaSalida = new ArrayList<Integer>();
+		for(Paciente p : pacientes){
+			horaSalida.add(p.getHoraSalida());
+		}
+		return horaSalida;
 	}
 
 
 
-	public ArrayList<String> getEstadoFinal() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<EstadoFinal> getEstadoFinal() {
+		ArrayList<EstadoFinal> estadoFinal = new ArrayList<EstadoFinal>();
+		for(Paciente p : pacientes){
+			estadoFinal.add(p.getEstadoFinal());
+		}
+		return estadoFinal;
 	}
 }

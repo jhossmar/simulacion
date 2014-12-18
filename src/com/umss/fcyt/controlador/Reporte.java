@@ -1,7 +1,10 @@
 package com.umss.fcyt.controlador;
 
 
+import com.umss.fcyt.modelo.EstadoFinal;
 import com.umss.fcyt.modelo.SalaEmergencias;    
+import com.umss.fcyt.modelo.TipoPaciente;
+
 import java.awt.Color; 
 import org.jfree.chart.*; 
 
@@ -26,10 +29,10 @@ public class Reporte {
 	private ArrayList<String> nombres;
 	private ArrayList<Integer> tiemposEspera;
 	private ArrayList<Integer> tiemposAtencion;
-	private ArrayList<String> cubiculo;
+	private ArrayList<TipoPaciente> cubiculo;
 	private ArrayList<Integer> horaEntrada;
 	private ArrayList<Integer> horaSalida;
-	private ArrayList<String> estadoFinal;
+	private ArrayList<EstadoFinal> estadoFinal;
 	
 	SalaEmergencias sala;
 	
@@ -45,13 +48,13 @@ public class Reporte {
 		 ArrayList<Integer> tiemposAtencion = sala.getTiempoAtencion();
 		 this.tiemposAtencion = tiemposAtencion;
 		 
-		 ArrayList<String> cubiculo = sala.getCubiculo();
+		 ArrayList<TipoPaciente> cubiculo = sala.getCubiculo();
 		 this.cubiculo = cubiculo;
 		 ArrayList<Integer> horaEntrada = sala.getHoraEntrada();
 		 this.horaEntrada = horaEntrada;
 		 ArrayList<Integer> horaSalida = sala.getHoraSalida();
 		 this.horaSalida = horaSalida;
-		 ArrayList<String> estadoFinal = sala.getEstadoFinal();
+		 ArrayList<EstadoFinal> estadoFinal = sala.getEstadoFinal();
 		 this.estadoFinal = estadoFinal;
 	}
 	public void crearGraficoCircular(){
@@ -319,10 +322,10 @@ public class Reporte {
 		String [] filas = new String[6];
 		filas[0] = nombres.get(pos);
 		filas[1] = tiemposAtencion.get(pos)+"";
-		filas[2] = cubiculo.get(pos);
-		filas[4] = horaEntrada.get(pos)+"";
-		filas[5] = horaSalida.get(pos)+"";
-		filas[6] = estadoFinal.get(pos);
+		filas[2] = cubiculo.get(pos)+"";
+		filas[3] = horaEntrada.get(pos)+"";
+		filas[4] = horaSalida.get(pos)+"";
+		filas[5] = estadoFinal.get(pos)+"";
 		return filas;
 	}
 }
