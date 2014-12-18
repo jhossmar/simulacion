@@ -125,10 +125,11 @@ public class SimuladorDos {
 		
 		//reduce tiempo de atencion solo a los que estan en los cubiculos
 		for (Cubiculo cubiculo : salaDeEmergencias.getCubiculos()) {
-			for (Paciente paciente : cubiculo.getPacientes()) {
+		    for (Paciente paciente : cubiculo.getPacientes()) {
 				paciente.reducirTiempoDeAtencion();
 			}
 		}
+		
 
 		
 		this.tiempoTranscurrido = this.tiempoTranscurrido + 1;
@@ -136,6 +137,7 @@ public class SimuladorDos {
 		//System.out.println("==================================================");
 	 }
 	}
+
 
 	public void ingresaNuevoPaciente() {
 		if (tiempoTranscurrido == tiempoDeEntradaPaciente) {
