@@ -155,6 +155,7 @@ public class VentanaPrincipalReportes extends JFrame {
 					reporte.graficarBarra();
 					VentanaReportes tabla = new VentanaReportes();
 					tabla.setVisible(true);
+					tabla.setLocation(750, 500);
 					for(int i = 0;i<lista.size();i++){
 						
 						String [] aux = reporte.getTabla(lista.get(i));
@@ -167,6 +168,7 @@ public class VentanaPrincipalReportes extends JFrame {
 						reporte.crearGraficoCircular();
 						VentanaReportes tabla = new VentanaReportes();
 						tabla.setVisible(true);
+						tabla.setLocation(750, 500);
 						for(int i = 0;i<lista.size();i++){
 							
 							String [] aux = reporte.getTabla(lista.get(i));
@@ -176,6 +178,7 @@ public class VentanaPrincipalReportes extends JFrame {
 					}else{
 						VentanaTabla tablaGeneral = new VentanaTabla();
 						tablaGeneral.setVisible(true);
+						tablaGeneral.setLocation(100, 200);
 						for(int i = 0;i<nombres.size();i++){
 							
 							String [] aux = reporte.getReporteTabla(i);
@@ -184,6 +187,7 @@ public class VentanaPrincipalReportes extends JFrame {
 						
 						VentanaReportes tabla = new VentanaReportes();
 						tabla.setVisible(true);
+						tabla.setLocation(800, 200);
 						for(int i = 0;i<lista.size();i++){
 							
 							String [] aux = reporte.getTabla(lista.get(i));

@@ -107,6 +107,7 @@ public class Reporte {
 		         false);
 		ChartFrame frame = new ChartFrame("JFreeChart", chart);
         frame.pack();
+        frame.setLocation(0, 430);
         frame.setVisible(true);
         
 	}
@@ -138,6 +139,7 @@ public class Reporte {
 		         false);
 		ChartFrame frame = new ChartFrame("JFreeChart", chart);
        frame.pack();
+       frame.setLocation(750, 0);
        frame.setVisible(true);
 	}
 	public void graficarBarra(){
@@ -208,6 +210,7 @@ public class Reporte {
 		
 		ChartFrame frame = new ChartFrame("JFreeChart", chart);
         frame.pack();
+        frame.setLocation(0, 430);
         frame.setVisible(true);
 	}
 	
@@ -236,6 +239,7 @@ public class Reporte {
 		
 		ChartFrame frame = new ChartFrame("JFreeChart", chart);
         frame.pack();
+        frame.setLocation(750, 0);
         frame.setVisible(true);
 	}
 	public void graficarBarraTiempoAtencion(ArrayList<String>nombres,ArrayList<Integer>tiemposAtencion){
