@@ -173,12 +173,12 @@ public class VentanaPrincipalReportes extends JFrame {
 						}
 						
 					}else{
-						VentanaTabla tabla = new VentanaTabla();
-						tabla.setVisible(true);
+						VentanaTabla tablaGeneral = new VentanaTabla();
+						tablaGeneral.setVisible(true);
 						for(int i = 0;i<nombres.size();i++){
 							
-							String [] aux = reporte.getTabla(lista.get(i));
-							tabla.model.addRow(aux);
+							String [] aux = reporte.getReporteTabla(i);
+							tablaGeneral.model.addRow(aux);
 						}
 						
 						VentanaReportes tabla = new VentanaReportes();

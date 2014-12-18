@@ -167,4 +167,32 @@ public class SalaEmergencias {
 		
 		return tiempos;
 	}
+
+
+
+	public ArrayList<String> getCubiculo() {
+		
+		return null;
+	}
+
+
+
+	public ArrayList<Integer> getHoraEntrada() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public ArrayList<Integer> getHoraSalida() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public ArrayList<String> getEstadoFinal() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

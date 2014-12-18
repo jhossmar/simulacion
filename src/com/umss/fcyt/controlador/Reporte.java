@@ -26,6 +26,10 @@ public class Reporte {
 	private ArrayList<String> nombres;
 	private ArrayList<Integer> tiemposEspera;
 	private ArrayList<Integer> tiemposAtencion;
+	private ArrayList<String> cubiculo;
+	private ArrayList<Integer> horaEntrada;
+	private ArrayList<Integer> horaSalida;
+	private ArrayList<String> estadoFinal;
 	
 	SalaEmergencias sala;
 	
@@ -40,6 +44,15 @@ public class Reporte {
 		 this.tiemposEspera = tiemposEspera;
 		 ArrayList<Integer> tiemposAtencion = sala.getTiempoAtencion();
 		 this.tiemposAtencion = tiemposAtencion;
+		 
+		 ArrayList<String> cubiculo = sala.getCubiculo();
+		 this.cubiculo = cubiculo;
+		 ArrayList<Integer> horaEntrada = sala.getHoraEntrada();
+		 this.horaEntrada = horaEntrada;
+		 ArrayList<Integer> horaSalida = sala.getHoraSalida();
+		 this.horaSalida = horaSalida;
+		 ArrayList<String> estadoFinal = sala.getEstadoFinal();
+		 this.estadoFinal = estadoFinal;
 	}
 	public void crearGraficoCircular(){
 		
@@ -301,5 +314,15 @@ public class Reporte {
 			}
 		}
 		return res;
+	}
+	public String [] getReporteTabla(int pos){
+		String [] filas = new String[6];
+		filas[0] = nombres.get(pos);
+		filas[1] = tiemposAtencion.get(pos)+"";
+		filas[2] = cubiculo.get(pos);
+		filas[4] = horaEntrada.get(pos)+"";
+		filas[5] = horaSalida.get(pos)+"";
+		filas[6] = estadoFinal.get(pos);
+		return filas;
 	}
 }
