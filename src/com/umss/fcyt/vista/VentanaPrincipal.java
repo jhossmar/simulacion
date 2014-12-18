@@ -39,6 +39,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import java.awt.Font;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -69,6 +70,7 @@ public class VentanaPrincipal extends JFrame {
 	int contador =0;
 	public JSlider sliderVelocidad;
 	public JTextArea textoDescripcion;
+	public JLabel labelHora;
 	 
 	public VentanaPrincipal() {
 		setResizable(false);
@@ -168,7 +170,7 @@ public class VentanaPrincipal extends JFrame {
 		JInternalFrame internalFrame = new JInternalFrame("Paleta de Herramientas");
 		internalFrame.setFrameIcon(new ImageIcon("imagenes/icono1.png"));
 		internalFrame.setBounds(10, 66, 194, 294);
-		contentPane.add(internalFrame);
+		//contentPane.add(internalFrame);
 		internalFrame.getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("New button");
@@ -261,6 +263,16 @@ public class VentanaPrincipal extends JFrame {
 		scrollPane.setViewportView(textoDescripcion);
 		scrollPane.setBounds(242, 500, 832, 110);
 		contentPane.add(scrollPane);
+		
+		JLabel lblHora = new JLabel("Hora :");
+		lblHora.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
+		lblHora.setBounds(613, 42, 62, 14);
+		contentPane.add(lblHora);
+		
+		labelHora = new JLabel("00:00");
+		labelHora.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
+		labelHora.setBounds(680, 42, 62, 14);
+		contentPane.add(labelHora);
 		internalFrame.setVisible(true);
 
 		

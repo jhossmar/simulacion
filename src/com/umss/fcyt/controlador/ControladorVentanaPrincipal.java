@@ -39,14 +39,15 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 
 	public ControladorVentanaPrincipal(VentanaPrincipal ventana) {
 		this.ventanaPrincipal = ventana;
-
-		this.reloj = new Reloj();
-
+		
 		this.velocidadActualDeSimulacion = VELOCIDAD_MINIMA_SIMULACION;
 
 		this.simulador = new SimuladorDos();
 
 		this.sala = simulador.getSalaDeEmergencias();
+		
+		this.reloj = simulador.getReloj();
+
 
 		agregarAccionesBotones();
 	}
@@ -175,6 +176,8 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 		
 		int cantidad3 = sala.getSalaEspera().size();
 		ventanaPrincipal.mostrar(ventanaPrincipal.panelTriaje, cantidad3);
+		
+		ventanaPrincipal.labelHora.setText(reloj.toString());
 	}
 
 	public void pausarSimulacion() {
