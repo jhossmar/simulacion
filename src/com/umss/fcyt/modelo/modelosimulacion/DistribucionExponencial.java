@@ -31,11 +31,18 @@ public class DistribucionExponencial {
     public static void main(String[]args)
     {
     
-    DistribucionExponencial Expone = new DistribucionExponencial();
-    Expone.generarValor(25);
+    while (true){
+    	DistribucionExponencial Expone = new DistribucionExponencial();
+    	try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    Expone.generarValor(30);
     Double valor = Expone.getValor();
     System.out.println(valor);
-    
+    }
     /*
         Double res = Math.log(0.2);
         System.out.println(res);

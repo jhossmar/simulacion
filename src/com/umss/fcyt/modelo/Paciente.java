@@ -1,5 +1,8 @@
 package com.umss.fcyt.modelo;
 
+import com.umss.fcyt.modelo.modelosimulacion.GeneradorCongruencialMixto;
+import com.umss.fcyt.modelo.modelosimulacion.GeneradorDeVariables;
+
 public class Paciente {
 	private TipoPaciente tipo;
 	private GravedadPaciente gravedad;
@@ -9,19 +12,20 @@ public class Paciente {
 	private int tiempoDeAtencion;
 	private int horaEntrada;
 	private int horaSalida;
-
-	Thread procesoPaciente;
-
+    Thread procesoPaciente;
+    GeneradorDeVariables generadorDeVariables;
+    
 	public Paciente(String nombre) {
+		generadorDeVariables = new GeneradorDeVariables();
 		this.nombre = nombre;
-		this.tipo = TipoPaciente.PACIENTES_GRAVES;
-		this.estadoFinal = EstadoFinal.DADO_ALTA;
-		this.gravedad = null;
+		this.tipo =  generadorDeVariables.getVarTipoDePaciente();
+		this.estadoFinal = EstadoFinal.DADO_ALTA;//falta implementar
+		this.gravedad = null; //falta implementar
 
-		this.tiempoDeAtencion = 10;// otra variable
-		this.tiempoEspera = 2;
+		this.tiempoDeAtencion = generadorDeVariables.getVarTiempoDeAtencion(tipo);
+		this.tiempoEspera = 2;// depende de la cantidad de paasientes que esten en hemergencias y tipo de pasiente
 		this.horaEntrada = 2;
-		this.horaSalida = 5;
+		this.horaSalida = 5;  // depente del tiempo de atencion para este pasiente
 	}
 
 	
