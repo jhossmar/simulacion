@@ -22,25 +22,19 @@ public GeneradorDeVariables(){
 public TipoPaciente getVarTipoDePaciente(){
 	TipoPaciente res = TipoPaciente.PACIENTES_GRAVES;
     DistribucionUniforme distribucionUnif = new DistribucionUniforme();
-    distribucionUnif.generar(1, 7);//dado que en el informe esta variable sige una distribucion exponencial con media = 25
+    distribucionUnif.generar(1, 5);//dado que en el informe esta variable sige una distribucion exponencial con media = 25
     int aux = (int)distribucionUnif.getValor();
     switch(aux) {
 	 case 1: 
 	      res = TipoPaciente.QUEMADURAS;
 	     break;
 	 case 2: 
-		 res = TipoPaciente.DERIVADORS_OTRO_HOSPITAL;
-	     break;
-	 case 3: 
-		 res = TipoPaciente.ACCIDENTE_TRANSITO;
-	     break;
-	 case 4: 
 		 res = TipoPaciente.CONTAGIOSOS;
 	     break;
-	 case 5: 
+	 case 3: 
 		 res = TipoPaciente.PACIENTES_GRAVES;
          break;	 
- 	 case 6:
+ 	 case 4:
 		 res = TipoPaciente.PACIENTES_NORMALES;
 	     break;
 	}

@@ -29,7 +29,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 	private Reloj reloj;
 
 	private static final int VELOCIDAD_MAXIMA_SIMULACION = 100;
-	private static final int VELOCIDAD_MINIMA_SIMULACION = 2000;
+	private static final int VELOCIDAD_MINIMA_SIMULACION = 1000;
 
 	private int velocidadActualDeSimulacion;
 
@@ -177,6 +177,12 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 		int cantidad3 = sala.getSalaEspera().size();
 		ventanaPrincipal.mostrar(ventanaPrincipal.panelTriaje, cantidad3);
 		
+		int cantidad4 = sala.getCubiculos().get(2).getPacientes().size();
+		ventanaPrincipal.mostrar(ventanaPrincipal.panelNormales, cantidad4);
+		
+		int cantidad5 = sala.getCubiculos().get(3).getPacientes().size();
+		ventanaPrincipal.mostrar(ventanaPrincipal.panelInfecciosos, cantidad5);
+
 		ventanaPrincipal.labelHora.setText(reloj.toString());
 	}
 
