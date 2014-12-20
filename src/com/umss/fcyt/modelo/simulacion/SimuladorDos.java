@@ -112,7 +112,7 @@ public class SimuladorDos {
 						}
 					}
 
-			
+			}
 		}
 		
 
@@ -131,11 +131,11 @@ public class SimuladorDos {
 		}
 		
 
-		
+		System.out.println("ESTA ENTRANDO");
 		this.tiempoTranscurrido = this.tiempoTranscurrido + 1;
 		descripcionSimulacion.append("==================================================\n");
 		//System.out.println("==================================================");
-	 }
+	 
 	}
 
 
