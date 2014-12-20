@@ -12,10 +12,10 @@ public class SalaEmergencias {
 	private SalaDeEspera salaEspera;
 	
 	public SalaEmergencias() {
-		this.pacientes = null;
+		this.pacientes = new ArrayList<Paciente>();
 		this.medicos = null;
 		this.enfermeros = null;
-		this.cubiculos = null;
+		this.cubiculos = new ArrayList<Cubiculo>();
 		
 		this.salaEspera = new SalaDeEspera();
 	}
@@ -144,7 +144,7 @@ public class SalaEmergencias {
 			suma = suma + p.getTiempoDeAtencion();
 		}
 		
-		return suma;
+		return (suma / pacientes.size());
 	}
 	
 	public ArrayList<String> getNombres(){

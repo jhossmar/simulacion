@@ -239,11 +239,11 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblCubiculoPacientesGraves = new JLabel("Cubiculo Pacientes Graves");
-		lblCubiculoPacientesGraves.setBounds(673, 79, 116, 20);
+		lblCubiculoPacientesGraves.setBounds(673, 79, 174, 20);
 		contentPane.add(lblCubiculoPacientesGraves);
 		
 		JLabel lblCubiculoPacientesInfecciosos = new JLabel("Cubiculo Pacientes Infecciosos");
-		lblCubiculoPacientesInfecciosos.setBounds(242, 296, 151, 20);
+		lblCubiculoPacientesInfecciosos.setBounds(242, 296, 198, 20);
 		contentPane.add(lblCubiculoPacientesInfecciosos);
 		
 		JLabel lblCubiculoPacientesNormales = new JLabel("Cubiculo Pacientes Normales");
@@ -297,15 +297,25 @@ public class VentanaPrincipal extends JFrame {
 	public void mostrar(JPanel panel ,int cantidad) {
 		
 		Component[] components = panel.getComponents();
-		int j = 0;
-		for (int i = 0; i < cantidad; i++) {
-			components[i].setVisible(true);
-			j = i;
-		}
 		
-		for (int i = j + 1; i < components.length; i++) {
+		for (int i = 0; i < components.length; i++) {
 			components[i].setVisible(false);
 		}
+		
+		for (int i = 0; i < cantidad; i++) {
+			components[i].setVisible(true);
+		}
+		
+//		Component[] components = panel.getComponents();
+//		int j = 0;
+//		for (int i = 0; i < cantidad; i++) {
+//			components[i].setVisible(true);
+//			j = i;
+//		}
+//		
+//		for (int i = j + 1; i < components.length; i++) {
+//			components[i].setVisible(false);
+//		}
 	}
 	
 	public void agregarCubiculos() {

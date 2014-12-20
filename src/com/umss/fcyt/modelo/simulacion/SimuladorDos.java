@@ -34,10 +34,16 @@ public class SimuladorDos {
 	public SimuladorDos() {
 		Cubiculo c = new Cubiculo(2, TipoPaciente.QUEMADURAS);
 		Cubiculo c2 = new Cubiculo(2, TipoPaciente.PACIENTES_GRAVES);
+		Cubiculo c3 = new Cubiculo(2, TipoPaciente.PACIENTES_NORMALES);
+		Cubiculo c4 = new Cubiculo(2, TipoPaciente.CONTAGIOSOS);
+		
+		
 		this.salaDeEmergencias = new SalaEmergencias();
+		
 		this.salaDeEmergencias.agregarCubiculo(c);
-
 		this.salaDeEmergencias.agregarCubiculo(c2);
+		this.salaDeEmergencias.agregarCubiculo(c3);
+		this.salaDeEmergencias.agregarCubiculo(c4);
 		
 		this.descripcionSimulacion = new StringBuffer();
 		
@@ -61,12 +67,19 @@ public class SimuladorDos {
 		//System.out.println("==================================================");
 		//System.out.println("Tiempo : " + reloj.toString());
 
+		//muestra el estado de los cubiculos actual
+		for (Cubiculo cubi : salaDeEmergencias.getCubiculos()) {
+			//Cubiculo cubi = salaDeEmergencias.getCubiculos().get(i);
+			descripcionSimulacion.append("El cubiculo de " +cubi.getTipoDePacienteParaAtender() + " esta atendiendo a: "+cubi.getPacientes().size()
+					+"  pacientes \n" + "Y tiene : " + cubi.retornarCantidadCamillasDisponibles() + " camillas disponibles \n");
+
+		}
 		
 		//libero cubiculos
 		for(int i=0;i < salaDeEmergencias.getCubiculos().size();i++) {
 			Cubiculo c = salaDeEmergencias.getCubiculos().get(i);
-			descripcionSimulacion.append("El cubiculo de " +c.getTipoDePacienteParaAtender() + " esta atendiendo a: "+c.getPacientes().size()
-					+"  pacientes \n" + "Y tiene : " + c.retornarCantidadCamillasDisponibles() + " camillas disponibles \n");
+//			descripcionSimulacion.append("El cubiculo de " +c.getTipoDePacienteParaAtender() + " esta atendiendo a: "+c.getPacientes().size()
+//					+"  pacientes \n" + "Y tiene : " + c.retornarCantidadCamillasDisponibles() + " camillas disponibles \n");
 			
 			//System.out.println("El cubiculo de " +c.getTipoDePacienteParaAtender() + "esta atendiendo a: "+c.getPacientes().size()
 				//	+"  pacientes");
@@ -197,7 +210,11 @@ public class SimuladorDos {
 			//despues de haber transcurrido el tiempo de entrada del paciente(aqui va la variable aleatoria ese tres)
 			//this.tiempoDeEntradaPaciente = this.tiempoDeEntradaPaciente + 3;// ojo parece que mas tres
 			 int valorgenerado=this.generadorDeVariables.getVarTiempoDeLlegada();
-		     this.tiempoDeEntradaPaciente = this.tiempoDeEntradaPaciente+valorgenerado;              
+			 if(valorgenerado==0){
+				 this.tiempoDeEntradaPaciente = this.tiempoDeEntradaPaciente+valorgenerado+1;
+			 } else {
+			     this.tiempoDeEntradaPaciente = this.tiempoDeEntradaPaciente+valorgenerado;              
+			 }
 		   
 		    System.out.println("##marce##valor de tiempoDeLLegada generado = "+valorgenerado );
 		    System.out.println("##marce###el siguiente pasiente llegara dentro de :"+tiempoDeEntradaPaciente);
