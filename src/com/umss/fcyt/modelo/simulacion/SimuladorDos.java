@@ -116,6 +116,8 @@ public class SimuladorDos {
 								descripcionSimulacion.append("El paciente :"+ paciente.getNombre()+ " esta siendo atendido  "+ "en el cubiculo de : "
 										+ cubiculo.getTipoDePacienteParaAtender().toString() + " por unos :"+paciente.getTiempoDeAtencion()+ " minutos .....\n");
 								
+								retornarProcesoDeAtencion(paciente);
+								
 								//System.out.println("El paciente :"+ paciente.getNombre()+ " esta siendo atendido  "+ "en el cubiculo de : "
 													//+ cubiculo.getTipoDePacienteParaAtender().toString() + " por unos :"+paciente.getTiempoDeAtencion()+ " minutos .....");
 
@@ -151,7 +153,28 @@ public class SimuladorDos {
 	 
 	}
 
+ 
+	public void retornarProcesoDeAtencion(Paciente paciente) {
+		
+		switch (paciente.getTipo()) {
+		case PACIENTES_NORMALES:
+			descripcionSimulacion.append(ProcesoAtencionANormales.atenderAPaciente(paciente));
+			break;
 
+		case CONTAGIOSOS:
+			descripcionSimulacion.append(ProcesoAtencionAInfecciosos.atenderAPaciente(paciente));
+			break;
+		case PACIENTES_GRAVES:
+			descripcionSimulacion.append(ProcesoAtencionAGraves.atenderAPaciente(paciente));
+			break;
+		case QUEMADURAS:
+			descripcionSimulacion.append(ProcesoAtencionAQuemados.atenderAPaciente(paciente));
+			break;
+		default:
+			break;
+		}
+	}
+	
 	public void ingresaNuevoPaciente() {
 		if (tiempoTranscurrido == tiempoDeEntradaPaciente) {
 			Paciente p = new Paciente("Beimar " + tiempoTranscurrido);
@@ -189,7 +212,7 @@ public class SimuladorDos {
 							this.salaDeEmergencias.getSalaEspera().eliminarEnPosicion(indicePrimero);
 							descripcionSimulacion.append("El paciente :"+ p.getNombre()+ " esta siendo atendido  "+ "en el cubiculo de : "
 									+ cubiculo.getTipoDePacienteParaAtender().toString() + " por unos :"+ p.getTiempoDeAtencion()+ " minutos ..... \n");
-							
+							retornarProcesoDeAtencion(p);
 							//System.out.println("El paciente :"+ p.getNombre()+ " esta siendo atendido  "+ "en el cubiculo de : "
 											//+ cubiculo.getTipoDePacienteParaAtender().toString() + " por unos :"+ p.getTiempoDeAtencion()+ " minutos .....");
 						} else {
