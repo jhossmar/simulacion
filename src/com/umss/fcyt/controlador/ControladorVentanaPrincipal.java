@@ -29,7 +29,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 	private Reloj reloj;
 
 	private static final int VELOCIDAD_MAXIMA_SIMULACION = 100;
-	private static final int VELOCIDAD_MINIMA_SIMULACION = 1000;
+	private static final int VELOCIDAD_MINIMA_SIMULACION = 2000;
 
 	private int velocidadActualDeSimulacion;
 
