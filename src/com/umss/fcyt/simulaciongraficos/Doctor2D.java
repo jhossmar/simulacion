@@ -41,7 +41,6 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	 */
 	@Override
 	public void dibujar(Graphics g) {
-		System.out.println("dibbujando doctores"+ (avance + 1));
 		// aumentar algo para control
 		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
 				largo, null);
