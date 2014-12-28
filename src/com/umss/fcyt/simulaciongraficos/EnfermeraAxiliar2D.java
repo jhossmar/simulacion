@@ -24,6 +24,7 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 	Monitor monitorPermisoAtenderAuxiliar;
 	Monitor monitorPermisoAtenderDoctor;
 	int tiempoAtencion = 2000;
+	public Thread hilo;
 
 	public EnfermeraAxiliar2D(PanelSimulacion panelSimulacion, int coordenaX,
 			int coordenaY, String nombreImagen) {
@@ -137,7 +138,7 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 	}
 
 	public void iniciarMovimiento() {
-		Thread hilo = new Thread(this);
+		hilo = new Thread(this);
 		hilo.start();
 	}
 

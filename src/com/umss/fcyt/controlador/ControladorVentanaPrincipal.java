@@ -209,19 +209,23 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 
 		if (e.getSource() == ventanaPrincipal.botonEjecutar
 				|| e.getSource() == ventanaPrincipal.itemEjecutar) {
-			this.iniciarSimulacion();
+			//this.iniciarSimulacion();
+			ventanaPrincipal.panelSimulacion.iniciarSimulacionGrafica();
 		}
 		if (e.getSource() == ventanaPrincipal.botonPausar
 				|| e.getSource() == ventanaPrincipal.itemPausar) {
-			this.pausarSimulacion();
+			//this.pausarSimulacion();
+			ventanaPrincipal.panelSimulacion.pausarSimulacionGrafica();
 		}
 		if (e.getSource() == ventanaPrincipal.botonDetener
 				|| e.getSource() == ventanaPrincipal.itemDetener) {
-			this.detenerSimulacion();
+			//this.detenerSimulacion();
+			ventanaPrincipal.panelSimulacion.pararMovimiento();
 		}
 		if (e.getSource() == ventanaPrincipal.botonContinuar
 				|| e.getSource() == ventanaPrincipal.itemContinuar) {
-			this.continuarSimulacion();
+			//this.continuarSimulacion();
+			ventanaPrincipal.panelSimulacion.continuarSimulacionGrafica();
 		}
 
 		if(e.getSource() == ventanaPrincipal.btnGenerarrepote) {

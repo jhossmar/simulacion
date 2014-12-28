@@ -58,12 +58,13 @@ public class VentanaPrincipal extends JFrame {
 	
 	//comandos de simulacion
 	public JButton botonEjecutar;
-	public  JButton botonPausar;
-	public  JButton botonDetener;
-	 public JButton botonContinuar;
+	public JButton botonPausar;
+	public JButton botonDetener;
+	public JButton botonContinuar;
 	
 	 //panel de graficos
 	 public JPanel panelQuemados;
+	 public PanelSimulacion panelSimulacion;
 	
 
 	int contador =0;
@@ -210,9 +211,10 @@ public class VentanaPrincipal extends JFrame {
 		panelQuemados = new JPanel(new FlowLayout());
 		//panelQuemados.setSize(-477, -246);
 		panelQuemados.setBackground(Color.DARK_GRAY);
-		panelQuemados.setBounds(30, 100, 500, 350);
+		panelQuemados.setBounds(30, 80, 500, 350);
 		
-		panelQuemados.add(new PanelSimulacion());
+		panelSimulacion = new PanelSimulacion();
+		panelQuemados.add(panelSimulacion);
 		contentPane.add(panelQuemados);
 		
 		JLabel lblNewLabel = new JLabel("Cubiculo Quemados");

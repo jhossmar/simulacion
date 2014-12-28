@@ -24,7 +24,7 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	Timer temporizador;
 
 	int retraso;
-	ArrayList<ElementoDibujable> pacientes;
+	ArrayList<Paciente2D> pacientes;
 	ArrayList<Doctor2D> doctores;
 	ArrayList<EnfermeraAxiliar2D> enfermeras;
 	ArrayList<EnfermeraLicenciada2D> enfermerasLicenciadas;
@@ -38,7 +38,10 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	public Monitor monitorPermisoAtenderAuxiliar = new Monitor(false);
 	public Monitor monitorPermisoAtenderDoctor = new Monitor(false);
 
+	
 	public Estaticos2D camilla;
+
+	public Thread graficador;
 	
 	public PanelSimulacion() {
 
@@ -46,7 +49,7 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 		Dimension b = new Dimension(500, 350);
 		this.setPreferredSize(b);
 
-		this.pacientes = new ArrayList<ElementoDibujable>();
+		this.pacientes = new ArrayList<Paciente2D>();
 		this.doctores = new ArrayList<Doctor2D>();
 		this.enfermeras = new ArrayList<EnfermeraAxiliar2D>();
 		this.objetos = new ArrayList<Estaticos2D>();
@@ -59,14 +62,14 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 		this.retraso = 5000;
 
 		this.temporizador = new Timer(retraso, this);
-		temporizador.start();
+
 		setFocusable(true);
 
 		imagenFondo = new ImageIcon("imagenes/Sala.png");
 		
 		setVisible(true);
 		
-		Thread corredor = new Thread(new Runnable() {
+		graficador = new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
@@ -83,9 +86,9 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 				
 			}
 		});
-		corredor.start();
-		
 	}
+	
+	
 	
 	public void cambiarCamillaVacia(String nombreImagen) {
 		camilla.cambiarImagen(nombreImagen);
@@ -153,11 +156,74 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 		}
 	}
 
-	public void pararMovimiento() {
-		this.temporizador.stop();
-
+	public void iniciarSimulacionGrafica() {
+		this.temporizador.start();
+		this.graficador.start();
 	}
 	
+	public void pararMovimiento() {
+		this.temporizador.stop();
+		for (Paciente2D paciente : pacientes) {
+			paciente.hilo.stop();
+			
+		}
+		
+		for (EnfermeraAxiliar2D enfermera : enfermeras) {
+			enfermera.hilo.stop();
+		}
+		
+		for (EnfermeraLicenciada2D enfermeraLicen : enfermerasLicenciadas) {
+			enfermeraLicen.hilo.stop();
+		}
+		
+		for (Doctor2D doctor : doctores) {
+			doctor.hilo.stop();
+		}
+	}
+	
+	public void pausarSimulacionGrafica() {
+		this.temporizador.stop();
+		for (Paciente2D paciente : pacientes) {
+			paciente.hilo.suspend();
+			
+		}
+		
+		for (EnfermeraAxiliar2D enfermera : enfermeras) {
+			enfermera.hilo.suspend();;
+		}
+		
+		for (EnfermeraLicenciada2D enfermeraLicen : enfermerasLicenciadas) {
+			enfermeraLicen.hilo.suspend();
+		}
+		
+		for (Doctor2D doctor : doctores) {
+			doctor.hilo.suspend();
+		}
+	}
+	
+	public void continuarSimulacionGrafica() {
+		this.temporizador.stop();
+		for (Paciente2D paciente : pacientes) {
+			paciente.hilo.resume();
+			
+		}
+		
+		for (EnfermeraAxiliar2D enfermera : enfermeras) {
+			enfermera.hilo.resume();
+		}
+		
+		for (EnfermeraLicenciada2D enfermeraLicen : enfermerasLicenciadas) {
+			enfermeraLicen.hilo.resume();
+		}
+		
+		for (Doctor2D doctor : doctores) {
+			doctor.hilo.resume();
+		}
+	}
+	
+	
+	
+	//puede ser un metodo que agrega unicamente pacientes segun el tiempo (ES MUCHO MAS REAL)
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(contador < 3) {
@@ -167,9 +233,6 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 			nuevoPaciente.iniciarMovimiento();
 			contador++;
 		} 
-		
-		
-		
 	}
 
 }

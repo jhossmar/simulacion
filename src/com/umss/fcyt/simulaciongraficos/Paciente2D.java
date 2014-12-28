@@ -37,6 +37,8 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 	int velocidad = 100;// indica la velocidad de recorrido
 	int avance = 10;// indica cuanto avanza el paciente por unidad de velocidad
 
+	public Thread hilo;
+
 	public Paciente2D(PanelSimulacion panelJuego) {
 		this.panelJuego = panelJuego;// panel donde se dibujan las notas
 
@@ -220,7 +222,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 	}
 
 	public void iniciarMovimiento() {
-		Thread hilo = new Thread(this);
+		hilo = new Thread(this);
 		hilo.start();
 	}
 

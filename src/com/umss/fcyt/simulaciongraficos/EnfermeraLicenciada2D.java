@@ -28,6 +28,7 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 	Monitor monitorPermisoEntrada;
 	Monitor monitorHayPacienteTriaje;
 	Monitor monitorPermisoACubiculo;
+	public Thread hilo;
 
 	public EnfermeraLicenciada2D(PanelSimulacion panelSimulacion,
 			int coordenaX, int coordenaY, String nombreImagen) {
@@ -142,7 +143,7 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 	}
 
 	public void iniciarMovimiento() {
-		Thread hilo = new Thread(this);
+		hilo = new Thread(this);
 		hilo.start();
 	}
 

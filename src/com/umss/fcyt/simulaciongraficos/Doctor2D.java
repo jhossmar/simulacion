@@ -25,6 +25,7 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	Monitor monitorPermisoAtenderDoctor;
 	Monitor monitorPermisoSalirDeCubiculo;
 	Monitor monitorPermisoEntrarACubiculo;
+	public Thread hilo;
 
 	public Doctor2D(PanelSimulacion panelJuego) {
 		this.panelJuego = panelJuego;// panel donde se dibujan las notas
@@ -126,7 +127,7 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	}
 
 	public void iniciarMovimiento() {
-		Thread hilo = new Thread(this);
+		hilo = new Thread(this);
 		hilo.start();
 	}
 
