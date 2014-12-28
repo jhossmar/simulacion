@@ -63,8 +63,6 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 					largo, null);
 			g.drawImage(imagenTutor.getImage(),coordenaX + cX, coordenaY + cY, 30,
 					30, null);
-
-			//panelJuego.repaint();
 		}
 		
 	}
@@ -97,7 +95,6 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaX = coordenaX + avance;
 			try {
 				Thread.sleep(velocidad);
-				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -111,7 +108,6 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaY = coordenaY + avance;
 			try {
 				Thread.sleep(velocidad);
-				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -128,7 +124,6 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaY = coordenaY - avance;
 			try {
 				Thread.sleep(velocidad);
-				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -145,7 +140,6 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaX = coordenaX + avance;
 			try {
 				Thread.sleep(velocidad);
-				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -163,7 +157,6 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaX = coordenaX - avance;
 			try {
 				Thread.sleep(velocidad);
-				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -177,7 +170,6 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaY = coordenaY + avance;
 			try {
 				Thread.sleep(velocidad);
-				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -191,7 +183,6 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaX = coordenaX + avance;
 			try {
 				Thread.sleep(velocidad);
-				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -203,7 +194,6 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 		ImageIcon nuevoTutor = new ImageIcon(nombreTutor);
 		this.imagenTutor = nuevoTutor;
 		setImage(nuevo, ancho, largo);
-		//panelJuego.repaint();
 	}
 
 	public int getCoordenaX() {

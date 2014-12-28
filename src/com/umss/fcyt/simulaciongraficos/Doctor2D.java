@@ -45,8 +45,6 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 		// aumentar algo para control
 		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
 				largo, null);
-
-		//panelJuego.repaint();
 	}
 
 	/*
@@ -74,7 +72,6 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 			try {
 				Thread.sleep(velocidad);
 				coordenaY = coordenaY - avance;// darle nombre a 2
-				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -89,7 +86,6 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	public void atenderPaciente(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
-			//panelJuego.repaint();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -101,7 +97,6 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 			try {
 				Thread.sleep(velocidad);
 				coordenaY = coordenaY + avance;// darle nombre a 2
-				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

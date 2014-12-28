@@ -48,8 +48,6 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 		// aumentar algo para control
 		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
 				largo, null);
-
-		//panelJuego.repaint();
 	}
 
 	/*
@@ -133,7 +131,6 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 	public void atenderPaciente(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
-			//panelJuego.repaint();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

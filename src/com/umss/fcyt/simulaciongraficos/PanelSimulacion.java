@@ -129,8 +129,7 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	public void paint(Graphics g) {
 		//se sigue pintando luego se arregla
 		//super.paint(g);
-		g.drawImage(imagenFondo.getImage(), 0, 0, getWidth(), getHeight(), null);
-		//this.repaint();																			
+		g.drawImage(imagenFondo.getImage(), 0, 0, getWidth(), getHeight(), null);																		
 		
 		for (ElementoDibujable paciente : pacientes) {
 			

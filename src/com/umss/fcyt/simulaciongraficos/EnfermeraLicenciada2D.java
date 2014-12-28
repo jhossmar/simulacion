@@ -56,8 +56,6 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 		// aumentar algo para control
 		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
 				largo, null);
-
-		//panelJuego.repaint();
 	}
 
 	/*
@@ -82,7 +80,6 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 			try {
 				Thread.sleep(velocidad);
 				coordenaX = coordenaX + avance;
-				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -95,7 +92,6 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 			try {
 				Thread.sleep(velocidad);
 				coordenaX = coordenaX - avance;
-				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -109,7 +105,6 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 	public void atenderPaciente(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
-			//panelJuego.repaint();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

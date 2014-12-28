@@ -35,8 +35,6 @@ public class Estaticos2D implements ElementoDibujable{
 		// aumentar algo para control
 		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
 				largo, null);
-
-		//panelJuego.repaint();
 	}
 
 	public int getCoordenaX() {
@@ -46,7 +44,6 @@ public class Estaticos2D implements ElementoDibujable{
 	public void cambiarImagen(String nombreImagen) {
 		ImageIcon nuevo = new ImageIcon(nombreImagen);
 		setImage(nuevo, ancho, largo);
-		//panelJuego.repaint();
 	}
 	
 	// CAmbia la imagen
