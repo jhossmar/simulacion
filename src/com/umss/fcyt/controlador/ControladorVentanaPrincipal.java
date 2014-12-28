@@ -127,8 +127,8 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 	// }
 
 	public void iniciarSimulacion() {
-		this.procesoSimulacion = new Thread(this);
-		this.procesoSimulacion.start();
+//		this.procesoSimulacion = new Thread(this);
+//		this.procesoSimulacion.start();
 	}
 
 	/**
@@ -149,9 +149,9 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 			try {
 				Thread.sleep(velocidadActualDeSimulacion);
 
-				simulador.pasoSimulacion();
+				//simulador.pasoSimulacion();
 				
-				actualizarVista();
+				//actualizarVista();
 
 				contadorTiempo++;
 				//SwingUtilities.updateComponentTreeUI(ventanaPrincipal);
@@ -168,22 +168,22 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 		
 		ventanaPrincipal.textoDescripcion.setText(simulador.descripcionSimulacion.toString());
 		
-		int cantidad = sala.getCubiculos().get(0).getPacientes().size(); 
-		ventanaPrincipal.mostrar(ventanaPrincipal.panelQuemados, cantidad);
-		
-		int cantidad2 = sala.getCubiculos().get(1).getPacientes().size(); 
-		ventanaPrincipal.mostrar(ventanaPrincipal.panelGraves, cantidad2);
-		
-		int cantidad3 = sala.getSalaEspera().size();
-		ventanaPrincipal.mostrar(ventanaPrincipal.panelTriaje, cantidad3);
-		
-		int cantidad4 = sala.getCubiculos().get(2).getPacientes().size();
-		ventanaPrincipal.mostrar(ventanaPrincipal.panelNormales, cantidad4);
-		
-		int cantidad5 = sala.getCubiculos().get(3).getPacientes().size();
-		ventanaPrincipal.mostrar(ventanaPrincipal.panelInfecciosos, cantidad5);
-
-		ventanaPrincipal.labelHora.setText(reloj.toString());
+//		int cantidad = sala.getCubiculos().get(0).getPacientes().size(); 
+//		ventanaPrincipal.mostrar(ventanaPrincipal.panelQuemados, cantidad);
+//		
+//		int cantidad2 = sala.getCubiculos().get(1).getPacientes().size(); 
+//		ventanaPrincipal.mostrar(ventanaPrincipal.panelGraves, cantidad2);
+//		
+//		int cantidad3 = sala.getSalaEspera().size();
+//		ventanaPrincipal.mostrar(ventanaPrincipal.panelTriaje, cantidad3);
+//		
+//		int cantidad4 = sala.getCubiculos().get(2).getPacientes().size();
+//		ventanaPrincipal.mostrar(ventanaPrincipal.panelNormales, cantidad4);
+//		
+//		int cantidad5 = sala.getCubiculos().get(3).getPacientes().size();
+//		ventanaPrincipal.mostrar(ventanaPrincipal.panelInfecciosos, cantidad5);
+//
+//		ventanaPrincipal.labelHora.setText(reloj.toString());
 	}
 
 	public void pausarSimulacion() {

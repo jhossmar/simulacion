@@ -25,11 +25,12 @@ public class VentanaPrincipal extends JFrame {
 	public void inicializarComponentes() {
 		this.setLayout(new FlowLayout(3));
 		PanelSimulacion p = new PanelSimulacion();
+		p.setPreferredSize(new Dimension(500, 350));
 		this.add(p);
 		
-		PanelDeProcesos b = new PanelDeProcesos();
-		b.setVisible(true);
-		this.add(b);
+//		PanelDeProcesos b = new PanelDeProcesos();
+//		b.setVisible(true);
+//		this.add(b);
 
 	}
 
@@ -42,7 +43,7 @@ public class VentanaPrincipal extends JFrame {
 		//setExtendedState(JFrame.MAXIMIZED_BOTH);
 		Dimension a = this.getToolkit().getScreenSize();
 		this.setSize(a);
-		setTitle("MusicMaster");
+		setTitle("Simulacion");
 	}
 
 	/*

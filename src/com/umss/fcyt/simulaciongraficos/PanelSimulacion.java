@@ -65,8 +65,10 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 		setFocusable(true);
 
 		imagenFondo = new ImageIcon("imagenes/Sala.png");
+		
+		setVisible(true);
 	}
-
+	
 	public void cambiarCamillaVacia(String nombreImagen) {
 		camilla.cambiarImagen(nombreImagen);
 	}

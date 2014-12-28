@@ -39,6 +39,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+
+import com.umss.fcyt.simulaciongraficos.PanelSimulacion;
+
 import java.awt.Font;
 
 public class VentanaPrincipal extends JFrame {
@@ -61,16 +64,11 @@ public class VentanaPrincipal extends JFrame {
 	
 	 //panel de graficos
 	 public JPanel panelQuemados;
-	 public JPanel panelGraves;
-	 public JPanel panelInfecciosos;
-	 public JPanel panelNormales;
-	 public JPanel panelTriaje;
 	
 
 	int contador =0;
 	public JSlider sliderVelocidad;
 	public JTextArea textoDescripcion;
-	public JLabel labelHora;
 	 
 	public VentanaPrincipal() {
 		setResizable(false);
@@ -91,10 +89,10 @@ public class VentanaPrincipal extends JFrame {
 		JMenu mnArchivo = new JMenu("Archivo");
 		menuBar.add(mnArchivo);
 		
-		JMenuItem mntmGuardarDiseo = new JMenuItem("Guardar Dise\u00F1o");
+		JMenuItem mntmGuardarDiseo = new JMenuItem("Guardar Dise");
 		mnArchivo.add(mntmGuardarDiseo);
 		
-		JMenuItem mntmAbrirDiseo = new JMenuItem("Abrir Dise\u00F1o");
+		JMenuItem mntmAbrirDiseo = new JMenuItem("Abrir Dise");
 		mnArchivo.add(mntmAbrirDiseo);
 		
 		JMenuItem mntmCerrarPrograma = new JMenuItem("Cerrar Programa");
@@ -209,50 +207,17 @@ public class VentanaPrincipal extends JFrame {
 		comboBox.setBounds(28, 243, 123, 20);
 		internalFrame.getContentPane().add(comboBox);
 		
-		panelQuemados = new JPanel();
+		panelQuemados = new JPanel(new FlowLayout());
+		//panelQuemados.setSize(-477, -246);
 		panelQuemados.setBackground(Color.DARK_GRAY);
-		panelQuemados.setBounds(242, 110, 401, 175);
+		panelQuemados.setBounds(30, 100, 500, 350);
+		
+		panelQuemados.add(new PanelSimulacion());
 		contentPane.add(panelQuemados);
 		
-		panelGraves = new JPanel();
-		panelGraves.setBackground(Color.DARK_GRAY);
-		panelGraves.setBounds(673, 110, 401, 175);
-		contentPane.add(panelGraves);
-		
-		panelInfecciosos = new JPanel();
-		panelInfecciosos.setBackground(Color.DARK_GRAY);
-		panelInfecciosos.setBounds(242, 316, 401, 175);
-		contentPane.add(panelInfecciosos);
-		
-		panelNormales = new JPanel();
-		panelNormales.setBackground(Color.DARK_GRAY);
-		panelNormales.setBounds(673, 316, 401, 175);
-		contentPane.add(panelNormales);
-		
-		panelTriaje = new JPanel();
-		panelTriaje.setBackground(Color.DARK_GRAY);
-		panelTriaje.setBounds(10, 402, 210, 134);
-		contentPane.add(panelTriaje);
-		
 		JLabel lblNewLabel = new JLabel("Cubiculo Quemados");
-		lblNewLabel.setBounds(242, 79, 116, 20);
+		lblNewLabel.setBounds(20, 59, 116, 20);
 		contentPane.add(lblNewLabel);
-		
-		JLabel lblCubiculoPacientesGraves = new JLabel("Cubiculo Pacientes Graves");
-		lblCubiculoPacientesGraves.setBounds(673, 79, 174, 20);
-		contentPane.add(lblCubiculoPacientesGraves);
-		
-		JLabel lblCubiculoPacientesInfecciosos = new JLabel("Cubiculo Pacientes Infecciosos");
-		lblCubiculoPacientesInfecciosos.setBounds(242, 296, 198, 20);
-		contentPane.add(lblCubiculoPacientesInfecciosos);
-		
-		JLabel lblCubiculoPacientesNormales = new JLabel("Cubiculo Pacientes Normales");
-		lblCubiculoPacientesNormales.setBounds(673, 296, 174, 20);
-		contentPane.add(lblCubiculoPacientesNormales);
-		
-		JLabel lblTriaje = new JLabel("Triaje");
-		lblTriaje.setBounds(20, 371, 116, 20);
-		contentPane.add(lblTriaje);
 		
 		textoDescripcion = new JTextArea();
 		textoDescripcion.setEditable(false);
@@ -263,25 +228,14 @@ public class VentanaPrincipal extends JFrame {
 		scrollPane.setViewportView(textoDescripcion);
 		scrollPane.setBounds(242, 500, 832, 110);
 		contentPane.add(scrollPane);
-		
-		JLabel lblHora = new JLabel("Hora :");
-		lblHora.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
-		lblHora.setBounds(613, 42, 62, 14);
-		contentPane.add(lblHora);
-		
-		labelHora = new JLabel("00:00");
-		labelHora.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
-		labelHora.setBounds(680, 42, 62, 14);
-		contentPane.add(labelHora);
 		internalFrame.setVisible(true);
 
 		
-		agregarCubiculos();
+		//agregarCubiculos();
 		
 	}
 	
 	public void agregarAPanel(JPanel panel, int cantidad) {
-		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 10 , 10));
 		
 		for (int i = 0; i < cantidad; i++) {
 			JLabel labelPaciente = new JLabel();
@@ -290,8 +244,6 @@ public class VentanaPrincipal extends JFrame {
 			labelPaciente.setIcon(new ImageIcon("imagenes/paciente.png"));
 			panel.add(labelPaciente);
 		}
-		
-		panel.updateUI();
 	}
 	
 	public void mostrar(JPanel panel ,int cantidad) {
@@ -305,25 +257,9 @@ public class VentanaPrincipal extends JFrame {
 		for (int i = 0; i < cantidad; i++) {
 			components[i].setVisible(true);
 		}
-		
-//		Component[] components = panel.getComponents();
-//		int j = 0;
-//		for (int i = 0; i < cantidad; i++) {
-//			components[i].setVisible(true);
-//			j = i;
-//		}
-//		
-//		for (int i = j + 1; i < components.length; i++) {
-//			components[i].setVisible(false);
-//		}
 	}
 	
 	public void agregarCubiculos() {
-		agregarAPanel(panelGraves, 2);
 		agregarAPanel(panelQuemados, 2);
-		agregarAPanel(panelInfecciosos, 2);
-		agregarAPanel(panelNormales, 2);
-		
-		agregarAPanel(panelTriaje, 20);
 	}
 }
