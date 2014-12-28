@@ -38,6 +38,7 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	public Monitor monitorPermisoAtenderAuxiliar = new Monitor(false);
 	public Monitor monitorPermisoAtenderDoctor = new Monitor(false);
 
+	boolean simulacionIniciada = false;
 	
 	public Estaticos2D camilla;
 
@@ -157,8 +158,12 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	}
 
 	public void iniciarSimulacionGrafica() {
-		this.temporizador.start();
-		this.graficador.start();
+		if(!simulacionIniciada) {
+			this.temporizador.start();
+			this.graficador.start();
+			simulacionIniciada = true;
+		}
+		
 	}
 	
 	public void pararMovimiento() {
