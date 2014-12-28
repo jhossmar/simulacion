@@ -1,7 +1,6 @@
 package com.umss.fcyt.simulaciongraficos;
 
 import java.awt.Color;
-
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -9,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -67,6 +65,26 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 		imagenFondo = new ImageIcon("imagenes/Sala.png");
 		
 		setVisible(true);
+		
+		Thread corredor = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				while(true) {
+					try {
+						Thread.sleep(100);
+						repaint();
+					} catch (InterruptedException e) {
+						System.out.println("me estan interrumpiendo");
+						e.printStackTrace();
+					}
+				}
+				
+				
+			}
+		});
+		corredor.start();
+		
 	}
 	
 	public void cambiarCamillaVacia(String nombreImagen) {
@@ -108,12 +126,14 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	}
 
 	
-	public void paint(final Graphics g) {
-		super.paint(g);
+	public void paint(Graphics g) {
+		//se sigue pintando luego se arregla
+		//super.paint(g);
 		g.drawImage(imagenFondo.getImage(), 0, 0, getWidth(), getHeight(), null);
-		this.repaint();																			
+		//this.repaint();																			
 		
 		for (ElementoDibujable paciente : pacientes) {
+			
 			paciente.dibujar(g);
 		}
 		
@@ -132,7 +152,6 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 		for (Doctor2D doctor : doctores) {
 			doctor.dibujar(g);
 		}
-		
 	}
 
 	public void pararMovimiento() {
@@ -142,13 +161,13 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if(contador < 6) {
+		if(contador < 3) {
 			Paciente2D nuevoPaciente = new Paciente2D(this);
 			this.pacientes.add(nuevoPaciente);
 			
 			nuevoPaciente.iniciarMovimiento();
 			contador++;
-		}
+		} 
 		
 		
 		

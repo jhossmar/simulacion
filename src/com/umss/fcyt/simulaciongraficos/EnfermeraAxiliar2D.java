@@ -49,7 +49,7 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
 				largo, null);
 
-		panelJuego.repaint();
+		//panelJuego.repaint();
 	}
 
 	/*
@@ -59,7 +59,7 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 	public void animar() {
 		while (true) {
 			monitorPermisoAtenderAuxiliar
-					.obtenerPermiso("intentando curar al  paciente");
+					.obtenerPermiso("estoy parada");
 			atenderPaciente();
 			monitorPermisoAtenderDoctor
 					.cederPermiso("termine de atender anda vos doctor");
@@ -133,7 +133,7 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 	public void atenderPaciente(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
-			panelJuego.repaint();
+			//panelJuego.repaint();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

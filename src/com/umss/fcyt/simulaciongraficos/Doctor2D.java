@@ -41,11 +41,12 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	 */
 	@Override
 	public void dibujar(Graphics g) {
+		System.out.println("dibbujando doctores"+ (avance + 1));
 		// aumentar algo para control
 		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
 				largo, null);
 
-		panelJuego.repaint();
+		//panelJuego.repaint();
 	}
 
 	/*
@@ -56,7 +57,7 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 		while (true) {
 
 			monitorPermisoAtenderDoctor
-					.obtenerPermiso("intentado curar al paciente");
+					.obtenerPermiso("estoy parado ");
 			atenderPaciente();
 
 			monitorPermisoSalirDeCubiculo
@@ -73,7 +74,7 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 			try {
 				Thread.sleep(velocidad);
 				coordenaY = coordenaY - avance;// darle nombre a 2
-				panelJuego.repaint();
+				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -88,7 +89,7 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	public void atenderPaciente(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
-			panelJuego.repaint();
+			//panelJuego.repaint();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -100,7 +101,7 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 			try {
 				Thread.sleep(velocidad);
 				coordenaY = coordenaY + avance;// darle nombre a 2
-				panelJuego.repaint();
+				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

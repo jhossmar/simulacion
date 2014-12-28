@@ -8,7 +8,8 @@ import javax.swing.ImageIcon;
 
 public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 		Runnable {
-
+	boolean movimientoTerminado = false;
+	
 	private int coordenaX = 50;
 	private int coordenaY = 200;
 	
@@ -57,13 +58,15 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 	@Override
 	public void dibujar(Graphics g) {
 		// aumentar algo para control
-		
-		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
-				largo, null);
-		g.drawImage(imagenTutor.getImage(),coordenaX + cX, coordenaY + cY, 30,
-				30, null);
+		if(!movimientoTerminado) {
+			g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
+					largo, null);
+			g.drawImage(imagenTutor.getImage(),coordenaX + cX, coordenaY + cY, 30,
+					30, null);
 
-		panelJuego.repaint();
+			//panelJuego.repaint();
+		}
+		
 	}
 
 	/*
@@ -84,7 +87,8 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 				.obtenerPermiso("obteniendo permiso para salir del cubiculo de atencion");
 
 		saleHospital();
-
+		
+		movimientoTerminado = true;
 	}
 
 	public void entraPaciente() {
@@ -93,7 +97,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaX = coordenaX + avance;
 			try {
 				Thread.sleep(velocidad);
-				panelJuego.repaint();
+				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -107,7 +111,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaY = coordenaY + avance;
 			try {
 				Thread.sleep(velocidad);
-				panelJuego.repaint();
+				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -124,7 +128,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaY = coordenaY - avance;
 			try {
 				Thread.sleep(velocidad);
-				panelJuego.repaint();
+				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -141,7 +145,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaX = coordenaX + avance;
 			try {
 				Thread.sleep(velocidad);
-				panelJuego.repaint();
+				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -159,7 +163,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaX = coordenaX - avance;
 			try {
 				Thread.sleep(velocidad);
-				panelJuego.repaint();
+				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -173,7 +177,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaY = coordenaY + avance;
 			try {
 				Thread.sleep(velocidad);
-				panelJuego.repaint();
+				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -187,7 +191,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			coordenaX = coordenaX + avance;
 			try {
 				Thread.sleep(velocidad);
-				panelJuego.repaint();
+				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -199,7 +203,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 		ImageIcon nuevoTutor = new ImageIcon(nombreTutor);
 		this.imagenTutor = nuevoTutor;
 		setImage(nuevo, ancho, largo);
-		panelJuego.repaint();
+		//panelJuego.repaint();
 	}
 
 	public int getCoordenaX() {

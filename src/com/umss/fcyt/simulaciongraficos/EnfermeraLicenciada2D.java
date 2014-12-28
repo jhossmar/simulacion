@@ -57,7 +57,7 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
 				largo, null);
 
-		panelJuego.repaint();
+		//panelJuego.repaint();
 	}
 
 	/*
@@ -67,7 +67,7 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 	public void animar() {
 		while (true) {
 
-			monitorHayPacienteTriaje.obtenerPermiso("atendiendo");
+			monitorHayPacienteTriaje.obtenerPermiso("estoy parada");
 			realizarEvaluacion();
 			monitorPermisoACubiculo.cederPermiso("puedes ir a cubiculo");
 			monitorPermisoEntrada.cederPermiso("hay espacio entra chango");
@@ -82,7 +82,7 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 			try {
 				Thread.sleep(velocidad);
 				coordenaX = coordenaX + avance;
-				panelJuego.repaint();
+				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -95,7 +95,7 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 			try {
 				Thread.sleep(velocidad);
 				coordenaX = coordenaX - avance;
-				panelJuego.repaint();
+				//panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -109,7 +109,7 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 	public void atenderPaciente(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
-			panelJuego.repaint();
+			//panelJuego.repaint();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
