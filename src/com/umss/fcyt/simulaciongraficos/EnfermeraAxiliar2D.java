@@ -23,6 +23,7 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 
 	Monitor monitorPermisoAtenderAuxiliar;
 	Monitor monitorPermisoAtenderDoctor;
+	int tiempoAtencion = 2000;
 
 	public EnfermeraAxiliar2D(PanelSimulacion panelSimulacion, int coordenaX,
 			int coordenaY, String nombreImagen) {
@@ -77,6 +78,12 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 				e.printStackTrace();
 			}
 
+		}
+		
+		try {
+			Thread.sleep(tiempoAtencion);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -16,6 +16,8 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 	private int largo = 50;
 
 	private ImageIcon imagen;
+	private ImageIcon imagenTutor;
+	
 	private PanelSimulacion panelJuego;
 
 	private String nombreImagen = "imagenes/personaOficial.png";
@@ -41,6 +43,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 		monitorPermisoAtenderAuxiliar = panelJuego.monitorPermisoAtenderAuxiliar;
 
 		this.imagen = new ImageIcon(nombreImagen);
+		this.imagenTutor = new ImageIcon("imagenes/tutorDerecha.png");
 
 	}
 
@@ -52,6 +55,8 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 		// aumentar algo para control
 		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
 				largo, null);
+		g.drawImage(imagenTutor.getImage(), this.coordenaX - 18, this.coordenaY + 10, 30,
+				30, null);
 
 		panelJuego.repaint();
 	}

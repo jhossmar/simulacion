@@ -56,7 +56,7 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 		agregarEnfermeras();
 		agregarObjetos();
 		
-		this.retraso = 1000;
+		this.retraso = 5000;
 
 		this.temporizador = new Timer(retraso, this);
 		temporizador.start();
@@ -134,7 +134,7 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if(contador < 2) {
+		if(contador < 6) {
 			Paciente2D nuevoPaciente = new Paciente2D(this);
 			this.pacientes.add(nuevoPaciente);
 			
