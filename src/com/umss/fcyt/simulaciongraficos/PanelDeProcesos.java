@@ -21,7 +21,7 @@ public class PanelDeProcesos extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelDeProcesos() {
-		setLayout(new FlowLayout(3));
+		setLayout(null);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.addMouseListener(new MouseAdapter() {

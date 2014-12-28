@@ -159,7 +159,7 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 
 	public void iniciarSimulacionGrafica() {
 		if(!simulacionIniciada) {
-			this.temporizador.start();
+			//this.temporizador.start();
 			this.graficador.start();
 			simulacionIniciada = true;
 		}
@@ -226,18 +226,23 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 		}
 	}
 	
-	
+	public void agregarPaciente() {
+		Paciente2D nuevoPaciente = new Paciente2D(this);
+		this.pacientes.add(nuevoPaciente);
+		
+		nuevoPaciente.iniciarMovimiento();
+	}
 	
 	//puede ser un metodo que agrega unicamente pacientes segun el tiempo (ES MUCHO MAS REAL)
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if(contador < 3) {
-			Paciente2D nuevoPaciente = new Paciente2D(this);
-			this.pacientes.add(nuevoPaciente);
-			
-			nuevoPaciente.iniciarMovimiento();
-			contador++;
-		} 
+//		if(contador < 3) {
+//			Paciente2D nuevoPaciente = new Paciente2D(this);
+//			this.pacientes.add(nuevoPaciente);
+//			
+//			nuevoPaciente.iniciarMovimiento();
+//			contador++;
+//		} 
 	}
 
 }

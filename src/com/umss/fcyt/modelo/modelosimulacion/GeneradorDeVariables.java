@@ -2,6 +2,7 @@ package com.umss.fcyt.modelo.modelosimulacion;
 
 import java.util.Random;
 
+import com.umss.fcyt.modelo.EstadoFinal;
 import com.umss.fcyt.modelo.Paciente;
 import com.umss.fcyt.modelo.TipoPaciente;
 /**
@@ -42,7 +43,31 @@ public TipoPaciente getVarTipoDePaciente(){
     return res;
     }
 	
-	
+public EstadoFinal getEstadoFinal(){
+	EstadoFinal res = EstadoFinal.CONSULTA_EXTERNA;
+    DistribucionUniforme distribucionUnif = new DistribucionUniforme();
+    distribucionUnif.generar(1, 6);//dado que en el informe esta variable sige una distribucion exponencial con media = 25
+    int aux = (int)distribucionUnif.getValor();
+    switch(aux) {
+	 case 1: 
+	      res = EstadoFinal.CONSULTA_EXTERNA;
+	     break;
+	 case 2: 
+		 res =EstadoFinal.DADO_ALTA;
+	     break;
+	 case 3: 
+		 res = EstadoFinal.FALLECIDO;
+         break;	 
+ 	 case 4:
+		 res = EstadoFinal.INTERNADO;
+	     break;
+ 	 case 5:
+		 res = EstadoFinal.FECHA_REPROGRAMADA;
+	     break;
+	}
+   //System.out.println("Se genero al  tipo de paciente paciente :" + res);
+    return res;
+    }
 
 	
 

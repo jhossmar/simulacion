@@ -143,7 +143,9 @@ public class SalaEmergencias {
 		for(Paciente p : pacientes) {
 			suma = suma + p.getTiempoDeAtencion();
 		}
-		
+		if(pacientes.size() == 0) {
+			return suma;
+		}
 		return (suma / pacientes.size());
 	}
 	

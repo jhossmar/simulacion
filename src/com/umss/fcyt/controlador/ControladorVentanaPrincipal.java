@@ -29,7 +29,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 	private Reloj reloj;
 
 	private static final int VELOCIDAD_MAXIMA_SIMULACION = 100;
-	private static final int VELOCIDAD_MINIMA_SIMULACION = 2000;
+	private static final int VELOCIDAD_MINIMA_SIMULACION = 5000;
 
 	private int velocidadActualDeSimulacion;
 
@@ -127,8 +127,8 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 	// }
 
 	public void iniciarSimulacion() {
-//		this.procesoSimulacion = new Thread(this);
-//		this.procesoSimulacion.start();
+		this.procesoSimulacion = new Thread(this);
+		this.procesoSimulacion.start();
 	}
 
 	/**
@@ -150,11 +150,10 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 				Thread.sleep(velocidadActualDeSimulacion);
 
 				//simulador.pasoSimulacion();
-				
-				//actualizarVista();
+				this.sala.agregarPaciente(new Paciente("Beimar Huarachi"));
+				ventanaPrincipal.panelSimulacion.agregarPaciente();
 
 				contadorTiempo++;
-				//SwingUtilities.updateComponentTreeUI(ventanaPrincipal);
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -167,23 +166,6 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 	public void actualizarVista() {
 		
 		ventanaPrincipal.textoDescripcion.setText(simulador.descripcionSimulacion.toString());
-		
-//		int cantidad = sala.getCubiculos().get(0).getPacientes().size(); 
-//		ventanaPrincipal.mostrar(ventanaPrincipal.panelQuemados, cantidad);
-//		
-//		int cantidad2 = sala.getCubiculos().get(1).getPacientes().size(); 
-//		ventanaPrincipal.mostrar(ventanaPrincipal.panelGraves, cantidad2);
-//		
-//		int cantidad3 = sala.getSalaEspera().size();
-//		ventanaPrincipal.mostrar(ventanaPrincipal.panelTriaje, cantidad3);
-//		
-//		int cantidad4 = sala.getCubiculos().get(2).getPacientes().size();
-//		ventanaPrincipal.mostrar(ventanaPrincipal.panelNormales, cantidad4);
-//		
-//		int cantidad5 = sala.getCubiculos().get(3).getPacientes().size();
-//		ventanaPrincipal.mostrar(ventanaPrincipal.panelInfecciosos, cantidad5);
-//
-//		ventanaPrincipal.labelHora.setText(reloj.toString());
 	}
 
 	public void pausarSimulacion() {
@@ -209,7 +191,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 
 		if (e.getSource() == ventanaPrincipal.botonEjecutar
 				|| e.getSource() == ventanaPrincipal.itemEjecutar) {
-			//this.iniciarSimulacion();
+			this.iniciarSimulacion();
 			ventanaPrincipal.panelSimulacion.iniciarSimulacionGrafica();
 		}
 		if (e.getSource() == ventanaPrincipal.botonPausar

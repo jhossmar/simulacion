@@ -217,8 +217,9 @@ public class VentanaPrincipal extends JFrame {
 		panelQuemados.add(panelSimulacion);
 		contentPane.add(panelQuemados);
 		
-		JLabel lblNewLabel = new JLabel("Cubiculo Quemados");
-		lblNewLabel.setBounds(20, 59, 116, 20);
+		JLabel lblNewLabel = new JLabel("Locacion: Cubiculo Quemados");
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
+		lblNewLabel.setBounds(28, 49, 242, 20);
 		contentPane.add(lblNewLabel);
 		
 		textoDescripcion = new JTextArea();
