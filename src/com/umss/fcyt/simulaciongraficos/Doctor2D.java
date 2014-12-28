@@ -95,6 +95,7 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	}
 
 	public void regresar() {
+		panelJuego.cambiarCamillaVacia("imagenes/camillaVacia.gif");
 		while (coordenaY <= 100) {
 			try {
 				Thread.sleep(velocidad);

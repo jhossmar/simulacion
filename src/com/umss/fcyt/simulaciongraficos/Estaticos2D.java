@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
 
-public class Estaticos2D implements ElementoAnimable, ElementoDibujable, Runnable{
+public class Estaticos2D implements ElementoDibujable{
 	private int coordenaX;
 	private int coordenaY;
 
@@ -39,107 +39,16 @@ public class Estaticos2D implements ElementoAnimable, ElementoDibujable, Runnabl
 		panelJuego.repaint();
 	}
 
-	/*
-	 * metodo que hace que la nota cambie su coordena en y
-	 */
-	@Override
-	public void animar() {
-		algo();
-	}
-
-	public void algo() {
-
-		// triaje
-		while (coordenaX <= 210) {
-			coordenaX = coordenaX + 10;
-			try {
-				Thread.sleep(100);
-				panelJuego.repaint();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
-		while ((coordenaX > 210) && (coordenaY <= 280)) {
-			coordenaY = coordenaY + 10;
-			try {
-				Thread.sleep(100);
-				panelJuego.repaint();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
-		try {
-			Thread.sleep(3000);
-			panelJuego.repaint();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		// cubiculo
-		while ((coordenaY >= 20)) {
-			coordenaY = coordenaY - 10;
-			try {
-				Thread.sleep(100);
-				panelJuego.repaint();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
-		while ((coordenaX <= 400)) {
-			coordenaX = coordenaX + 10;
-			try {
-				Thread.sleep(100);
-				panelJuego.repaint();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
-		try {
-			Thread.sleep(3000);
-			panelJuego.repaint();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		// salir
-		while ((coordenaX >= 210)) {
-			coordenaX = coordenaX - 10;
-			try {
-				Thread.sleep(100);
-				panelJuego.repaint();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
-		while ((coordenaY <= 190)) {
-			coordenaY = coordenaY + 10;
-			try {
-				Thread.sleep(100);
-				panelJuego.repaint();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-
-		while ((coordenaX <= 470)) {
-			coordenaX = coordenaX + 10;
-			try {
-				Thread.sleep(100);
-				panelJuego.repaint();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	public int getCoordenaX() {
 		return coordenaX;
 	}
 
+	public void cambiarImagen(String nombreImagen) {
+		ImageIcon nuevo = new ImageIcon(nombreImagen);
+		setImage(nuevo, ancho, largo);
+		panelJuego.repaint();
+	}
+	
 	// CAmbia la imagen
 	public void setImage(ImageIcon imagen, int ancho, int largo) {
 		this.imagen = imagen;
@@ -165,15 +74,5 @@ public class Estaticos2D implements ElementoAnimable, ElementoDibujable, Runnabl
 
 	public void setLargo(int largo) {
 		this.largo = largo;
-	}
-
-	public void iniciarMovimiento() {
-		Thread hilo = new Thread(this);
-		hilo.start();
-	}
-	
-	@Override
-	public void run() {
-		animar();
 	}
 }

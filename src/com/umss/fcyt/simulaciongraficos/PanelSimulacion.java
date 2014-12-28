@@ -39,6 +39,8 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	public Monitor monitorPermisoSalirDeCubiculo = new Monitor(false);
 	public Monitor monitorPermisoAtenderAuxiliar = new Monitor(false);
 	public Monitor monitorPermisoAtenderDoctor = new Monitor(false);
+
+	public Estaticos2D camilla;
 	
 	public PanelSimulacion() {
 
@@ -65,13 +67,17 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 		imagenFondo = new ImageIcon("imagenes/Sala.png");
 	}
 
+	public void cambiarCamillaVacia(String nombreImagen) {
+		camilla.cambiarImagen(nombreImagen);
+	}
+	
 	private void agregarObjetos() {
 		Estaticos2D herramientas = new Estaticos2D(this, 308, 80, "imagenes/herramientas.gif");
 		herramientas.setLargo(63);
 		herramientas.setAncho(45);
 		objetos.add(herramientas);
 		
-		Estaticos2D camilla = new Estaticos2D(this, 390, 20, "imagenes/camillaVacia.gif");
+		camilla = new Estaticos2D(this, 390, 20, "imagenes/camillaVacia.gif");
 		camilla.setAncho(70);
 		camilla.setLargo(50);
 		objetos.add(camilla);

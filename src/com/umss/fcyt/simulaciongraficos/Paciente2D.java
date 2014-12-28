@@ -11,6 +11,10 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 
 	private int coordenaX = 50;
 	private int coordenaY = 200;
+	
+	//para el acompaniante
+	private int cX = - 20;
+	private int cY = 10;
 
 	private int ancho = 50;
 	private int largo = 50;
@@ -53,9 +57,10 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 	@Override
 	public void dibujar(Graphics g) {
 		// aumentar algo para control
+		
 		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
 				largo, null);
-		g.drawImage(imagenTutor.getImage(), this.coordenaX - 18, this.coordenaY + 10, 30,
+		g.drawImage(imagenTutor.getImage(),coordenaX + cX, coordenaY + cY, 30,
 				30, null);
 
 		panelJuego.repaint();
@@ -94,7 +99,9 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			}
 		}
 
-		cambiarImagen("imagenes/personaOficialAbajo.png");
+		cambiarImagen("imagenes/personaOficialAbajo.png", "imagenes/tutorAbajo.png");
+		this.cX = 10;
+		this.cY = - 20;
 
 		while ((coordenaX > 190) && (coordenaY <= 280)) {
 			coordenaY = coordenaY + avance;
@@ -106,7 +113,9 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			}
 		}
 
-		cambiarImagen("imagenes/personaOficialArriba.png");
+		cambiarImagen("imagenes/personaOficialArriba.png","imagenes/tutorArriba.png");
+		this.cX = 10;
+		this.cY = 35;
 	}
 
 	public void entraCubiculo() {
@@ -121,11 +130,14 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			}
 		}
 
-		cambiarImagen("imagenes/personaOficial.png");
+		cambiarImagen("imagenes/personaOficial.png", "imagenes/tutorDerecha.png");
+		//para el acompaniante
+		this.cX = -20;
+		this.cY = 10;
 		monitorPermisoEntrarACubiculo
 				.obtenerPermiso("obteniendo permiso para entrar a cubiculo");
 
-		while ((coordenaX <= 400)) {
+		while ((coordenaX <= 370)) {
 			coordenaX = coordenaX + avance;
 			try {
 				Thread.sleep(velocidad);
@@ -134,11 +146,14 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 				e.printStackTrace();
 			}
 		}
+		panelJuego.cambiarCamillaVacia("imagenes/camillaLlena.png");
 	}
 
 	public void saleHospital() {
 
-		cambiarImagen("imagenes/personaOficialIzquierda.png");
+		cambiarImagen("imagenes/personaOficialIzquierda.png", "imagenes/tutorIzquierda.png");
+		this.cX = 35;
+		this.cY = 10;
 		// salir
 		while ((coordenaX >= 210)) {
 			coordenaX = coordenaX - avance;
@@ -150,7 +165,10 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			}
 		}
 
-		cambiarImagen("imagenes/personaOficialAbajo.png");
+		cambiarImagen("imagenes/personaOficialAbajo.png", "imagenes/tutorAbajo.png");
+		this.cX = 10;
+		this.cY = -20;
+		
 		while ((coordenaY <= 190)) {
 			coordenaY = coordenaY + avance;
 			try {
@@ -161,7 +179,10 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 			}
 		}
 
-		cambiarImagen("imagenes/personaOficial.png");
+		cambiarImagen("imagenes/personaOficial.png" , "imagenes/tutorDerecha.png");
+		this.cX = -20;
+		this.cY = 10;
+		
 		while ((coordenaX <= 470)) {
 			coordenaX = coordenaX + avance;
 			try {
@@ -173,8 +194,10 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable,
 		}
 	}
 
-	public void cambiarImagen(String nombreImagen) {
+	public void cambiarImagen(String nombreImagen, String nombreTutor) {
 		ImageIcon nuevo = new ImageIcon(nombreImagen);
+		ImageIcon nuevoTutor = new ImageIcon(nombreTutor);
+		this.imagenTutor = nuevoTutor;
 		setImage(nuevo, ancho, largo);
 		panelJuego.repaint();
 	}
