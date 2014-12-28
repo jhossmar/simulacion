@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-public class Paciente2D implements ElementoAnimable, ElementoDibujable, Runnable {
+public class Paciente2D implements ElementoAnimable, ElementoDibujable,
+		Runnable {
 
 	private int coordenaX = 50;
 	private int coordenaY = 200;
@@ -19,26 +20,28 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable, Runnable
 
 	private String nombreImagen = "imagenes/personaOficial.png";
 
-	ArrayList<String> hayPacienteCubiculo;
-	ArrayList<String> seAtiendeCubiculo;
-	
-	ArrayList<String> hayPacienteTriaje;
-	ArrayList<String> seAtiendeTriaje;
-	
-	int velocidad = 100;//indica la velocidad de recorrido
+	Monitor monitorPermisoEntrada;
+	Monitor monitorHayPacienteTriaje;
+	Monitor monitorPermisoACubiculo;
+	Monitor monitorPermisoEntrarACubiculo;
+	Monitor monitorPermisoSalirDeCubiculo;
+	Monitor monitorPermisoAtenderAuxiliar;
+
+	int velocidad = 100;// indica la velocidad de recorrido
 	int avance = 10;// indica cuanto avanza el paciente por unidad de velocidad
-	
+
 	public Paciente2D(PanelSimulacion panelJuego) {
 		this.panelJuego = panelJuego;// panel donde se dibujan las notas
 
-		this.hayPacienteCubiculo = panelJuego.hayPacienteCubiculo;
-		this.seAtiendeCubiculo = panelJuego.seAtendioCubiculo;
-		
-		this.hayPacienteTriaje = panelJuego.hayPacienteTriaje;
-		this.seAtiendeTriaje = panelJuego.seAtendioTriaje;
-		
+		monitorPermisoEntrada = panelJuego.monitorPermisoEntrada;
+		monitorHayPacienteTriaje = panelJuego.monitorHayPacienteTriaje;
+		monitorPermisoACubiculo = panelJuego.monitorPermisoACubiculo;
+		monitorPermisoEntrarACubiculo = panelJuego.monitorPermisoEntrarACubiculo;
+		monitorPermisoSalirDeCubiculo = panelJuego.monitorPermisoSalirDeCubiculo;
+		monitorPermisoAtenderAuxiliar = panelJuego.monitorPermisoAtenderAuxiliar;
+
 		this.imagen = new ImageIcon(nombreImagen);
-		
+
 	}
 
 	/*
@@ -58,48 +61,20 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable, Runnable
 	 */
 	@Override
 	public void animar() {
-		
-		synchronized (hayPacienteTriaje) {
-			entraPaciente();
-			hayPacienteTriaje.add("nuevo");
-			hayPacienteTriaje.notify();
-		}
-		
-		synchronized (seAtiendeTriaje) {
-			if(seAtiendeTriaje.size() == 0){
-				try {
-					seAtiendeTriaje.wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			seAtiendeTriaje.remove(0);
-		}
-		
-		
-		synchronized (hayPacienteCubiculo) {
-			entraCubiculo();
-			hayPacienteCubiculo.add("nuevo");
-			hayPacienteCubiculo.notify();
-			
-		}
-		
-		
-		synchronized (seAtiendeCubiculo) {
-			if(seAtiendeCubiculo.size() == 0) {
-				try {
-					seAtiendeCubiculo.wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			seAtiendeCubiculo.remove(0);
-		}
-		
+		monitorPermisoEntrada.obtenerPermiso("beimar");
+
+		entraPaciente();
+		monitorHayPacienteTriaje.cederPermiso("ya estoy adentro atende");
+
+		monitorPermisoACubiculo.obtenerPermiso("estoy en marcha a cubiculo");
+
+		entraCubiculo();
+		monitorPermisoAtenderAuxiliar.cederPermiso("estoy aqui curame");
+		monitorPermisoSalirDeCubiculo
+				.obtenerPermiso("obteniendo permiso para salir del cubiculo de atencion");
+
 		saleHospital();
-		
+
 	}
 
 	public void entraPaciente() {
@@ -115,7 +90,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable, Runnable
 		}
 
 		cambiarImagen("imagenes/personaOficialAbajo.png");
-		
+
 		while ((coordenaX > 190) && (coordenaY <= 280)) {
 			coordenaY = coordenaY + avance;
 			try {
@@ -125,10 +100,10 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable, Runnable
 				e.printStackTrace();
 			}
 		}
-		
+
 		cambiarImagen("imagenes/personaOficialArriba.png");
 	}
-	
+
 	public void entraCubiculo() {
 		// cubiculo
 		while ((coordenaY >= 20)) {
@@ -142,7 +117,9 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable, Runnable
 		}
 
 		cambiarImagen("imagenes/personaOficial.png");
-		
+		monitorPermisoEntrarACubiculo
+				.obtenerPermiso("obteniendo permiso para entrar a cubiculo");
+
 		while ((coordenaX <= 400)) {
 			coordenaX = coordenaX + avance;
 			try {
@@ -153,7 +130,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable, Runnable
 			}
 		}
 	}
-	
+
 	public void saleHospital() {
 
 		cambiarImagen("imagenes/personaOficialIzquierda.png");
@@ -196,7 +173,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable, Runnable
 		setImage(nuevo, ancho, largo);
 		panelJuego.repaint();
 	}
-	
+
 	public int getCoordenaX() {
 		return coordenaX;
 	}
@@ -224,7 +201,7 @@ public class Paciente2D implements ElementoAnimable, ElementoDibujable, Runnable
 		Thread hilo = new Thread(this);
 		hilo.start();
 	}
-	
+
 	@Override
 	public void run() {
 		animar();

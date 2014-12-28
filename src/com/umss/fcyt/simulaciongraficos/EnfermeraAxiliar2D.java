@@ -5,13 +5,14 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-public class EnfermeraAxiliar2D  implements ElementoAnimable, ElementoDibujable, Runnable {
+public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
+		Runnable {
 	private int coordenaX;
 	private int coordenaY;
 
 	private int ancho = 35;
 	private int largo = 35;
-	
+
 	int velocidad = 100;
 	int avance = 5;
 
@@ -20,22 +21,21 @@ public class EnfermeraAxiliar2D  implements ElementoAnimable, ElementoDibujable,
 
 	private String nombreImagen;
 
-	ArrayList<String> hayPacienteAuxiliar;
-	ArrayList<String> seAtendioAxiliar;
-	
-	
-	public EnfermeraAxiliar2D(PanelSimulacion panelSimulacion, int coordenaX, int coordenaY, String nombreImagen) {
-		
+	Monitor monitorPermisoAtenderAuxiliar;
+	Monitor monitorPermisoAtenderDoctor;
+
+	public EnfermeraAxiliar2D(PanelSimulacion panelSimulacion, int coordenaX,
+			int coordenaY, String nombreImagen) {
+
 		this.coordenaX = coordenaX;
 		this.coordenaY = coordenaY;
 		this.panelJuego = panelSimulacion;// panel donde se dibujan las notas
 
-		this.hayPacienteAuxiliar = panelSimulacion.hayPacienteAuxiliar;
-		this.seAtendioAxiliar = panelSimulacion.seAtendioAuxiliar;
-		
-		
+		monitorPermisoAtenderAuxiliar = panelSimulacion.monitorPermisoAtenderAuxiliar;
+		monitorPermisoAtenderDoctor = panelSimulacion.monitorPermisoAtenderDoctor;
+
 		this.nombreImagen = nombreImagen;
-		
+
 		this.imagen = new ImageIcon(this.nombreImagen);
 	}
 
@@ -56,28 +56,19 @@ public class EnfermeraAxiliar2D  implements ElementoAnimable, ElementoDibujable,
 	 */
 	@Override
 	public void animar() {
-		while(true) {
+		while (true) {
+			monitorPermisoAtenderAuxiliar
+					.obtenerPermiso("intentando curar al  paciente");
 			atenderPaciente();
-			System.out.println(coordenaY);
+			monitorPermisoAtenderDoctor
+					.cederPermiso("termine de atender anda vos doctor");
 			regresar();
-//			synchronized (hayPacienteAuxiliar) {
-//				if( hayPacienteAuxiliar.size() == 0) {
-//					try {
-//						System.out.println("no hay pacientes para auxiliar");
-//						hayPacienteAuxiliar.wait();
-//						
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}
-			
-			
+
 		}
 	}
 
 	public void atenderPaciente() {
-		while(coordenaY >= 55) {
+		while (coordenaY >= 55) {
 			try {
 				Thread.sleep(velocidad);
 				coordenaX = coordenaX + avance;
@@ -85,12 +76,12 @@ public class EnfermeraAxiliar2D  implements ElementoAnimable, ElementoDibujable,
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		
+
 		}
 	}
-	
+
 	public void regresar() {
-		while(coordenaY <= 100) {
+		while (coordenaY <= 100) {
 			try {
 				Thread.sleep(velocidad);
 				coordenaX = coordenaX - avance;
@@ -123,7 +114,7 @@ public class EnfermeraAxiliar2D  implements ElementoAnimable, ElementoDibujable,
 	public void setCoordenaY(int coordenaY) {
 		this.coordenaY = coordenaY;
 	}
-	
+
 	public void setAncho(int ancho) {
 		this.ancho = ancho;
 	}
@@ -140,12 +131,12 @@ public class EnfermeraAxiliar2D  implements ElementoAnimable, ElementoDibujable,
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void iniciarMovimiento() {
 		Thread hilo = new Thread(this);
 		hilo.start();
 	}
-	
+
 	@Override
 	public void run() {
 		animar();

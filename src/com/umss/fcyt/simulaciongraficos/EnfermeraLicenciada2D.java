@@ -5,13 +5,14 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-public class EnfermeraLicenciada2D implements ElementoAnimable, ElementoDibujable, Runnable{
+public class EnfermeraLicenciada2D implements ElementoAnimable,
+		ElementoDibujable, Runnable {
 	private int coordenaX;
 	private int coordenaY;
 
 	private int ancho = 35;
 	private int largo = 35;
-	
+
 	int velocidad = 100;
 	int avance = 5;
 	int tiempoAtencion = 2000;
@@ -21,20 +22,29 @@ public class EnfermeraLicenciada2D implements ElementoAnimable, ElementoDibujabl
 
 	private String nombreImagen;
 
-	ArrayList<String> hayPaciente;
-	ArrayList<String> seAtiende;
-	
-	public EnfermeraLicenciada2D(PanelSimulacion panelSimulacion, int coordenaX, int coordenaY, String nombreImagen) {
-		
+	// ArrayList<String> hayPaciente;
+	// ArrayList<String> seAtiende;
+
+	Monitor monitorPermisoEntrada;
+	Monitor monitorHayPacienteTriaje;
+	Monitor monitorPermisoACubiculo;
+
+	public EnfermeraLicenciada2D(PanelSimulacion panelSimulacion,
+			int coordenaX, int coordenaY, String nombreImagen) {
+
 		this.coordenaX = coordenaX;
 		this.coordenaY = coordenaY;
 		this.panelJuego = panelSimulacion;// panel donde se dibujan las notas
 
-		this.hayPaciente = panelSimulacion.hayPacienteTriaje;
-		this.seAtiende = panelSimulacion.seAtendioTriaje;
-		
+		// this.hayPaciente = panelSimulacion.hayPacienteTriaje;
+		// this.seAtiende = panelSimulacion.seAtendioTriaje;
+
+		monitorPermisoEntrada = panelSimulacion.monitorPermisoEntrada;
+		monitorHayPacienteTriaje = panelSimulacion.monitorHayPacienteTriaje;
+		monitorPermisoACubiculo = panelSimulacion.monitorPermisoACubiculo;
+
 		this.nombreImagen = nombreImagen;
-		
+
 		this.imagen = new ImageIcon(this.nombreImagen);
 	}
 
@@ -55,34 +65,20 @@ public class EnfermeraLicenciada2D implements ElementoAnimable, ElementoDibujabl
 	 */
 	@Override
 	public void animar() {
-		while(true) {
-			
-			synchronized (hayPaciente) {
-				if(hayPaciente.size() == 0) {
-					try {
-						System.out.println("no hay pacientes en el triaje");
-						hayPaciente.wait();
-						
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				
-				hayPaciente.remove(0);
-				realizarEvaluacion();
-			}
-			
-			synchronized (seAtiende) {
-				seAtiende.add("nuevo");
-				seAtiende.notify();
-			}
-			
+		while (true) {
+
+			monitorHayPacienteTriaje.obtenerPermiso("atendiendo");
+			realizarEvaluacion();
+			monitorPermisoACubiculo.cederPermiso("puedes ir a cubiculo");
+			monitorPermisoEntrada.cederPermiso("hay espacio entra chango");
+
 			regresar();
+
 		}
 	}
 
 	public void regresar() {
-		while(coordenaX <= 285) {
+		while (coordenaX <= 285) {
 			try {
 				Thread.sleep(velocidad);
 				coordenaX = coordenaX + avance;
@@ -90,12 +86,12 @@ public class EnfermeraLicenciada2D implements ElementoAnimable, ElementoDibujabl
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 	}
-	
+
 	public void realizarEvaluacion() {
-		while(coordenaX >= 245) {
+		while (coordenaX >= 245) {
 			try {
 				Thread.sleep(velocidad);
 				coordenaX = coordenaX - avance;
@@ -103,13 +99,13 @@ public class EnfermeraLicenciada2D implements ElementoAnimable, ElementoDibujabl
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
-		
+
 		atenderPaciente(tiempoAtencion);
-		
+
 	}
-	
+
 	public void atenderPaciente(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
@@ -118,7 +114,7 @@ public class EnfermeraLicenciada2D implements ElementoAnimable, ElementoDibujabl
 			e.printStackTrace();
 		}
 	}
-	
+
 	public int getCoordenaX() {
 		return coordenaX;
 	}
@@ -141,7 +137,7 @@ public class EnfermeraLicenciada2D implements ElementoAnimable, ElementoDibujabl
 	public void setCoordenaY(int coordenaY) {
 		this.coordenaY = coordenaY;
 	}
-	
+
 	public void setAncho(int ancho) {
 		this.ancho = ancho;
 	}
@@ -154,7 +150,7 @@ public class EnfermeraLicenciada2D implements ElementoAnimable, ElementoDibujabl
 		Thread hilo = new Thread(this);
 		hilo.start();
 	}
-	
+
 	@Override
 	public void run() {
 		animar();

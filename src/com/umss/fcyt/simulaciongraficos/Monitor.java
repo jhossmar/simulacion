@@ -9,7 +9,7 @@ public class Monitor {
 	}
 	
 	//puuede ser solo permisos
-	public synchronized void obtenerPermiso(String nombre) {
+	public synchronized void cederPermiso(String nombre) {
 		while(hayPermiso) {
 			try {
 				System.out.println(nombre + " ya existe un producto en el almacen");
@@ -23,7 +23,7 @@ public class Monitor {
 		notify();
 	}
 	
-	public synchronized void cederPermiso(String nombre) {
+	public synchronized void obtenerPermiso(String nombre) {
 		while(!hayPermiso) {
 			try {
 				System.out.println("no hay permiso" + nombre);

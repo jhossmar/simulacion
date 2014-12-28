@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import javax.sql.rowset.spi.SyncResolver;
 import javax.swing.ImageIcon;
 
-public class Doctor2D  implements ElementoAnimable, ElementoDibujable, Runnable {
+public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	private int coordenaX = 410;
 	private int coordenaY = 100;
 
 	private int ancho = 45;
 	private int largo = 45;
-	
+
 	int velocidad = 100;
 	int avance = 5;
 	int tiempoAtencion = 2000;
@@ -22,17 +22,18 @@ public class Doctor2D  implements ElementoAnimable, ElementoDibujable, Runnable 
 
 	private String nombreImagen = "imagenes/doctor.gif";
 
-	ArrayList<String> hayPaciente;
-	
-	ArrayList<String> seAtiende;
-	
+	Monitor monitorPermisoAtenderDoctor;
+	Monitor monitorPermisoSalirDeCubiculo;
+	Monitor monitorPermisoEntrarACubiculo;
+
 	public Doctor2D(PanelSimulacion panelJuego) {
 		this.panelJuego = panelJuego;// panel donde se dibujan las notas
 
 		this.imagen = new ImageIcon(nombreImagen);
-		
-		hayPaciente = panelJuego.hayPacienteCubiculo;
-		seAtiende = panelJuego.seAtendioCubiculo;
+
+		monitorPermisoAtenderDoctor = panelJuego.monitorPermisoAtenderDoctor;
+		monitorPermisoSalirDeCubiculo = panelJuego.monitorPermisoSalirDeCubiculo;
+		monitorPermisoEntrarACubiculo = panelJuego.monitorPermisoEntrarACubiculo;
 	}
 
 	/*
@@ -52,48 +53,36 @@ public class Doctor2D  implements ElementoAnimable, ElementoDibujable, Runnable 
 	 */
 	@Override
 	public void animar() {
-		while(true) {
-			
-			synchronized (hayPaciente) {
-				if(hayPaciente.size() == 0) {
-					try {
-						System.out.println("no hay pacientes");
-						hayPaciente.wait();
-						
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				
-				hayPaciente.remove(0);
-				atenderPaciente();
-			}
-			
-			synchronized (seAtiende) {
-				seAtiende.add("Nuevo");
-				seAtiende.notify();
-			}
-			
+		while (true) {
+
+			monitorPermisoAtenderDoctor
+					.obtenerPermiso("intentado curar al paciente");
+			atenderPaciente();
+
+			monitorPermisoSalirDeCubiculo
+					.cederPermiso("ya te cure salite paciente");
+			monitorPermisoEntrarACubiculo.cederPermiso("entra!! ya termine");
+
 			regresar();
 		}
 	}
 
 	public void atenderPaciente() {
-		//410 60
-		while(coordenaY >= 60) {
+		// 410 60
+		while (coordenaY >= 60) {
 			try {
 				Thread.sleep(velocidad);
-				coordenaY = coordenaY - avance;//darle nombre a 2
+				coordenaY = coordenaY - avance;// darle nombre a 2
 				panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
-		
-		//atiende al paciente con el tiempo de atencion 
+
+		// atiende al paciente con el tiempo de atencion
 		atenderPaciente(tiempoAtencion);
-		
+
 	}
 
 	public void atenderPaciente(int tiempo) {
@@ -104,18 +93,19 @@ public class Doctor2D  implements ElementoAnimable, ElementoDibujable, Runnable 
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void regresar() {
-		while(coordenaY <= 100) {
+		while (coordenaY <= 100) {
 			try {
 				Thread.sleep(velocidad);
-				coordenaY = coordenaY + avance;//darle nombre a 2
+				coordenaY = coordenaY + avance;// darle nombre a 2
 				panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 	}
+
 	public int getCoordenaX() {
 		return coordenaX;
 	}
@@ -143,7 +133,7 @@ public class Doctor2D  implements ElementoAnimable, ElementoDibujable, Runnable 
 		Thread hilo = new Thread(this);
 		hilo.start();
 	}
-	
+
 	@Override
 	public void run() {
 		animar();

@@ -32,14 +32,13 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	ArrayList<EnfermeraLicenciada2D> enfermerasLicenciadas;
 	ArrayList<Estaticos2D> objetos;
 	
-	public ArrayList<String> hayPacienteCubiculo = new ArrayList<String>();
-	public ArrayList<String> seAtendioCubiculo = new ArrayList<String>();
-	
-	public ArrayList<String> hayPacienteTriaje = new ArrayList<String>();
-	public ArrayList<String> seAtendioTriaje = new ArrayList<String>();
-	
-	public ArrayList<String> hayPacienteAuxiliar = new ArrayList<String>();
-	public ArrayList<String> seAtendioAuxiliar = new ArrayList<String>();
+	public Monitor monitorPermisoEntrada = new Monitor(true);
+	public Monitor monitorHayPacienteTriaje = new Monitor(false);
+	public Monitor monitorPermisoACubiculo = new Monitor(false);
+	public Monitor monitorPermisoEntrarACubiculo = new Monitor(true);
+	public Monitor monitorPermisoSalirDeCubiculo = new Monitor(false);
+	public Monitor monitorPermisoAtenderAuxiliar = new Monitor(false);
+	public Monitor monitorPermisoAtenderDoctor = new Monitor(false);
 	
 	public PanelSimulacion() {
 
@@ -93,7 +92,7 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 		enfermera2.setAncho(45);
 		enfermera2.setLargo(45);
 		enfermeras.add(enfermera2);
-		//enfermera2.iniciarMovimiento();
+		enfermera2.iniciarMovimiento();
 	}
 	
 	public void cambiarImagen(String nombreIm) {
