@@ -45,6 +45,7 @@ import com.umss.fcyt.simulaciongraficos.PanelSimulacion;
 import java.awt.Font;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -71,6 +72,10 @@ public class VentanaPrincipal extends JFrame {
 
 	int contador =0;
 	public JSlider sliderVelocidad;
+	public JTextArea txtAreaEnfermeraLicenciada;
+	public JTextArea textAreaEnfermeraAuxiliar;
+	public JTextArea textAreaMedicoTurno;
+	public JTextArea textAreaPersonaEncargada;
 	 
 	public VentanaPrincipal() {
 		setResizable(false);
@@ -330,38 +335,62 @@ public class VentanaPrincipal extends JFrame {
 		JLabel lblPersonaEncargada_2 = new JLabel("Persona Encargada");
 		lblPersonaEncargada_2.setBounds(290, 310, 130, 14);
 		panel.add(lblPersonaEncargada_2);
-		internalFrame.setVisible(true);
-
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new LineBorder(Color.BLACK));
+		panel_1.setBounds(30, 441, 1010, 169);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblComportamientoDeEntidades = new JLabel("Comportamiento de Entidades");
+		lblComportamientoDeEntidades.setBounds(10, 0, 252, 14);
+		panel_1.add(lblComportamientoDeEntidades);
+		
+		JLabel lblEnfermeraLicenciada_2 = new JLabel("Enfermera Licenciada");
+		lblEnfermeraLicenciada_2.setBounds(10, 21, 133, 14);
+		panel_1.add(lblEnfermeraLicenciada_2);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 46, 233, 112);
+		panel_1.add(scrollPane);
+		
+		txtAreaEnfermeraLicenciada = new JTextArea();
+		scrollPane.setViewportView(txtAreaEnfermeraLicenciada);
+		
+		JLabel lblEnfermeraAuxiliar_2 = new JLabel("Enfermera Auxiliar");
+		lblEnfermeraAuxiliar_2.setBounds(263, 21, 133, 14);
+		panel_1.add(lblEnfermeraAuxiliar_2);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(263, 46, 233, 112);
+		panel_1.add(scrollPane_1);
+		
+		textAreaEnfermeraAuxiliar = new JTextArea();
+		scrollPane_1.setViewportView(textAreaEnfermeraAuxiliar);
+		
+		JLabel lblMedicoDeTurno_4 = new JLabel("Medico de Turno");
+		lblMedicoDeTurno_4.setBounds(511, 21, 117, 14);
+		panel_1.add(lblMedicoDeTurno_4);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(521, 46, 233, 112);
+		panel_1.add(scrollPane_2);
+		
+		textAreaMedicoTurno = new JTextArea();
+		scrollPane_2.setViewportView(textAreaMedicoTurno);
+		
+		JLabel lblPersonaEncargada_3 = new JLabel("Persona Encargada");
+		lblPersonaEncargada_3.setBounds(776, 21, 133, 14);
+		panel_1.add(lblPersonaEncargada_3);
+		
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(764, 46, 236, 112);
+		panel_1.add(scrollPane_3);
+		
+		textAreaPersonaEncargada = new JTextArea();
+		scrollPane_3.setViewportView(textAreaPersonaEncargada);
+		internalFrame.setVisible(true);
 		//agregarCubiculos();
 		
-	}
-	
-	public void agregarAPanel(JPanel panel, int cantidad) {
-		
-		for (int i = 0; i < cantidad; i++) {
-			JLabel labelPaciente = new JLabel();
-			labelPaciente.setVisible(false);
-			labelPaciente.setBorder(BorderFactory.createBevelBorder(1, Color.BLUE, Color.gray));
-			labelPaciente.setIcon(new ImageIcon("imagenes/paciente.png"));
-			panel.add(labelPaciente);
-		}
-	}
-	
-	public void mostrar(JPanel panel ,int cantidad) {
-		
-		Component[] components = panel.getComponents();
-		
-		for (int i = 0; i < components.length; i++) {
-			components[i].setVisible(false);
-		}
-		
-		for (int i = 0; i < cantidad; i++) {
-			components[i].setVisible(true);
-		}
-	}
-	
-	public void agregarCubiculos() {
-		agregarAPanel(panelQuemados, 2);
 	}
 }
