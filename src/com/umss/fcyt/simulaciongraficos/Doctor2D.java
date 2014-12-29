@@ -20,7 +20,7 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	private ImageIcon imagen;
 	private PanelSimulacion panelJuego;
 
-	private String nombreImagen = "imagenes/doctor.gif";
+	private String nombreImagen = "imagenes/doctor.png";
 
 	Monitor monitorPermisoAtenderDoctor;
 	Monitor monitorPermisoSalirDeCubiculo;

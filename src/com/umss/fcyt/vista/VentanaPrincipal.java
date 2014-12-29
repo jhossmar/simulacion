@@ -362,11 +362,11 @@ public class VentanaPrincipal extends JFrame {
 		
 		JLabel lblPersonaEncargada_3 = new JLabel("Persona Encargada");
 		lblPersonaEncargada_3.setBounds(776, 21, 133, 14);
-		panel_1.add(lblPersonaEncargada_3);
+		//panel_1.add(lblPersonaEncargada_3);
 		
 		JScrollPane scrollPane_3 = new JScrollPane();
 		scrollPane_3.setBounds(764, 46, 236, 112);
-		panel_1.add(scrollPane_3);
+		//panel_1.add(scrollPane_3);
 		
 		textAreaPersonaEncargada = new JTextArea();
 		scrollPane_3.setViewportView(textAreaPersonaEncargada);
