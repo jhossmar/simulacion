@@ -33,17 +33,11 @@ public class SimuladorDos {
 
 	public SimuladorDos() {
 		Cubiculo c = new Cubiculo(2, TipoPaciente.QUEMADURAS);
-		Cubiculo c2 = new Cubiculo(2, TipoPaciente.PACIENTES_GRAVES);
-		Cubiculo c3 = new Cubiculo(2, TipoPaciente.PACIENTES_NORMALES);
-		Cubiculo c4 = new Cubiculo(2, TipoPaciente.CONTAGIOSOS);
 		
 		
 		this.salaDeEmergencias = new SalaEmergencias();
 		
 		this.salaDeEmergencias.agregarCubiculo(c);
-		this.salaDeEmergencias.agregarCubiculo(c2);
-		this.salaDeEmergencias.agregarCubiculo(c3);
-		this.salaDeEmergencias.agregarCubiculo(c4);
 		
 		this.descripcionSimulacion = new StringBuffer();
 		

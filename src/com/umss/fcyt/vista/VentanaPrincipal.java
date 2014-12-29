@@ -39,7 +39,13 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+
+import com.umss.fcyt.simulaciongraficos.PanelSimulacion;
+
 import java.awt.Font;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -55,22 +61,21 @@ public class VentanaPrincipal extends JFrame {
 	
 	//comandos de simulacion
 	public JButton botonEjecutar;
-	public  JButton botonPausar;
-	public  JButton botonDetener;
-	 public JButton botonContinuar;
+	public JButton botonPausar;
+	public JButton botonDetener;
+	public JButton botonContinuar;
 	
 	 //panel de graficos
 	 public JPanel panelQuemados;
-	 public JPanel panelGraves;
-	 public JPanel panelInfecciosos;
-	 public JPanel panelNormales;
-	 public JPanel panelTriaje;
+	 public PanelSimulacion panelSimulacion;
 	
 
 	int contador =0;
 	public JSlider sliderVelocidad;
-	public JTextArea textoDescripcion;
-	public JLabel labelHora;
+	public JTextArea txtAreaEnfermeraLicenciada;
+	public JTextArea textAreaEnfermeraAuxiliar;
+	public JTextArea textAreaMedicoTurno;
+	public JTextArea textAreaPersonaEncargada;
 	 
 	public VentanaPrincipal() {
 		setResizable(false);
@@ -91,10 +96,10 @@ public class VentanaPrincipal extends JFrame {
 		JMenu mnArchivo = new JMenu("Archivo");
 		menuBar.add(mnArchivo);
 		
-		JMenuItem mntmGuardarDiseo = new JMenuItem("Guardar Dise\u00F1o");
+		JMenuItem mntmGuardarDiseo = new JMenuItem("Guardar Dise");
 		mnArchivo.add(mntmGuardarDiseo);
 		
-		JMenuItem mntmAbrirDiseo = new JMenuItem("Abrir Dise\u00F1o");
+		JMenuItem mntmAbrirDiseo = new JMenuItem("Abrir Dise");
 		mnArchivo.add(mntmAbrirDiseo);
 		
 		JMenuItem mntmCerrarPrograma = new JMenuItem("Cerrar Programa");
@@ -209,121 +214,183 @@ public class VentanaPrincipal extends JFrame {
 		comboBox.setBounds(28, 243, 123, 20);
 		internalFrame.getContentPane().add(comboBox);
 		
-		panelQuemados = new JPanel();
+		panelQuemados = new JPanel(new FlowLayout());
+		//panelQuemados.setSize(-477, -246);
 		panelQuemados.setBackground(Color.DARK_GRAY);
-		panelQuemados.setBounds(242, 110, 401, 175);
+		panelQuemados.setBounds(30, 80, 500, 350);
+		
+		panelSimulacion = new PanelSimulacion();
+		panelSimulacion.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		panelQuemados.add(panelSimulacion);
 		contentPane.add(panelQuemados);
 		
-		panelGraves = new JPanel();
-		panelGraves.setBackground(Color.DARK_GRAY);
-		panelGraves.setBounds(673, 110, 401, 175);
-		contentPane.add(panelGraves);
-		
-		panelInfecciosos = new JPanel();
-		panelInfecciosos.setBackground(Color.DARK_GRAY);
-		panelInfecciosos.setBounds(242, 316, 401, 175);
-		contentPane.add(panelInfecciosos);
-		
-		panelNormales = new JPanel();
-		panelNormales.setBackground(Color.DARK_GRAY);
-		panelNormales.setBounds(673, 316, 401, 175);
-		contentPane.add(panelNormales);
-		
-		panelTriaje = new JPanel();
-		panelTriaje.setBackground(Color.DARK_GRAY);
-		panelTriaje.setBounds(10, 402, 210, 134);
-		contentPane.add(panelTriaje);
-		
-		JLabel lblNewLabel = new JLabel("Cubiculo Quemados");
-		lblNewLabel.setBounds(242, 79, 116, 20);
+		JLabel lblNewLabel = new JLabel("Locacion: Cubiculo Quemados");
+		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
+		lblNewLabel.setBounds(28, 49, 242, 20);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblCubiculoPacientesGraves = new JLabel("Cubiculo Pacientes Graves");
-		lblCubiculoPacientesGraves.setBounds(673, 79, 174, 20);
-		contentPane.add(lblCubiculoPacientesGraves);
+		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		getContentPane().setLayout(null);
+		panel.setBackground(new Color(47, 79, 79));
+		panel.setBounds(595, 80, 445, 350);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
-		JLabel lblCubiculoPacientesInfecciosos = new JLabel("Cubiculo Pacientes Infecciosos");
-		lblCubiculoPacientesInfecciosos.setBounds(242, 296, 198, 20);
-		contentPane.add(lblCubiculoPacientesInfecciosos);
+		JLabel lblJerarquiaDeProcesos = new JLabel("Jerarquia de Procesos");
+		lblJerarquiaDeProcesos.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 14));
+		lblJerarquiaDeProcesos.setBounds(66, 11, 164, 24);
+		panel.add(lblJerarquiaDeProcesos);
 		
-		JLabel lblCubiculoPacientesNormales = new JLabel("Cubiculo Pacientes Normales");
-		lblCubiculoPacientesNormales.setBounds(673, 296, 174, 20);
-		contentPane.add(lblCubiculoPacientesNormales);
+		JLabel lblEntidadResponsable = new JLabel("Entidad Responsable");
+		lblEntidadResponsable.setBackground(new Color(47, 79, 79));
+		lblEntidadResponsable.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 14));
+		lblEntidadResponsable.setBounds(280, 11, 135, 24);
+		panel.add(lblEntidadResponsable);
 		
-		JLabel lblTriaje = new JLabel("Triaje");
-		lblTriaje.setBounds(20, 371, 116, 20);
-		contentPane.add(lblTriaje);
+		JLabel lblLlevarAl = new JLabel("1.- Llevar al Paciente a Triaje");
+		lblLlevarAl.setBounds(29, 56, 191, 14);
+		panel.add(lblLlevarAl);
 		
-		textoDescripcion = new JTextArea();
-		textoDescripcion.setEditable(false);
-		textoDescripcion.setBounds(242, 515, 832, 95);
-		//contentPane.add(textoDescripcion);
+		JLabel lblRealizarRevision = new JLabel("2.- Realizar revision del paciente");
+		lblRealizarRevision.setBounds(29, 81, 191, 14);
+		panel.add(lblRealizarRevision);
+		
+		JLabel lblDesignarA = new JLabel("3.- Designar a un cubiculo");
+		lblDesignarA.setBounds(29, 106, 191, 14);
+		panel.add(lblDesignarA);
+		
+		JLabel lblLlevarAl_1 = new JLabel("4.- Llevar al Paciente al cubiculo respectivo");
+		lblLlevarAl_1.setBounds(29, 131, 215, 14);
+		panel.add(lblLlevarAl_1);
+		
+		JLabel lblTenderAl = new JLabel("5.- Tender al paciente en la camilla");
+		lblTenderAl.setBounds(29, 156, 215, 14);
+		panel.add(lblTenderAl);
+		
+		JLabel lblQuitarRopas = new JLabel("6.- Quitar Ropas de Vestir y anillos");
+		lblQuitarRopas.setBounds(29, 181, 221, 14);
+		panel.add(lblQuitarRopas);
+		
+		JLabel lblDetenerEl = new JLabel("7.- Detener el proceso que indujo la quemadura");
+		lblDetenerEl.setBounds(28, 206, 242, 14);
+		panel.add(lblDetenerEl);
+		
+		JLabel lblIrrigarLa = new JLabel("8.- Irrigar la zona con solucion fria de suero");
+		lblIrrigarLa.setBounds(27, 231, 243, 14);
+		panel.add(lblIrrigarLa);
+		
+		JLabel lblCubrirAl = new JLabel("9.- Cubrir al paciente con sabanas limpias");
+		lblCubrirAl.setBounds(29, 256, 241, 14);
+		panel.add(lblCubrirAl);
+		
+		JLabel lblDarDe = new JLabel("10.- Dar de alta");
+		lblDarDe.setBounds(28, 281, 242, 14);
+		panel.add(lblDarDe);
+		
+		JLabel lblLlevarAl_2 = new JLabel("11.- Llevar al paciente donde se lo designo");
+		lblLlevarAl_2.setBounds(29, 310, 241, 14);
+		panel.add(lblLlevarAl_2);
+		
+		JLabel lblPersonaEncargada = new JLabel("Persona Encargada");
+		lblPersonaEncargada.setBounds(290, 56, 143, 14);
+		panel.add(lblPersonaEncargada);
+		
+		JLabel lblEnfermeraLicenciada = new JLabel("Enfermera Licenciada");
+		lblEnfermeraLicenciada.setBounds(290, 81, 143, 14);
+		panel.add(lblEnfermeraLicenciada);
+		
+		JLabel lblEnfermeraLicenciada_1 = new JLabel("Enfermera Licenciada");
+		lblEnfermeraLicenciada_1.setBounds(290, 106, 143, 14);
+		panel.add(lblEnfermeraLicenciada_1);
+		
+		JLabel lblPersonaEncargada_1 = new JLabel("Persona Encargada");
+		lblPersonaEncargada_1.setBounds(290, 131, 143, 14);
+		panel.add(lblPersonaEncargada_1);
+		
+		JLabel lblEnfermeraAuxiliar = new JLabel("Enfermera Auxiliar");
+		lblEnfermeraAuxiliar.setBounds(290, 156, 143, 14);
+		panel.add(lblEnfermeraAuxiliar);
+		
+		JLabel lblEnfermeraAuxiliar_1 = new JLabel("Enfermera Auxiliar");
+		lblEnfermeraAuxiliar_1.setBounds(290, 181, 133, 14);
+		panel.add(lblEnfermeraAuxiliar_1);
+		
+		JLabel lblMedicoDeTurno = new JLabel("Medico de Turno");
+		lblMedicoDeTurno.setBounds(290, 206, 143, 14);
+		panel.add(lblMedicoDeTurno);
+		
+		JLabel lblMedicoDeTurno_1 = new JLabel("Medico de Turno");
+		lblMedicoDeTurno_1.setBounds(290, 231, 133, 14);
+		panel.add(lblMedicoDeTurno_1);
+		
+		JLabel lblMedicoDeTurno_2 = new JLabel("Medico de Turno");
+		lblMedicoDeTurno_2.setBounds(290, 256, 143, 14);
+		panel.add(lblMedicoDeTurno_2);
+		
+		JLabel lblMedicoDeTurno_3 = new JLabel("Medico de Turno");
+		lblMedicoDeTurno_3.setBounds(290, 281, 135, 14);
+		panel.add(lblMedicoDeTurno_3);
+		
+		JLabel lblPersonaEncargada_2 = new JLabel("Persona Encargada");
+		lblPersonaEncargada_2.setBounds(290, 310, 130, 14);
+		panel.add(lblPersonaEncargada_2);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new LineBorder(Color.BLACK));
+		panel_1.setBounds(30, 441, 1010, 169);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblComportamientoDeEntidades = new JLabel("Comportamiento de Entidades");
+		lblComportamientoDeEntidades.setBounds(10, 0, 252, 14);
+		panel_1.add(lblComportamientoDeEntidades);
+		
+		JLabel lblEnfermeraLicenciada_2 = new JLabel("Enfermera Licenciada");
+		lblEnfermeraLicenciada_2.setBounds(10, 21, 133, 14);
+		panel_1.add(lblEnfermeraLicenciada_2);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setViewportView(textoDescripcion);
-		scrollPane.setBounds(242, 500, 832, 110);
-		contentPane.add(scrollPane);
+		scrollPane.setBounds(10, 46, 233, 112);
+		panel_1.add(scrollPane);
 		
-		JLabel lblHora = new JLabel("Hora :");
-		lblHora.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
-		lblHora.setBounds(613, 42, 62, 14);
-		contentPane.add(lblHora);
+		txtAreaEnfermeraLicenciada = new JTextArea();
+		scrollPane.setViewportView(txtAreaEnfermeraLicenciada);
 		
-		labelHora = new JLabel("00:00");
-		labelHora.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 18));
-		labelHora.setBounds(680, 42, 62, 14);
-		contentPane.add(labelHora);
+		JLabel lblEnfermeraAuxiliar_2 = new JLabel("Enfermera Auxiliar");
+		lblEnfermeraAuxiliar_2.setBounds(263, 21, 133, 14);
+		panel_1.add(lblEnfermeraAuxiliar_2);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(263, 46, 233, 112);
+		panel_1.add(scrollPane_1);
+		
+		textAreaEnfermeraAuxiliar = new JTextArea();
+		scrollPane_1.setViewportView(textAreaEnfermeraAuxiliar);
+		
+		JLabel lblMedicoDeTurno_4 = new JLabel("Medico de Turno");
+		lblMedicoDeTurno_4.setBounds(511, 21, 117, 14);
+		panel_1.add(lblMedicoDeTurno_4);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(521, 46, 233, 112);
+		panel_1.add(scrollPane_2);
+		
+		textAreaMedicoTurno = new JTextArea();
+		scrollPane_2.setViewportView(textAreaMedicoTurno);
+		
+		JLabel lblPersonaEncargada_3 = new JLabel("Persona Encargada");
+		lblPersonaEncargada_3.setBounds(776, 21, 133, 14);
+		panel_1.add(lblPersonaEncargada_3);
+		
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(764, 46, 236, 112);
+		panel_1.add(scrollPane_3);
+		
+		textAreaPersonaEncargada = new JTextArea();
+		scrollPane_3.setViewportView(textAreaPersonaEncargada);
 		internalFrame.setVisible(true);
-
+		//agregarCubiculos();
 		
-		agregarCubiculos();
-		
-	}
-	
-	public void agregarAPanel(JPanel panel, int cantidad) {
-		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 10 , 10));
-		
-		for (int i = 0; i < cantidad; i++) {
-			JLabel labelPaciente = new JLabel();
-			labelPaciente.setVisible(false);
-			labelPaciente.setBorder(BorderFactory.createBevelBorder(1, Color.BLUE, Color.gray));
-			labelPaciente.setIcon(new ImageIcon("imagenes/paciente.png"));
-			panel.add(labelPaciente);
-		}
-		
-		panel.updateUI();
-	}
-	
-	public void mostrar(JPanel panel ,int cantidad) {
-		
-		Component[] components = panel.getComponents();
-		
-		for (int i = 0; i < components.length; i++) {
-			components[i].setVisible(false);
-		}
-		
-		for (int i = 0; i < cantidad; i++) {
-			components[i].setVisible(true);
-		}
-		
-//		Component[] components = panel.getComponents();
-//		int j = 0;
-//		for (int i = 0; i < cantidad; i++) {
-//			components[i].setVisible(true);
-//			j = i;
-//		}
-//		
-//		for (int i = j + 1; i < components.length; i++) {
-//			components[i].setVisible(false);
-//		}
-	}
-	
-	public void agregarCubiculos() {
-		agregarAPanel(panelGraves, 2);
-		agregarAPanel(panelQuemados, 2);
-		agregarAPanel(panelInfecciosos, 2);
-		agregarAPanel(panelNormales, 2);
-		
-		agregarAPanel(panelTriaje, 20);
 	}
 }

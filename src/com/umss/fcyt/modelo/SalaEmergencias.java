@@ -143,7 +143,9 @@ public class SalaEmergencias {
 		for(Paciente p : pacientes) {
 			suma = suma + p.getTiempoDeAtencion();
 		}
-		
+		if(pacientes.size() == 0) {
+			return suma;
+		}
 		return (suma / pacientes.size());
 	}
 	
@@ -163,6 +165,7 @@ public class SalaEmergencias {
 		
 		return tiempos;
 	}
+	
 	public ArrayList<Integer> getTiempoAtencion(){
 		ArrayList<Integer> tiempos = new ArrayList<Integer>();
 		
@@ -172,8 +175,6 @@ public class SalaEmergencias {
 		
 		return tiempos;
 	}
-
-
 
 	public ArrayList<TipoPaciente> getCubiculo() {
 		ArrayList<TipoPaciente> cubiculos = new ArrayList<TipoPaciente>();

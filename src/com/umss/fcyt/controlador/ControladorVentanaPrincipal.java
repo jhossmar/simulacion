@@ -29,13 +29,15 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 	private Reloj reloj;
 
 	private static final int VELOCIDAD_MAXIMA_SIMULACION = 100;
-	private static final int VELOCIDAD_MINIMA_SIMULACION = 2000;
+	private static final int VELOCIDAD_MINIMA_SIMULACION = 5000;
 
 	private int velocidadActualDeSimulacion;
 
 	private Thread procesoSimulacion;
 
 	private SalaEmergencias sala;
+
+	public Thread graficadorDescripciones;
 
 	public ControladorVentanaPrincipal(VentanaPrincipal ventana) {
 		this.ventanaPrincipal = ventana;
@@ -48,7 +50,29 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 		
 		this.reloj = simulador.getReloj();
 
-
+		graficadorDescripciones = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				while(true) {
+					try {
+						Thread.sleep(100);
+						String texto = ventanaPrincipal.panelSimulacion.licenciadaDescripcion.toString();
+						ventanaPrincipal.txtAreaEnfermeraLicenciada.setText(texto);
+						
+						String texto2 = ventanaPrincipal.panelSimulacion.auxiliarDescripcion.toString();
+						ventanaPrincipal.textAreaEnfermeraAuxiliar.setText(texto2);
+						
+						String texto3 = ventanaPrincipal.panelSimulacion.medicoDescripcion.toString();
+						ventanaPrincipal.textAreaMedicoTurno.setText(texto3);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		});
+		
 		agregarAccionesBotones();
 	}
 
@@ -149,12 +173,10 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 			try {
 				Thread.sleep(velocidadActualDeSimulacion);
 
-				simulador.pasoSimulacion();
-				
-				actualizarVista();
+				this.sala.agregarPaciente(new Paciente("Beimar Huarachi"));
+				ventanaPrincipal.panelSimulacion.agregarPaciente();
 
 				contadorTiempo++;
-				//SwingUtilities.updateComponentTreeUI(ventanaPrincipal);
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -166,24 +188,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 
 	public void actualizarVista() {
 		
-		ventanaPrincipal.textoDescripcion.setText(simulador.descripcionSimulacion.toString());
 		
-		int cantidad = sala.getCubiculos().get(0).getPacientes().size(); 
-		ventanaPrincipal.mostrar(ventanaPrincipal.panelQuemados, cantidad);
-		
-		int cantidad2 = sala.getCubiculos().get(1).getPacientes().size(); 
-		ventanaPrincipal.mostrar(ventanaPrincipal.panelGraves, cantidad2);
-		
-		int cantidad3 = sala.getSalaEspera().size();
-		ventanaPrincipal.mostrar(ventanaPrincipal.panelTriaje, cantidad3);
-		
-		int cantidad4 = sala.getCubiculos().get(2).getPacientes().size();
-		ventanaPrincipal.mostrar(ventanaPrincipal.panelNormales, cantidad4);
-		
-		int cantidad5 = sala.getCubiculos().get(3).getPacientes().size();
-		ventanaPrincipal.mostrar(ventanaPrincipal.panelInfecciosos, cantidad5);
-
-		ventanaPrincipal.labelHora.setText(reloj.toString());
 	}
 
 	public void pausarSimulacion() {
@@ -197,31 +202,33 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 	public void continuarSimulacion() {
 		this.procesoSimulacion.resume();
 	}
-
-	public static void main(String[] args) {
-		ControladorVentanaPrincipal c = new ControladorVentanaPrincipal(
-				new VentanaPrincipal());
-		c.iniciarSimulacion();
-	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == ventanaPrincipal.botonEjecutar
 				|| e.getSource() == ventanaPrincipal.itemEjecutar) {
 			this.iniciarSimulacion();
+			graficadorDescripciones.start();
+			ventanaPrincipal.panelSimulacion.iniciarSimulacionGrafica();
 		}
 		if (e.getSource() == ventanaPrincipal.botonPausar
 				|| e.getSource() == ventanaPrincipal.itemPausar) {
 			this.pausarSimulacion();
+			graficadorDescripciones.suspend();
+			ventanaPrincipal.panelSimulacion.pausarSimulacionGrafica();
 		}
 		if (e.getSource() == ventanaPrincipal.botonDetener
 				|| e.getSource() == ventanaPrincipal.itemDetener) {
 			this.detenerSimulacion();
+			graficadorDescripciones.stop();
+			ventanaPrincipal.panelSimulacion.pararMovimiento();
 		}
 		if (e.getSource() == ventanaPrincipal.botonContinuar
 				|| e.getSource() == ventanaPrincipal.itemContinuar) {
 			this.continuarSimulacion();
+			graficadorDescripciones.resume();
+			ventanaPrincipal.panelSimulacion.continuarSimulacionGrafica();
 		}
 
 		if(e.getSource() == ventanaPrincipal.btnGenerarrepote) {

@@ -24,7 +24,9 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 	Monitor monitorPermisoAtenderAuxiliar;
 	Monitor monitorPermisoAtenderDoctor;
 	int tiempoAtencion = 2000;
+	public Thread hilo;
 
+	StringBuffer textoDescripcion;
 	public EnfermeraAxiliar2D(PanelSimulacion panelSimulacion, int coordenaX,
 			int coordenaY, String nombreImagen) {
 
@@ -34,6 +36,8 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 
 		monitorPermisoAtenderAuxiliar = panelSimulacion.monitorPermisoAtenderAuxiliar;
 		monitorPermisoAtenderDoctor = panelSimulacion.monitorPermisoAtenderDoctor;
+		
+		this.textoDescripcion = panelSimulacion.auxiliarDescripcion;
 
 		this.nombreImagen = nombreImagen;
 
@@ -48,8 +52,6 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 		// aumentar algo para control
 		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
 				largo, null);
-
-		panelJuego.repaint();
 	}
 
 	/*
@@ -59,7 +61,7 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 	public void animar() {
 		while (true) {
 			monitorPermisoAtenderAuxiliar
-					.obtenerPermiso("intentando curar al  paciente");
+					.obtenerPermiso("estoy parada");
 			atenderPaciente();
 			monitorPermisoAtenderDoctor
 					.cederPermiso("termine de atender anda vos doctor");
@@ -69,6 +71,7 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 	}
 
 	public void atenderPaciente() {
+		textoDescripcion.append("Enfermera Auxiliar: Tendiendo al paciente en la camilla\n");
 		while (coordenaY >= 55) {
 			try {
 				Thread.sleep(velocidad);
@@ -79,7 +82,7 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 			}
 
 		}
-		
+		textoDescripcion.append("Enfermera Auxiliar: quitando ropa de vestir y objetos metalicos del paciente\n");
 		try {
 			Thread.sleep(tiempoAtencion);
 		} catch (InterruptedException e) {
@@ -133,14 +136,13 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 	public void atenderPaciente(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
-			panelJuego.repaint();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void iniciarMovimiento() {
-		Thread hilo = new Thread(this);
+		hilo = new Thread(this);
 		hilo.start();
 	}
 

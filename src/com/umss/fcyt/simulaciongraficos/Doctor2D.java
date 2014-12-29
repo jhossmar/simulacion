@@ -25,6 +25,9 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	Monitor monitorPermisoAtenderDoctor;
 	Monitor monitorPermisoSalirDeCubiculo;
 	Monitor monitorPermisoEntrarACubiculo;
+	public Thread hilo;
+	
+	StringBuffer textoDescripcion;
 
 	public Doctor2D(PanelSimulacion panelJuego) {
 		this.panelJuego = panelJuego;// panel donde se dibujan las notas
@@ -34,6 +37,8 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 		monitorPermisoAtenderDoctor = panelJuego.monitorPermisoAtenderDoctor;
 		monitorPermisoSalirDeCubiculo = panelJuego.monitorPermisoSalirDeCubiculo;
 		monitorPermisoEntrarACubiculo = panelJuego.monitorPermisoEntrarACubiculo;
+		
+		this.textoDescripcion = panelJuego.medicoDescripcion;
 	}
 
 	/*
@@ -44,8 +49,6 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 		// aumentar algo para control
 		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
 				largo, null);
-
-		panelJuego.repaint();
 	}
 
 	/*
@@ -56,7 +59,8 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 		while (true) {
 
 			monitorPermisoAtenderDoctor
-					.obtenerPermiso("intentado curar al paciente");
+					.obtenerPermiso("estoy parado ");
+			textoDescripcion.append("Medico de Turno: deteniendo el proceso que indujo la quemadura\n");
 			atenderPaciente();
 
 			monitorPermisoSalirDeCubiculo
@@ -73,33 +77,35 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 			try {
 				Thread.sleep(velocidad);
 				coordenaY = coordenaY - avance;// darle nombre a 2
-				panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
 		}
-
+		
+		textoDescripcion.append("Medico de Turno: irrigando la zona con sulucion fria de suero\n");
+		textoDescripcion.append("Medico de Turno: cubriendo al paciente con sabanas limpias \n");
 		// atiende al paciente con el tiempo de atencion
 		atenderPaciente(tiempoAtencion);
+		
+		textoDescripcion.append("Medico de Turno: dando de alta al paciente\n");
 
 	}
 
 	public void atenderPaciente(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
-			panelJuego.repaint();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void regresar() {
+		panelJuego.cambiarCamillaVacia("imagenes/camillaVacia.gif");
 		while (coordenaY <= 100) {
 			try {
 				Thread.sleep(velocidad);
 				coordenaY = coordenaY + avance;// darle nombre a 2
-				panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -130,7 +136,7 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	}
 
 	public void iniciarMovimiento() {
-		Thread hilo = new Thread(this);
+		hilo = new Thread(this);
 		hilo.start();
 	}
 

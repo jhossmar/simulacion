@@ -22,28 +22,28 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 
 	private String nombreImagen;
 
-	// ArrayList<String> hayPaciente;
-	// ArrayList<String> seAtiende;
-
 	Monitor monitorPermisoEntrada;
 	Monitor monitorHayPacienteTriaje;
 	Monitor monitorPermisoACubiculo;
+	
+	public Thread hilo;
 
+	StringBuffer textoDescripcion;
+	
 	public EnfermeraLicenciada2D(PanelSimulacion panelSimulacion,
 			int coordenaX, int coordenaY, String nombreImagen) {
 
 		this.coordenaX = coordenaX;
 		this.coordenaY = coordenaY;
 		this.panelJuego = panelSimulacion;// panel donde se dibujan las notas
-
-		// this.hayPaciente = panelSimulacion.hayPacienteTriaje;
-		// this.seAtiende = panelSimulacion.seAtendioTriaje;
-
+		
 		monitorPermisoEntrada = panelSimulacion.monitorPermisoEntrada;
 		monitorHayPacienteTriaje = panelSimulacion.monitorHayPacienteTriaje;
 		monitorPermisoACubiculo = panelSimulacion.monitorPermisoACubiculo;
 
 		this.nombreImagen = nombreImagen;
+		
+		this.textoDescripcion = panelSimulacion.licenciadaDescripcion;
 
 		this.imagen = new ImageIcon(this.nombreImagen);
 	}
@@ -56,8 +56,6 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 		// aumentar algo para control
 		g.drawImage(imagen.getImage(), this.coordenaX, this.coordenaY, ancho,
 				largo, null);
-
-		panelJuego.repaint();
 	}
 
 	/*
@@ -67,7 +65,8 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 	public void animar() {
 		while (true) {
 
-			monitorHayPacienteTriaje.obtenerPermiso("atendiendo");
+			monitorHayPacienteTriaje.obtenerPermiso("estoy parada");
+			textoDescripcion.append("Enfermera Licenciada: preparando para la evaluacion del paciente\n");
 			realizarEvaluacion();
 			monitorPermisoACubiculo.cederPermiso("puedes ir a cubiculo");
 			monitorPermisoEntrada.cederPermiso("hay espacio entra chango");
@@ -82,7 +81,6 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 			try {
 				Thread.sleep(velocidad);
 				coordenaX = coordenaX + avance;
-				panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -95,21 +93,19 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 			try {
 				Thread.sleep(velocidad);
 				coordenaX = coordenaX - avance;
-				panelJuego.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
 		}
-
+		textoDescripcion.append("Enfermera Licenciada: realizando la evaluacion del paciente\n");
 		atenderPaciente(tiempoAtencion);
-
+		textoDescripcion.append("Enfermera Licenciada: designando al paciente al cubiculo de quemados\n");
 	}
 
 	public void atenderPaciente(int tiempo) {
 		try {
 			Thread.sleep(tiempo);
-			panelJuego.repaint();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -147,7 +143,7 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 	}
 
 	public void iniciarMovimiento() {
-		Thread hilo = new Thread(this);
+		hilo = new Thread(this);
 		hilo.start();
 	}
 
