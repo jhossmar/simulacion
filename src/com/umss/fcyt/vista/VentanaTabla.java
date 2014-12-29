@@ -39,7 +39,7 @@ public class VentanaTabla extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 560, 227);
 		getContentPane().add(scrollPane);
-		String[] columnNames = { "Nombre del Paciente", "Tiempo de Atencion","Cubiculo","Hora de entrada","Hora de Salida","Estado Final"};
+		String[] columnNames = { "Nombre del Paciente", "Tiempo de Atencion","Tiempo de Espera","Cubiculo","Estado Final"};
 		model = new DefaultTableModel(null, columnNames);
 		table = new JTable(model);
 		

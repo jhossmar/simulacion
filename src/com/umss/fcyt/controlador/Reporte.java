@@ -1,7 +1,7 @@
 package com.umss.fcyt.controlador;
 
 
-import com.umss.fcyt.modelo.EstadoFinal;
+import com.umss.fcyt.modelo.EstadoFinal; 
 import com.umss.fcyt.modelo.SalaEmergencias;    
 import com.umss.fcyt.modelo.TipoPaciente;
 
@@ -114,7 +114,7 @@ public class Reporte {
 	public void graficarCircularTiempoAtencion(ArrayList<String>nombres,ArrayList<Integer>tiemposAtencion){
 		DefaultPieDataset data = new DefaultPieDataset();
 		for(int i = 0;i<nombres.size();i++){
-			data.setValue(nombres.get(i), tiemposAtencion.get(i));
+			data.setValue(nombres.get(i)+i, tiemposAtencion.get(i));
 		}
 		JFreeChart chart = ChartFactory.createPieChart(
 		         "REPORTE EN GRAFICO CIRCULAR DE LOS TIEMPOS DE ATENCION",
@@ -129,7 +129,7 @@ public class Reporte {
 	public void graficarCircularTiempoEspera(ArrayList<String>nombres,ArrayList<Integer>tiemposEspera){
 		DefaultPieDataset data = new DefaultPieDataset();
 		for(int i = 0;i<nombres.size();i++){
-			data.setValue(nombres.get(i), tiemposEspera.get(i));
+			data.setValue(nombres.get(i)+i, tiemposEspera.get(i));
 		}
 		JFreeChart chart = ChartFactory.createPieChart(
 		         "REPORTE EN GRAFICO CIRCULAR DE LOS TIEMPOS DE ESPERA",
@@ -219,7 +219,7 @@ public class Reporte {
 		JFreeChart chart = null;
 		DefaultCategoryDataset data = new DefaultCategoryDataset();
 		for(int i = 0; i<nombres.size(); i++){
-			data.addValue(tiemposEspera.get(i), nombres.get(i), nombres.get(i));
+			data.addValue(tiemposEspera.get(i), nombres.get(i)+i, nombres.get(i)+i);
 		}
 		chart = ChartFactory.createBarChart("REPORTE EN GRAFICO DE BARRAS DE LOS TIEMPOS DE ESPERA",
 				"",
@@ -247,7 +247,7 @@ public class Reporte {
 		JFreeChart chart = null;
 		DefaultCategoryDataset data = new DefaultCategoryDataset();
 		for(int i = 0; i<nombres.size(); i++){
-			data.addValue(tiemposAtencion.get(i), nombres.get(i), nombres.get(i));
+			data.addValue(tiemposAtencion.get(i), nombres.get(i)+i, nombres.get(i)+i);
 		}
 		chart = ChartFactory.createBarChart("REPORTE EN GRAFICO DE BARRAS DE LOS TIEMPOS DE ATENCION",
 				"",
@@ -323,13 +323,12 @@ public class Reporte {
 		return res;
 	}
 	public String [] getReporteTabla(int pos){
-		String [] filas = new String[6];
+		String [] filas = new String[5];
 		filas[0] = nombres.get(pos);
 		filas[1] = tiemposAtencion.get(pos)+"";
-		filas[2] = cubiculo.get(pos)+"";
-		filas[3] = horaEntrada.get(pos)+"";
-		filas[4] = horaSalida.get(pos)+"";
-		filas[5] = estadoFinal.get(pos)+"";
+		filas[2] = tiemposEspera.get(pos)+"";
+		filas[3] = cubiculo.get(pos)+"";
+		filas[4] = estadoFinal.get(pos)+"";
 		return filas;
 	}
 }
