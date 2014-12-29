@@ -20,9 +20,9 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 
 	int retraso;
 	ArrayList<Paciente2D> pacientes;
-	ArrayList<Doctor2D> doctores;
-	ArrayList<EnfermeraAxiliar2D> enfermeras;
-	ArrayList<EnfermeraLicenciada2D> enfermerasLicenciadas;
+//	ArrayList<Doctor2D> doctores;
+//	ArrayList<EnfermeraAxiliar2D> enfermeras;
+//	ArrayList<EnfermeraLicenciada2D> enfermerasLicenciadas;
 	ArrayList<Estaticos2D> objetos;
 	
 	public Monitor monitorPermisoEntrada = new Monitor(true);
@@ -42,6 +42,13 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	public StringBuffer licenciadaDescripcion = new StringBuffer();
 	public StringBuffer auxiliarDescripcion = new StringBuffer();
 	public StringBuffer medicoDescripcion = new StringBuffer();
+
+	//Doctor2D representa como un proceso y lo mismo en las enfermeras
+	private Doctor2D doctor;
+
+	private EnfermeraLicenciada2D enfermeraTriaje;
+
+	private EnfermeraAxiliar2D enfermeraCubiculo;
 	
 	public PanelSimulacion() {
 
@@ -50,10 +57,10 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 		this.setPreferredSize(b);
 
 		this.pacientes = new ArrayList<Paciente2D>();
-		this.doctores = new ArrayList<Doctor2D>();
-		this.enfermeras = new ArrayList<EnfermeraAxiliar2D>();
+//		this.doctores = new ArrayList<Doctor2D>();
+//		this.enfermeras = new ArrayList<EnfermeraAxiliar2D>();
 		this.objetos = new ArrayList<Estaticos2D>();
-		this.enfermerasLicenciadas = new ArrayList<EnfermeraLicenciada2D>();
+		//this.enfermerasLicenciadas = new ArrayList<EnfermeraLicenciada2D>();
 		
 		agregarDoctores();
 		agregarEnfermeras();
@@ -107,21 +114,21 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	}
 
 	public void agregarDoctores() {
-		Doctor2D doctor1 = new Doctor2D(this);
-		doctores.add(doctor1);
-		doctor1.iniciarMovimiento();
+		doctor = new Doctor2D(this);
+		//doctores.add(doctor);
+		doctor.iniciarMovimiento();
 	}
 	
 	public void agregarEnfermeras() {
-		EnfermeraLicenciada2D enfermera = new EnfermeraLicenciada2D(this, 285, 290, "imagenes/enfermeraLicenciadaTriaje.gif");
-		enfermerasLicenciadas.add(enfermera);
-		enfermera.iniciarMovimiento();
+		enfermeraTriaje = new EnfermeraLicenciada2D(this, 285, 290, "imagenes/enfermeraLicenciadaTriaje.gif");
+		//enfermerasLicenciadas.add(enfermeraCubiculo);
+		enfermeraTriaje.iniciarMovimiento();
 		
-		EnfermeraAxiliar2D enfermera2 = new EnfermeraAxiliar2D(this,365,100, "imagenes/enfermeraCubiculo.png");
-		enfermera2.setAncho(45);
-		enfermera2.setLargo(45);
-		enfermeras.add(enfermera2);
-		enfermera2.iniciarMovimiento();
+		enfermeraCubiculo = new EnfermeraAxiliar2D(this,365,100, "imagenes/enfermeraCubiculo.png");
+		enfermeraCubiculo.setAncho(45);
+		enfermeraCubiculo.setLargo(45);
+		//enfermeras.add(enfermeraTriaje);
+		enfermeraCubiculo.iniciarMovimiento();
 	}
 	
 	public void cambiarImagen(String nombreIm) {
@@ -143,17 +150,17 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 			objeto.dibujar(g);
 		}
 		
-		for (EnfermeraAxiliar2D enfermera : enfermeras) {
-			enfermera.dibujar(g);
-		}
+		//for (EnfermeraAxiliar2D enfermera : enfermeras) {
+			enfermeraCubiculo.dibujar(g);
+		//}
 		
-		for (EnfermeraLicenciada2D enfermeraLicen : enfermerasLicenciadas) {
-			enfermeraLicen.dibujar(g);
-		}
+		//for (EnfermeraLicenciada2D enfermeraLicen : enfermerasLicenciadas) {
+			enfermeraTriaje.dibujar(g);
+		//}
 		
-		for (Doctor2D doctor : doctores) {
+		//for (Doctor2D doctor : doctores) {
 			doctor.dibujar(g);
-		}
+		//}
 	}
 
 	public void iniciarSimulacionGrafica() {
@@ -172,17 +179,17 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 			
 		}
 		
-		for (EnfermeraAxiliar2D enfermera : enfermeras) {
-			enfermera.hilo.stop();
-		}
+		//for (EnfermeraAxiliar2D enfermera : enfermeras) {
+			enfermeraCubiculo.hilo.stop();
+		//}
 		
-		for (EnfermeraLicenciada2D enfermeraLicen : enfermerasLicenciadas) {
-			enfermeraLicen.hilo.stop();
-		}
+		//for (EnfermeraLicenciada2D enfermeraLicen : enfermerasLicenciadas) {
+			enfermeraTriaje.hilo.stop();
+		//}
 		
-		for (Doctor2D doctor : doctores) {
+		//for (Doctor2D doctor : doctores) {
 			doctor.hilo.stop();
-		}
+		//}
 	}
 	
 	public void pausarSimulacionGrafica() {
@@ -192,17 +199,17 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 			
 		}
 		
-		for (EnfermeraAxiliar2D enfermera : enfermeras) {
-			enfermera.hilo.suspend();;
-		}
+		//for (EnfermeraAxiliar2D enfermera : enfermeras) {
+			enfermeraCubiculo.hilo.suspend();;
+		//}
 		
-		for (EnfermeraLicenciada2D enfermeraLicen : enfermerasLicenciadas) {
-			enfermeraLicen.hilo.suspend();
-		}
+		//for (EnfermeraLicenciada2D enfermeraLicen : enfermerasLicenciadas) {
+			enfermeraTriaje.hilo.suspend();
+		//}
 		
-		for (Doctor2D doctor : doctores) {
+		//for (Doctor2D doctor : doctores) {
 			doctor.hilo.suspend();
-		}
+		//}
 	}
 	
 	public void continuarSimulacionGrafica() {
@@ -212,17 +219,17 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 			
 		}
 		
-		for (EnfermeraAxiliar2D enfermera : enfermeras) {
-			enfermera.hilo.resume();
-		}
+		//for (EnfermeraAxiliar2D enfermera : enfermeras) {
+			enfermeraCubiculo.hilo.resume();
+		//}
 		
-		for (EnfermeraLicenciada2D enfermeraLicen : enfermerasLicenciadas) {
-			enfermeraLicen.hilo.resume();
-		}
+		//for (EnfermeraLicenciada2D enfermeraLicen : enfermerasLicenciadas) {
+			enfermeraTriaje.hilo.resume();
+		//}
 		
-		for (Doctor2D doctor : doctores) {
+		//for (Doctor2D doctor : doctores) {
 			doctor.hilo.resume();
-		}
+		//}
 	}
 	
 	public void agregarPaciente() {
