@@ -51,7 +51,6 @@ public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private JToolBar toolBar;
-	private JButton btnGuardar;
 	public JButton btnGenerarrepote;
 	
 	public JMenuItem itemEjecutar;
@@ -132,30 +131,12 @@ public class VentanaPrincipal extends JFrame {
 		JMenu mnReporte = new JMenu("Reporte");
 		menuBar.add(mnReporte);
 		
-		JMenuItem mntmCantidadPacientesAtendidos = new JMenuItem("Cantidad Pacientes Atendidos");
-		mnReporte.add(mntmCantidadPacientesAtendidos);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Tiempo Promedio de Atencion");
-		mnReporte.add(mntmNewMenuItem);
-		
 		JMenu mnAyuda = new JMenu("Ayuda");
 		menuBar.add(mnAyuda);
-		
-		JMenuItem mntmListaDeComandos = new JMenuItem("Lista de comandos");
-		mnAyuda.add(mntmListaDeComandos);
-		
-		JMenuItem mntmManualDeUsuario = new JMenuItem("Manual de usuario");
-		mnAyuda.add(mntmManualDeUsuario);
-		
-		JMenuItem mntmSobreNosotros = new JMenuItem("Sobre nosotros");
-		mnAyuda.add(mntmSobreNosotros);
 		
 		toolBar = new JToolBar();
 		toolBar.setBounds(0, 21, 550, 27);
 		contentPane.add(toolBar);
-		
-		btnGuardar = new JButton("Guardar");
-		toolBar.add(btnGuardar);
 		
 		btnGenerarrepote = new JButton("GenerarRepote");
 		toolBar.add(btnGenerarrepote);
