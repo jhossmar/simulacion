@@ -136,6 +136,9 @@ public class VentanaPrincipal extends JFrame {
 		JMenu mnAyuda = new JMenu("Ayuda");
 		menuBar.add(mnAyuda);
 		
+		mntmManualDeUsuario = new JMenuItem("Manual de Usuario");
+		mnAyuda.add(mntmManualDeUsuario);
+		
 		toolBar = new JToolBar();
 		toolBar.setBounds(0, 21, 550, 27);
 		contentPane.add(toolBar);
