@@ -22,29 +22,28 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 
 	private String nombreImagen;
 
-	// ArrayList<String> hayPaciente;
-	// ArrayList<String> seAtiende;
-
 	Monitor monitorPermisoEntrada;
 	Monitor monitorHayPacienteTriaje;
 	Monitor monitorPermisoACubiculo;
+	
 	public Thread hilo;
 
+	StringBuffer textoDescripcion;
+	
 	public EnfermeraLicenciada2D(PanelSimulacion panelSimulacion,
 			int coordenaX, int coordenaY, String nombreImagen) {
 
 		this.coordenaX = coordenaX;
 		this.coordenaY = coordenaY;
 		this.panelJuego = panelSimulacion;// panel donde se dibujan las notas
-
-		// this.hayPaciente = panelSimulacion.hayPacienteTriaje;
-		// this.seAtiende = panelSimulacion.seAtendioTriaje;
-
+		
 		monitorPermisoEntrada = panelSimulacion.monitorPermisoEntrada;
 		monitorHayPacienteTriaje = panelSimulacion.monitorHayPacienteTriaje;
 		monitorPermisoACubiculo = panelSimulacion.monitorPermisoACubiculo;
 
 		this.nombreImagen = nombreImagen;
+		
+		this.textoDescripcion = panelSimulacion.licenciadaDescripcion;
 
 		this.imagen = new ImageIcon(this.nombreImagen);
 	}
@@ -67,6 +66,7 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 		while (true) {
 
 			monitorHayPacienteTriaje.obtenerPermiso("estoy parada");
+			textoDescripcion.append("Enfermera Licenciada: preparando para la evaluacion del paciente\n");
 			realizarEvaluacion();
 			monitorPermisoACubiculo.cederPermiso("puedes ir a cubiculo");
 			monitorPermisoEntrada.cederPermiso("hay espacio entra chango");
@@ -98,9 +98,9 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 			}
 
 		}
-
+		textoDescripcion.append("Enfermera Licenciada: realizando la evaluacion del paciente\n");
 		atenderPaciente(tiempoAtencion);
-
+		textoDescripcion.append("Enfermera Licenciada: designando al paciente al cubiculo de quemados\n");
 	}
 
 	public void atenderPaciente(int tiempo) {

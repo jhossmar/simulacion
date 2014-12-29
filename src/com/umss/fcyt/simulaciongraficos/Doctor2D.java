@@ -26,6 +26,8 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	Monitor monitorPermisoSalirDeCubiculo;
 	Monitor monitorPermisoEntrarACubiculo;
 	public Thread hilo;
+	
+	StringBuffer textoDescripcion;
 
 	public Doctor2D(PanelSimulacion panelJuego) {
 		this.panelJuego = panelJuego;// panel donde se dibujan las notas
@@ -35,6 +37,8 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 		monitorPermisoAtenderDoctor = panelJuego.monitorPermisoAtenderDoctor;
 		monitorPermisoSalirDeCubiculo = panelJuego.monitorPermisoSalirDeCubiculo;
 		monitorPermisoEntrarACubiculo = panelJuego.monitorPermisoEntrarACubiculo;
+		
+		this.textoDescripcion = panelJuego.medicoDescripcion;
 	}
 
 	/*
@@ -56,6 +60,7 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 
 			monitorPermisoAtenderDoctor
 					.obtenerPermiso("estoy parado ");
+			textoDescripcion.append("Medico de Turno: deteniendo el proceso que indujo la quemadura\n");
 			atenderPaciente();
 
 			monitorPermisoSalirDeCubiculo
@@ -77,9 +82,13 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 			}
 
 		}
-
+		
+		textoDescripcion.append("Medico de Turno: irrigando la zona con sulucion fria de suero\n");
+		textoDescripcion.append("Medico de Turno: cubriendo al paciente con sabanas limpias \n");
 		// atiende al paciente con el tiempo de atencion
 		atenderPaciente(tiempoAtencion);
+		
+		textoDescripcion.append("Medico de Turno: dando de alta al paciente\n");
 
 	}
 

@@ -1,15 +1,10 @@
 package com.umss.fcyt.simulaciongraficos;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -43,6 +38,10 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	public Estaticos2D camilla;
 
 	public Thread graficador;
+	
+	public StringBuffer licenciadaDescripcion = new StringBuffer();
+	public StringBuffer auxiliarDescripcion = new StringBuffer();
+	public StringBuffer medicoDescripcion = new StringBuffer();
 	
 	public PanelSimulacion() {
 

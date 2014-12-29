@@ -37,6 +37,8 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 
 	private SalaEmergencias sala;
 
+	public Thread graficadorDescripciones;
+
 	public ControladorVentanaPrincipal(VentanaPrincipal ventana) {
 		this.ventanaPrincipal = ventana;
 		
@@ -48,7 +50,29 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 		
 		this.reloj = simulador.getReloj();
 
-
+		graficadorDescripciones = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				while(true) {
+					try {
+						Thread.sleep(100);
+						String texto = ventanaPrincipal.panelSimulacion.licenciadaDescripcion.toString();
+						ventanaPrincipal.txtAreaEnfermeraLicenciada.setText(texto);
+						
+						String texto2 = ventanaPrincipal.panelSimulacion.auxiliarDescripcion.toString();
+						ventanaPrincipal.textAreaEnfermeraAuxiliar.setText(texto2);
+						
+						String texto3 = ventanaPrincipal.panelSimulacion.medicoDescripcion.toString();
+						ventanaPrincipal.textAreaMedicoTurno.setText(texto3);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		});
+		
 		agregarAccionesBotones();
 	}
 
@@ -149,7 +173,6 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 			try {
 				Thread.sleep(velocidadActualDeSimulacion);
 
-				//simulador.pasoSimulacion();
 				this.sala.agregarPaciente(new Paciente("Beimar Huarachi"));
 				ventanaPrincipal.panelSimulacion.agregarPaciente();
 
@@ -186,21 +209,25 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 		if (e.getSource() == ventanaPrincipal.botonEjecutar
 				|| e.getSource() == ventanaPrincipal.itemEjecutar) {
 			this.iniciarSimulacion();
+			graficadorDescripciones.start();
 			ventanaPrincipal.panelSimulacion.iniciarSimulacionGrafica();
 		}
 		if (e.getSource() == ventanaPrincipal.botonPausar
 				|| e.getSource() == ventanaPrincipal.itemPausar) {
-			//this.pausarSimulacion();
+			this.pausarSimulacion();
+			graficadorDescripciones.suspend();
 			ventanaPrincipal.panelSimulacion.pausarSimulacionGrafica();
 		}
 		if (e.getSource() == ventanaPrincipal.botonDetener
 				|| e.getSource() == ventanaPrincipal.itemDetener) {
-			//this.detenerSimulacion();
+			this.detenerSimulacion();
+			graficadorDescripciones.stop();
 			ventanaPrincipal.panelSimulacion.pararMovimiento();
 		}
 		if (e.getSource() == ventanaPrincipal.botonContinuar
 				|| e.getSource() == ventanaPrincipal.itemContinuar) {
-			//this.continuarSimulacion();
+			this.continuarSimulacion();
+			graficadorDescripciones.resume();
 			ventanaPrincipal.panelSimulacion.continuarSimulacionGrafica();
 		}
 

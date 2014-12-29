@@ -26,6 +26,7 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 	int tiempoAtencion = 2000;
 	public Thread hilo;
 
+	StringBuffer textoDescripcion;
 	public EnfermeraAxiliar2D(PanelSimulacion panelSimulacion, int coordenaX,
 			int coordenaY, String nombreImagen) {
 
@@ -35,6 +36,8 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 
 		monitorPermisoAtenderAuxiliar = panelSimulacion.monitorPermisoAtenderAuxiliar;
 		monitorPermisoAtenderDoctor = panelSimulacion.monitorPermisoAtenderDoctor;
+		
+		this.textoDescripcion = panelSimulacion.auxiliarDescripcion;
 
 		this.nombreImagen = nombreImagen;
 
@@ -68,6 +71,7 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 	}
 
 	public void atenderPaciente() {
+		textoDescripcion.append("Enfermera Auxiliar: Tendiendo al paciente en la camilla\n");
 		while (coordenaY >= 55) {
 			try {
 				Thread.sleep(velocidad);
@@ -78,7 +82,7 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 			}
 
 		}
-		
+		textoDescripcion.append("Enfermera Auxiliar: quitando ropa de vestir y objetos metalicos del paciente\n");
 		try {
 			Thread.sleep(tiempoAtencion);
 		} catch (InterruptedException e) {
