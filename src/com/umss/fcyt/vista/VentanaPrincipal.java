@@ -43,6 +43,8 @@ import javax.swing.JScrollPane;
 import com.umss.fcyt.simulaciongraficos.PanelSimulacion;
 
 import java.awt.Font;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -69,7 +71,6 @@ public class VentanaPrincipal extends JFrame {
 
 	int contador =0;
 	public JSlider sliderVelocidad;
-	public JTextArea textoDescripcion;
 	 
 	public VentanaPrincipal() {
 		setResizable(false);
@@ -214,6 +215,7 @@ public class VentanaPrincipal extends JFrame {
 		panelQuemados.setBounds(30, 80, 500, 350);
 		
 		panelSimulacion = new PanelSimulacion();
+		panelSimulacion.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		panelQuemados.add(panelSimulacion);
 		contentPane.add(panelQuemados);
 		
@@ -222,15 +224,112 @@ public class VentanaPrincipal extends JFrame {
 		lblNewLabel.setBounds(28, 49, 242, 20);
 		contentPane.add(lblNewLabel);
 		
-		textoDescripcion = new JTextArea();
-		textoDescripcion.setEditable(false);
-		textoDescripcion.setBounds(242, 515, 832, 95);
-		//contentPane.add(textoDescripcion);
+		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		getContentPane().setLayout(null);
+		panel.setBackground(new Color(47, 79, 79));
+		panel.setBounds(595, 80, 445, 350);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setViewportView(textoDescripcion);
-		scrollPane.setBounds(242, 500, 832, 110);
-		contentPane.add(scrollPane);
+		JLabel lblJerarquiaDeProcesos = new JLabel("Jerarquia de Procesos");
+		lblJerarquiaDeProcesos.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 14));
+		lblJerarquiaDeProcesos.setBounds(66, 11, 164, 24);
+		panel.add(lblJerarquiaDeProcesos);
+		
+		JLabel lblEntidadResponsable = new JLabel("Entidad Responsable");
+		lblEntidadResponsable.setBackground(new Color(47, 79, 79));
+		lblEntidadResponsable.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 14));
+		lblEntidadResponsable.setBounds(280, 11, 135, 24);
+		panel.add(lblEntidadResponsable);
+		
+		JLabel lblLlevarAl = new JLabel("1.- Llevar al Paciente a Triaje");
+		lblLlevarAl.setBounds(29, 56, 191, 14);
+		panel.add(lblLlevarAl);
+		
+		JLabel lblRealizarRevision = new JLabel("2.- Realizar revision del paciente");
+		lblRealizarRevision.setBounds(29, 81, 191, 14);
+		panel.add(lblRealizarRevision);
+		
+		JLabel lblDesignarA = new JLabel("3.- Designar a un cubiculo");
+		lblDesignarA.setBounds(29, 106, 191, 14);
+		panel.add(lblDesignarA);
+		
+		JLabel lblLlevarAl_1 = new JLabel("4.- Llevar al Paciente al cubiculo respectivo");
+		lblLlevarAl_1.setBounds(29, 131, 215, 14);
+		panel.add(lblLlevarAl_1);
+		
+		JLabel lblTenderAl = new JLabel("5.- Tender al paciente en la camilla");
+		lblTenderAl.setBounds(29, 156, 215, 14);
+		panel.add(lblTenderAl);
+		
+		JLabel lblQuitarRopas = new JLabel("6.- Quitar Ropas de Vestir y anillos");
+		lblQuitarRopas.setBounds(29, 181, 221, 14);
+		panel.add(lblQuitarRopas);
+		
+		JLabel lblDetenerEl = new JLabel("7.- Detener el proceso que indujo la quemadura");
+		lblDetenerEl.setBounds(28, 206, 242, 14);
+		panel.add(lblDetenerEl);
+		
+		JLabel lblIrrigarLa = new JLabel("8.- Irrigar la zona con solucion fria de suero");
+		lblIrrigarLa.setBounds(27, 231, 243, 14);
+		panel.add(lblIrrigarLa);
+		
+		JLabel lblCubrirAl = new JLabel("9.- Cubrir al paciente con sabanas limpias");
+		lblCubrirAl.setBounds(29, 256, 241, 14);
+		panel.add(lblCubrirAl);
+		
+		JLabel lblDarDe = new JLabel("10.- Dar de alta");
+		lblDarDe.setBounds(28, 281, 242, 14);
+		panel.add(lblDarDe);
+		
+		JLabel lblLlevarAl_2 = new JLabel("11.- Llevar al paciente donde se lo designo");
+		lblLlevarAl_2.setBounds(29, 310, 241, 14);
+		panel.add(lblLlevarAl_2);
+		
+		JLabel lblPersonaEncargada = new JLabel("Persona Encargada");
+		lblPersonaEncargada.setBounds(290, 56, 143, 14);
+		panel.add(lblPersonaEncargada);
+		
+		JLabel lblEnfermeraLicenciada = new JLabel("Enfermera Licenciada");
+		lblEnfermeraLicenciada.setBounds(290, 81, 143, 14);
+		panel.add(lblEnfermeraLicenciada);
+		
+		JLabel lblEnfermeraLicenciada_1 = new JLabel("Enfermera Licenciada");
+		lblEnfermeraLicenciada_1.setBounds(290, 106, 143, 14);
+		panel.add(lblEnfermeraLicenciada_1);
+		
+		JLabel lblPersonaEncargada_1 = new JLabel("Persona Encargada");
+		lblPersonaEncargada_1.setBounds(290, 131, 143, 14);
+		panel.add(lblPersonaEncargada_1);
+		
+		JLabel lblEnfermeraAuxiliar = new JLabel("Enfermera Auxiliar");
+		lblEnfermeraAuxiliar.setBounds(290, 156, 143, 14);
+		panel.add(lblEnfermeraAuxiliar);
+		
+		JLabel lblEnfermeraAuxiliar_1 = new JLabel("Enfermera Auxiliar");
+		lblEnfermeraAuxiliar_1.setBounds(290, 181, 133, 14);
+		panel.add(lblEnfermeraAuxiliar_1);
+		
+		JLabel lblMedicoDeTurno = new JLabel("Medico de Turno");
+		lblMedicoDeTurno.setBounds(290, 206, 143, 14);
+		panel.add(lblMedicoDeTurno);
+		
+		JLabel lblMedicoDeTurno_1 = new JLabel("Medico de Turno");
+		lblMedicoDeTurno_1.setBounds(290, 231, 133, 14);
+		panel.add(lblMedicoDeTurno_1);
+		
+		JLabel lblMedicoDeTurno_2 = new JLabel("Medico de Turno");
+		lblMedicoDeTurno_2.setBounds(290, 256, 143, 14);
+		panel.add(lblMedicoDeTurno_2);
+		
+		JLabel lblMedicoDeTurno_3 = new JLabel("Medico de Turno");
+		lblMedicoDeTurno_3.setBounds(290, 281, 135, 14);
+		panel.add(lblMedicoDeTurno_3);
+		
+		JLabel lblPersonaEncargada_2 = new JLabel("Persona Encargada");
+		lblPersonaEncargada_2.setBounds(290, 310, 130, 14);
+		panel.add(lblPersonaEncargada_2);
 		internalFrame.setVisible(true);
 
 		

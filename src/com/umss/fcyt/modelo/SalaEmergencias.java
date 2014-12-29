@@ -165,6 +165,7 @@ public class SalaEmergencias {
 		
 		return tiempos;
 	}
+	
 	public ArrayList<Integer> getTiempoAtencion(){
 		ArrayList<Integer> tiempos = new ArrayList<Integer>();
 		
@@ -174,8 +175,6 @@ public class SalaEmergencias {
 		
 		return tiempos;
 	}
-
-
 
 	public ArrayList<TipoPaciente> getCubiculo() {
 		ArrayList<TipoPaciente> cubiculos = new ArrayList<TipoPaciente>();

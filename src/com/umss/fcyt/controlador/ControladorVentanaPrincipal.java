@@ -165,7 +165,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 
 	public void actualizarVista() {
 		
-		ventanaPrincipal.textoDescripcion.setText(simulador.descripcionSimulacion.toString());
+		
 	}
 
 	public void pausarSimulacion() {
@@ -179,13 +179,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 	public void continuarSimulacion() {
 		this.procesoSimulacion.resume();
 	}
-
-	public static void main(String[] args) {
-		ControladorVentanaPrincipal c = new ControladorVentanaPrincipal(
-				new VentanaPrincipal());
-		c.iniciarSimulacion();
-	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
