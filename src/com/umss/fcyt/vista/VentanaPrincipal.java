@@ -58,6 +58,7 @@ public class VentanaPrincipal extends JFrame {
 	public JMenuItem itemPausar;
 	public JMenuItem itemContinuar;
 	public JMenuItem itemDetener;
+	public JMenuItem mntmManualDeUsuario;
 	
 	//comandos de simulacion
 	public JButton botonEjecutar;
@@ -76,6 +77,8 @@ public class VentanaPrincipal extends JFrame {
 	public JTextArea textAreaEnfermeraAuxiliar;
 	public JTextArea textAreaMedicoTurno;
 	public JTextArea textAreaPersonaEncargada;
+	
+	
 	 
 	public VentanaPrincipal() {
 		setResizable(false);
@@ -144,7 +147,7 @@ public class VentanaPrincipal extends JFrame {
 		JMenuItem mntmListaDeComandos = new JMenuItem("Lista de comandos");
 		mnAyuda.add(mntmListaDeComandos);
 		
-		JMenuItem mntmManualDeUsuario = new JMenuItem("Manual de usuario");
+		mntmManualDeUsuario = new JMenuItem("Manual de usuario");
 		mnAyuda.add(mntmManualDeUsuario);
 		
 		JMenuItem mntmSobreNosotros = new JMenuItem("Sobre nosotros");
