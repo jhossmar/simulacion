@@ -113,11 +113,11 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	}
 	
 	public void agregarEnfermeras() {
-		EnfermeraLicenciada2D enfermera = new EnfermeraLicenciada2D(this, 285, 290, "imagenes/enfermeraTrans.png");
+		EnfermeraLicenciada2D enfermera = new EnfermeraLicenciada2D(this, 285, 290, "imagenes/enfermeraLicenciadaTriaje.gif");
 		enfermerasLicenciadas.add(enfermera);
 		enfermera.iniciarMovimiento();
 		
-		EnfermeraAxiliar2D enfermera2 = new EnfermeraAxiliar2D(this,365,100, "imagenes/enfermeraCubi.png");
+		EnfermeraAxiliar2D enfermera2 = new EnfermeraAxiliar2D(this,365,100, "imagenes/enfermeraCubiculo.png");
 		enfermera2.setAncho(45);
 		enfermera2.setLargo(45);
 		enfermeras.add(enfermera2);
