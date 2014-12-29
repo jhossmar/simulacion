@@ -15,6 +15,7 @@ import com.umss.fcyt.modelo.SalaEmergencias;
 import com.umss.fcyt.modelo.TipoPaciente;
 import com.umss.fcyt.modelo.simulacion.Reloj;
 import com.umss.fcyt.modelo.simulacion.SimuladorDos;
+import com.umss.fcyt.vista.ManualDeUsuario;
 import com.umss.fcyt.vista.VentanaPrincipal;
 import com.umss.fcyt.vista.VentanaPrincipalReportes;
 
@@ -239,7 +240,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 		}
 		if(e.getSource()== ventanaPrincipal.mntmManualDeUsuario){
 			
-			
+			new ManualDeUsuario(ventanaPrincipal).setVisible(true);
 			
 			
 			
