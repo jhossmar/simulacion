@@ -15,13 +15,15 @@ import com.umss.fcyt.modelo.SalaEmergencias;
 import com.umss.fcyt.modelo.TipoPaciente;
 import com.umss.fcyt.modelo.simulacion.Reloj;
 import com.umss.fcyt.modelo.simulacion.SimuladorDos;
+import com.umss.fcyt.vista.ManualDeUsuario;
 import com.umss.fcyt.vista.VentanaPrincipal;
 import com.umss.fcyt.vista.VentanaPrincipalReportes;
 
 public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 
 	VentanaPrincipal ventanaPrincipal;
-
+    
+	
 	int tiempoDuracionSimulacion = 1440;
 
 	private SimuladorDos simulador;
@@ -87,6 +89,7 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 		ventanaPrincipal.itemDetener.addActionListener(this);
 		ventanaPrincipal.itemContinuar.addActionListener(this);
 		ventanaPrincipal.btnGenerarrepote.addActionListener(this);
+		ventanaPrincipal.mntmManualDeUsuario.addActionListener(this);
 
 		ventanaPrincipal.sliderVelocidad
 				.addChangeListener(new ChangeListener() {
@@ -235,5 +238,13 @@ public class ControladorVentanaPrincipal implements Runnable, ActionListener {
 			VentanaPrincipalReportes ventana = new VentanaPrincipalReportes(sala);
 			ventana.setVisible(true);
 		}
+		if(e.getSource()== ventanaPrincipal.mntmManualDeUsuario){
+			
+			new ManualDeUsuario(ventanaPrincipal).setVisible(true);
+			
+			
+			
+		}
+		
 	}
 }

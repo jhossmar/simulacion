@@ -133,8 +133,8 @@ public class SimuladorDos {
 		
 		
 		//reduce tiempo de atencion solo a los que estan en los cubiculos
-		for (Cubiculo cubiculo1 : salaDeEmergencias.getCubiculos()) { // problema con la variable cubiculo@marcelo
-		    for (Paciente paciente : cubiculo1.getPacientes()) {
+		for (Cubiculo cubiculo2 : salaDeEmergencias.getCubiculos()) { // problema con la variable cubiculo@marcelo
+		    for (Paciente paciente : cubiculo2.getPacientes()) {
 				paciente.reducirTiempoDeAtencion();
 			}
 		}

@@ -125,7 +125,11 @@ public class SalaEmergencias {
 		for(Paciente p : pacientes) {
 			tiempo = tiempo + p.getTiempoEspera();
 		}
-		return tiempo;
+		if(pacientes.size() == 0) {
+			return tiempo;
+		}
+		return (tiempo / pacientes.size());
+		//return tiempo;
 	}
 	
 	public int calcularCantidadPacientesPorEstadoFinal(EstadoFinal estadoFinal) {
