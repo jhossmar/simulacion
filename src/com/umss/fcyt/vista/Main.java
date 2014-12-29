@@ -40,6 +40,7 @@ public class Main {
         // show the first page
         PDFPage page = pdffile.getPage(0);
         panel.useZoomTool(true);
+       
         panel.showPage(page);
         
         
