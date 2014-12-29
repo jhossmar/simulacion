@@ -1,58 +1,77 @@
 package com.umss.fcyt.simulaciongraficos;
+import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JScrollPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JList;
 import javax.swing.JTextArea;
 import javax.swing.AbstractListModel;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.List;
+import java.awt.Point;
+import java.awt.ScrollPane;
+
 import javax.swing.JButton;
+
+import java.awt.Font;
+import java.util.ArrayList;
+
+import javax.swing.JTextPane;
+
+import com.sun.corba.se.spi.orb.StringPair;
+
+import javax.swing.ListSelectionModel;
 
 public class PanelDeProcesos extends JPanel {
 
+	static DefaultListModel modeloLista = new DefaultListModel();
+	private JComboBox box_Entidad;
+	private JComboBox box_Proceso;
+	private JList list;
+	private JScrollPane scrollLista;
+	
 	/**
-	 * Create the panel.
+	*Create the panel.
 	 */
 	public PanelDeProcesos() {
-		setLayout(new FlowLayout(3));
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.addMouseListener(new MouseAdapter() {
+		box_Entidad = new JComboBox();
+		box_Entidad.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		comboBox.addActionListener(new ActionListener() {
+		box_Entidad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Doctor", "Enfermera", "paciente"}));
-		comboBox.setBounds(12, 39, 235, 24);
-		add(comboBox);
+		setLayout(null);
+		box_Entidad.setModel(new DefaultComboBoxModel(new String[] {"Doctor", "Enfermera", "Paciente"}));
+		box_Entidad.setBounds(15, 81, 101, 24);
+		add(box_Entidad);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"quitar ropa de vetir", "detener proceso que indujo la quemadura", "irrigar la zona quemada con solucion fria", "cubrir con sabanas limpias", "utilizar protocolo RCP ", "internar Paciente", "Dar De Alta"}));
-		comboBox_1.setBounds(12, 83, 235, 24);
-		add(comboBox_1);
+		box_Proceso = new JComboBox();
+		box_Proceso.setModel(new DefaultComboBoxModel(new String[] {"quitar ropa de vetir", "detener proceso que indujo la quemadura", "irrigar la zona quemada con solucion fria", "cubrir con sabanas limpias", "utilizar protocolo RCP ", "internar Paciente", "Dar de Alta"}));
+		box_Proceso.setBounds(133, 81, 327, 24);
+		add(box_Proceso);
 		
 		JLabel lblEntidad = new JLabel("ENTIDAD");
-		lblEntidad.setBounds(12, 12, 70, 15);
+		lblEntidad.setBounds(15, 62, 59, 15);
 		add(lblEntidad);
 		
 		JLabel lblProceso = new JLabel("PROCESO");
-		lblProceso.setBounds(12, 65, 70, 15);
+		lblProceso.setBounds(133, 62, 66, 15);
 		add(lblProceso);
-		
-		List list_1 = new List();
-		list_1.setBounds(12, 151, 235, 139);
-		add(list_1);
 		
 		JButton btnIntroducir = new JButton("Introducir");
 		btnIntroducir.addActionListener(new ActionListener() {
@@ -61,15 +80,56 @@ public class PanelDeProcesos extends JPanel {
 			
 			}
 		});
-		btnIntroducir.setBounds(138, 119, 117, 25);
+		btnIntroducir.setBounds(174, 126, 103, 25);
 		add(btnIntroducir);
-
+		
+		JLabel lblPanelDeProcesos = new JLabel("PANEL DE PROCESOS");
+		lblPanelDeProcesos.setFont(new Font("DejaVu Serif Condensed", Font.BOLD | Font.ITALIC, 16));
+		lblPanelDeProcesos.setBounds(148, 12, 211, 24);
+		add(lblPanelDeProcesos);
+		
+		list = new JList();
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		//list.setBounds(15, 160, 445, 121);
+		//add(list);
+		
+		scrollLista = new JScrollPane();
+		scrollLista.setBounds(15,163,445,233);
+		scrollLista.setViewportView(list);
+        add(scrollLista);
 	}
 
 	
 	
 	protected void introducirSeleccionados() {
 		
+		if(!seleccionado()){
+		String aux = (String)box_Entidad.getSelectedItem()+"  "+(String)box_Proceso.getSelectedItem();
+        modeloLista.addElement(aux);
+		list.setModel(modeloLista);
+		desplazar();
 		
+		
+		}
+		
+		
+	}
+
+
+    /**
+     * despalaza el visor de el JList a la ultima linea
+     * */
+	private void desplazar() {
+		Dimension tamanholista = list.getSize();
+		Point p = new Point(0,tamanholista.height);
+		scrollLista.getViewport().setViewPosition(p);
+		
+		
+	}
+
+
+
+	private boolean seleccionado() {
+		 return false;
 	}
 }

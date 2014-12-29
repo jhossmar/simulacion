@@ -23,13 +23,15 @@ public class VentanaPrincipal extends JFrame {
 
 	
 	public void inicializarComponentes() {
-		this.setLayout(new FlowLayout(3));
+		getContentPane().setLayout(null);
 		PanelSimulacion p = new PanelSimulacion();
-		this.add(p);
+		p.setBounds(5, 5, 500, 350);
+		getContentPane().add(p);
 		
 		PanelDeProcesos b = new PanelDeProcesos();
+		b.setBounds(510, 5, 460, 403);
 		b.setVisible(true);
-		this.add(b);
+		getContentPane().add(b);
 
 	}
 
