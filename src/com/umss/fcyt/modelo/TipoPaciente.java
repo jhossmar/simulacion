@@ -1,0 +1,10 @@
+package com.umss.fcyt.modelo;
+
+public enum TipoPaciente {
+	DERIVADORS_OTRO_HOSPITAL,
+	ACCIDENTE_TRANSITO,
+	QUEMADURAS,
+	CONTAGIOSOS,
+	PACIENTES_GRAVES,
+	PACIENTES_NORMALES
+}
