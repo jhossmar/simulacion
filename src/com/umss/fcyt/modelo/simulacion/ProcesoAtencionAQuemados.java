@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import com.umss.fcyt.modelo.Paciente;
 
 public class ProcesoAtencionAQuemados {
-	static StringBuffer proceso = new StringBuffer();
-	static ArrayList<String> procesos = new ArrayList<String>(); 
+	ArrayList<String> procesos = new ArrayList<String>(); 
 	
 	public ProcesoAtencionAQuemados() {
 		procesos.add(tenderCamilla);
@@ -18,18 +17,26 @@ public class ProcesoAtencionAQuemados {
 		//procesos.add(darEstadoFinal);
 	}
 	
-	static String tenderCamilla = "";
+	 public ArrayList<String> getProcesos() {
+		return procesos;
+	}
+
+	public void setProcesos(ArrayList<String> procesos) {
+		this.procesos = procesos;
+	}
+
+	String tenderCamilla = "Tendiendo al paciente en la camilla";
 	
-	static String quitarRopa = "";
+	 String quitarRopa = "Quitando ropas de vestir y objetos metalicos";
 	
-	static String aplicarCompresas = "";
+	 String aplicarCompresas = "Aplicando compresas Frias para aliviar el dolor del paciente";
 	
-	static String cubrirSabanas = "";
+	 String cubrirSabanas = "Cubriendo con sabanas limpias y mantas para mantener la temperatura del paciente";
 	
-	static String aplicarAnalgesico = "";
+	 String aplicarAnalgesico = "Dando de ingerir Analgesicos opiaceos(Cloruro Morfico: 10 mgrs)";
 	
-	static String AdministrarVacuna = "";
+	 String AdministrarVacuna = "Administrando vacuna con ganmaglubulina";
 	
-	static String darEstadoFinal = "";
+	 String darEstadoFinal = "hla";
 	
 }

@@ -10,6 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import com.umss.fcyt.modelo.Entidad;
+
 public class PanelSimulacion extends JPanel implements ActionListener {
 
 	ImageIcon imagenFondo;
@@ -47,13 +49,20 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	public StringBuffer medicoDescripcion = new StringBuffer();
 
 	//Doctor2D representa como un proceso y lo mismo en las enfermeras
+	//cubiculo dos
 	private Doctor2D doctor;
 
+	//triaje
 	private EnfermeraLicenciada2D enfermeraTriaje;
 
+	//cubiculo uno
 	private EnfermeraAxiliar2D enfermeraCubiculo;
 	
-	boolean terminadoAsignacion = false;
+	public boolean terminadoAsignacion = false;
+	
+	public Entidad entidadCubiculoDos = new Entidad("", "", new ArrayList<String>());
+	public Entidad entidadCubiculoUno = new Entidad("", "", new ArrayList<String>());
+	public Entidad entidadTriajenew =new Entidad("", "", new ArrayList<String>());
 	
 	public PanelSimulacion() {
 
@@ -67,8 +76,8 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 		this.objetos = new ArrayList<Estaticos2D>();
 		//this.enfermerasLicenciadas = new ArrayList<EnfermeraLicenciada2D>();
 		
-		agregarDoctores();
-		agregarEnfermeras();
+		//agregarDoctores();
+		//agregarEnfermeras();
 		agregarObjetos();
 		
 		this.retraso = 5000;
@@ -124,11 +133,11 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	}
 	
 	public void agregarEnfermeras() {
-		enfermeraTriaje = new EnfermeraLicenciada2D(this, 285, 290, "imagenes/enfermeraLicenciadaTriaje.gif");
+		enfermeraTriaje = new EnfermeraLicenciada2D(this, 285, 290, entidadTriajenew.getNombreImagen());
 		//enfermerasLicenciadas.add(enfermeraCubiculo);
 		
 		
-		enfermeraCubiculo = new EnfermeraAxiliar2D(this,365,100, "imagenes/enfermeraCubiculo.png");
+		enfermeraCubiculo = new EnfermeraAxiliar2D(this,365,100, entidadCubiculoUno.getNombreImagen());
 		enfermeraCubiculo.setAncho(45);
 		enfermeraCubiculo.setLargo(45);
 		//enfermeras.add(enfermeraTriaje);

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import javax.sql.rowset.spi.SyncResolver;
 import javax.swing.ImageIcon;
 
+import com.umss.fcyt.modelo.Entidad;
+
 public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	private int coordenaX = 410;
 	private int coordenaY = 100;
@@ -28,17 +30,30 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 	public Thread hilo;
 	
 	StringBuffer textoDescripcion;
+	
+	Entidad entidad;
+	
 
 	public Doctor2D(PanelSimulacion panelJuego) {
 		this.panelJuego = panelJuego;// panel donde se dibujan las notas
-
-		this.imagen = new ImageIcon(nombreImagen);
+		this.entidad = panelJuego.entidadCubiculoDos;
+		
+		this.imagen = new ImageIcon(entidad.getNombreImagen());
+		System.out.println("beimar esta probando"+entidad.getNombreImagen());
 
 		monitorPermisoAtenderDoctor = panelJuego.monitorPermisoAtenderDoctor;
 		monitorPermisoSalirDeCubiculo = panelJuego.monitorPermisoSalirDeCubiculo;
 		monitorPermisoEntrarACubiculo = panelJuego.monitorPermisoEntrarACubiculo;
 		
-		this.textoDescripcion = panelJuego.medicoDescripcion;
+		//this.textoDescripcion = panelJuego.medicoDescripcion;
+		
+		if((entidad.getNombreEntidad()).equalsIgnoreCase("Medico de Turno")) {
+			this.textoDescripcion = panelJuego.medicoDescripcion;
+		} else if((entidad.getNombreEntidad()).equalsIgnoreCase("Enfermera Auxiliar")) {
+			this.textoDescripcion = panelJuego.auxiliarDescripcion;
+		} else if((entidad.getNombreEntidad()).equalsIgnoreCase("Enfermera Licenciada")) {
+			this.textoDescripcion = panelJuego.licenciadaDescripcion;
+		}
 	}
 
 	/*
@@ -60,7 +75,7 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 
 			monitorPermisoAtenderDoctor
 					.obtenerPermiso("estoy parado ");
-			textoDescripcion.append("Medico de Turno: deteniendo el proceso que indujo la quemadura\n");
+
 			atenderPaciente();
 
 			monitorPermisoSalirDeCubiculo
@@ -82,22 +97,27 @@ public class Doctor2D implements ElementoAnimable, ElementoDibujable, Runnable {
 			}
 
 		}
-		
-		textoDescripcion.append("Medico de Turno: irrigando la zona con sulucion fria de suero\n");
-		textoDescripcion.append("Medico de Turno: cubriendo al paciente con sabanas limpias \n");
 		// atiende al paciente con el tiempo de atencion
 		atenderPaciente(tiempoAtencion);
-		
-		textoDescripcion.append("Medico de Turno: dando de alta al paciente\n");
 
 	}
 
 	public void atenderPaciente(int tiempo) {
-		try {
-			Thread.sleep(tiempo);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		for (String  string : entidad.getProcesos()) {
+			try {
+				//cuidado
+				textoDescripcion
+				.append(entidad.getNombreEntidad()+": " + string  + "\n");
+				Thread.sleep(tiempoAtencion / entidad.getProcesos().size());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
+//		try {
+//			Thread.sleep(tiempo);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	public void regresar() {

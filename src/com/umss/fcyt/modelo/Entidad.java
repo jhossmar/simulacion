@@ -14,6 +14,25 @@ public class Entidad {
 		this.procesos = procesos;
 	}
 
+	public String toString() {
+		String respuesta = "";
+		respuesta = respuesta + nombreEntidad+ "    ";
+		respuesta = respuesta + nombreImagen + "    ";
+		for (String string : procesos) {
+			respuesta = respuesta + string + "    ";
+		}
+		
+		return respuesta;
+	}
+	
+	public String getNombreEntidad() {
+		return nombreEntidad;
+	}
+
+	public void setNombreEntidad(String nombreEntidad) {
+		this.nombreEntidad = nombreEntidad;
+	}
+
 	public String getNombreImagen() {
 		return nombreImagen;
 	}

@@ -40,9 +40,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
+import com.umss.fcyt.controlador.ControladorPanelSimulacion;
 import com.umss.fcyt.simulaciongraficos.PanelSimulacion;
 
 import java.awt.Font;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
@@ -77,8 +79,30 @@ public class VentanaPrincipal extends JFrame {
 	public JTextArea textAreaEnfermeraAuxiliar;
 	public JTextArea textAreaMedicoTurno;
 	public JTextArea textAreaPersonaEncargada;
+	
+	
+	public JComboBox comboBoxEntidadResponsableDosCubiculo;
+	public JComboBox comboBoxEntidadResponsableUnoCubiculo;
+	
+	public JComboBox comboBoxProcesoUno;
+	public JComboBox comboBoxProcesoDos;
+	public JComboBox comboBoxProcesoTres;
+	public JComboBox comboBoxProcesoCuatro;
+	public JComboBox comboBoxProcesoCinco;
+	public JComboBox comboBoxProcesoSeis;
+	
+	public JComboBox comboBoxEntidadReponsableTriaje;
+	
+	public JLabel lblEntidadUnoTriaje;
+	public JLabel lblEntidadDosTriaje;
+	public JButton btnAceptarCambios;
 	 
 	public VentanaPrincipal() {
+		inicializarVentana();
+		
+	}
+	
+	public void inicializarVentana() {
 		setResizable(false);
 		setTitle("Simulador Sala de Emergencias");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("imagenes/icono1.png"));
@@ -205,6 +229,8 @@ public class VentanaPrincipal extends JFrame {
 		panelQuemados.setBackground(Color.DARK_GRAY);
 		panelQuemados.setBounds(30, 80, 500, 350);
 		
+		
+		
 		panelSimulacion = new PanelSimulacion();
 		panelSimulacion.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		panelQuemados.add(panelSimulacion);
@@ -220,7 +246,7 @@ public class VentanaPrincipal extends JFrame {
 		getContentPane().setLayout(null);
 		panel.setBackground(new Color(47, 79, 79));
 		panel.setBounds(595, 80, 445, 350);
-		contentPane.add(panel);
+		//contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblJerarquiaDeProcesos = new JLabel("Jerarquia de Procesos");
@@ -355,7 +381,7 @@ public class VentanaPrincipal extends JFrame {
 		scrollPane_1.setViewportView(textAreaEnfermeraAuxiliar);
 		
 		JLabel lblMedicoDeTurno_4 = new JLabel("Medico de Turno");
-		lblMedicoDeTurno_4.setBounds(511, 21, 117, 14);
+		lblMedicoDeTurno_4.setBounds(521, 21, 117, 14);
 		panel_1.add(lblMedicoDeTurno_4);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
@@ -364,6 +390,142 @@ public class VentanaPrincipal extends JFrame {
 		
 		textAreaMedicoTurno = new JTextArea();
 		scrollPane_2.setViewportView(textAreaMedicoTurno);
+		
+		JLabel lblImagenEnfermeraLicenciada = new JLabel(new ImageIcon("imagenes/enfermeraLicenciadaCubiculo.png"));
+		lblImagenEnfermeraLicenciada.setBounds(181, 0, 62, 48);
+		panel_1.add(lblImagenEnfermeraLicenciada);
+		
+		JLabel labelImagenEnfermeraAxiliar = new JLabel(new ImageIcon("imagenes/enfermeraCubiculo.png"));
+		labelImagenEnfermeraAxiliar.setBounds(434, 0, 62, 48);
+		panel_1.add(labelImagenEnfermeraAxiliar);
+		
+		JLabel labelImagenDoctor = new JLabel(new ImageIcon("imagenes/doctorCubiculo.png"));
+		labelImagenDoctor.setBounds(692, 0, 62, 48);
+		panel_1.add(labelImagenDoctor);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(47, 79, 79));
+		panel_2.setBounds(588, 64, 496, 95);
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("Procesos");
+		lblNewLabel_1.setBounds(40, 11, 126, 14);
+		panel_2.add(lblNewLabel_1);
+		
+		JLabel lblEntidadResponsable_1 = new JLabel("Entidad Responsable");
+		lblEntidadResponsable_1.setBounds(319, 11, 145, 14);
+		panel_2.add(lblEntidadResponsable_1);
+		
+		JLabel lblRealizarEvaluacion = new JLabel("1.- Realizar Evaluacion ");
+		lblRealizarEvaluacion.setBounds(10, 44, 215, 14);
+		panel_2.add(lblRealizarEvaluacion);
+		
+		JLabel lblDesignarA_1 = new JLabel("3.- Designar a un Cubiculo");
+		lblDesignarA_1.setBounds(10, 73, 215, 14);
+		panel_2.add(lblDesignarA_1);
+		
+		lblEntidadUnoTriaje = new JLabel("");
+		lblEntidadUnoTriaje.setBounds(310, 36, 154, 14);
+		panel_2.add(lblEntidadUnoTriaje);
+		
+		lblEntidadDosTriaje = new JLabel("");
+		lblEntidadDosTriaje.setBounds(310, 73, 154, 14);
+		panel_2.add(lblEntidadDosTriaje);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(47, 79, 79));
+		panel_3.setBounds(588, 219, 496, 211);
+		contentPane.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JLabel lblProcesos = new JLabel("Procesos");
+		lblProcesos.setBounds(29, 0, 92, 14);
+		panel_3.add(lblProcesos);
+		
+		JLabel lblEntidadResponsable_2 = new JLabel("Entidad Responsable");
+		lblEntidadResponsable_2.setBounds(294, 0, 157, 14);
+		panel_3.add(lblEntidadResponsable_2);
+		
+		JLabel lblTenderEn = new JLabel("1.- Tender en Camilla");
+		lblTenderEn.setBounds(10, 44, 227, 14);
+		panel_3.add(lblTenderEn);
+		
+		JLabel lblQuitarVestimenta = new JLabel("2.- Quitar Vestimenta");
+		lblQuitarVestimenta.setBounds(10, 69, 227, 14);
+		panel_3.add(lblQuitarVestimenta);
+		
+		JLabel lblAplicarCompresas = new JLabel("3.- Aplicar compresas Frias");
+		lblAplicarCompresas.setBounds(10, 94, 227, 14);
+		panel_3.add(lblAplicarCompresas);
+		
+		JLabel lblCubrirCon = new JLabel("4.- Cubrir con Sabanas y Mantas");
+		lblCubrirCon.setBounds(10, 119, 227, 14);
+		panel_3.add(lblCubrirCon);
+		
+		JLabel lblAplicarAnalgesico = new JLabel("5.- Aplicar Analgesico");
+		lblAplicarAnalgesico.setBounds(10, 144, 227, 14);
+		panel_3.add(lblAplicarAnalgesico);
+		
+		JLabel lblAdministrarVacuna = new JLabel("6.- Administrar Vacuna");
+		lblAdministrarVacuna.setBounds(10, 169, 227, 14);
+		panel_3.add(lblAdministrarVacuna);
+		
+		comboBoxProcesoUno = new JComboBox();
+		comboBoxProcesoUno.setBounds(294, 41, 166, 20);
+		panel_3.add(comboBoxProcesoUno);
+		
+		comboBoxProcesoDos = new JComboBox();
+		comboBoxProcesoDos.setBounds(294, 66, 166, 20);
+		panel_3.add(comboBoxProcesoDos);
+		
+		comboBoxProcesoTres = new JComboBox();
+		comboBoxProcesoTres.setBounds(294, 91, 166, 20);
+		panel_3.add(comboBoxProcesoTres);
+		
+		comboBoxProcesoCuatro = new JComboBox();
+		comboBoxProcesoCuatro.setBounds(294, 116, 166, 20);
+		panel_3.add(comboBoxProcesoCuatro);
+		
+		comboBoxProcesoCinco = new JComboBox();
+		comboBoxProcesoCinco.setBounds(294, 141, 166, 20);
+		panel_3.add(comboBoxProcesoCinco);
+		
+		comboBoxProcesoSeis = new JComboBox();
+		comboBoxProcesoSeis.setBounds(294, 166, 166, 20);
+		panel_3.add(comboBoxProcesoSeis);
+		
+		btnAceptarCambios = new JButton("Aceptar Cambios");
+		btnAceptarCambios.setBounds(167, 188, 130, 23);
+		panel_3.add(btnAceptarCambios);
+		
+		JLabel lblLocacionTriaje = new JLabel("Locacion : Triaje");
+		lblLocacionTriaje.setBounds(588, 49, 99, 14);
+		contentPane.add(lblLocacionTriaje);
+		
+		JLabel lblLocacionCubiculo = new JLabel("Locacion : Cubiculo de Quemados");
+		lblLocacionCubiculo.setBounds(588, 169, 204, 14);
+		contentPane.add(lblLocacionCubiculo);
+		
+		comboBoxEntidadReponsableTriaje = new JComboBox();
+		comboBoxEntidadReponsableTriaje.setBounds(911, 46, 174, 20);
+		contentPane.add(comboBoxEntidadReponsableTriaje);
+		
+		comboBoxEntidadResponsableDosCubiculo = new JComboBox();
+		comboBoxEntidadResponsableDosCubiculo.setBounds(942, 194, 142, 20);
+		contentPane.add(comboBoxEntidadResponsableDosCubiculo);
+		
+		comboBoxEntidadResponsableUnoCubiculo = new JComboBox();
+		comboBoxEntidadResponsableUnoCubiculo.setBounds(783, 194, 149, 20);
+		contentPane.add(comboBoxEntidadResponsableUnoCubiculo);
+		
+		JLabel lblResponsable = new JLabel("Responsable");
+		lblResponsable.setBounds(795, 49, 106, 14);
+		contentPane.add(lblResponsable);
+		
+		JLabel lblEntidadesResponsable = new JLabel("Entidades Responsable");
+		lblEntidadesResponsable.setBounds(588, 194, 185, 20);
+		contentPane.add(lblEntidadesResponsable);
 		
 		JLabel lblPersonaEncargada_3 = new JLabel("Persona Encargada");
 		lblPersonaEncargada_3.setBounds(776, 21, 133, 14);
@@ -378,5 +540,6 @@ public class VentanaPrincipal extends JFrame {
 		internalFrame.setVisible(true);
 		//agregarCubiculos();
 		
+		ControladorPanelSimulacion controladorPanelSimulacion = new ControladorPanelSimulacion(this);
 	}
 }

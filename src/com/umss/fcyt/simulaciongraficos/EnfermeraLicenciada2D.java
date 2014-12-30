@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import com.umss.fcyt.modelo.Entidad;
+
 public class EnfermeraLicenciada2D implements ElementoAnimable,
 		ElementoDibujable, Runnable {
 	private int coordenaX;
@@ -30,12 +32,15 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 
 	StringBuffer textoDescripcion;
 	
+	Entidad entidad;
+	
 	public EnfermeraLicenciada2D(PanelSimulacion panelSimulacion,
 			int coordenaX, int coordenaY, String nombreImagen) {
 
 		this.coordenaX = coordenaX;
 		this.coordenaY = coordenaY;
 		this.panelJuego = panelSimulacion;// panel donde se dibujan las notas
+		this.entidad = panelSimulacion.entidadTriajenew;
 		
 		monitorPermisoEntrada = panelSimulacion.monitorPermisoEntrada;
 		monitorHayPacienteTriaje = panelSimulacion.monitorHayPacienteTriaje;
@@ -43,9 +48,17 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 
 		this.nombreImagen = nombreImagen;
 		
-		this.textoDescripcion = panelSimulacion.licenciadaDescripcion;
+		//this.textoDescripcion = panelSimulacion.licenciadaDescripcion;
 
 		this.imagen = new ImageIcon(this.nombreImagen);
+		
+		if((entidad.getNombreEntidad()).equalsIgnoreCase("Medico de Turno")) {
+			this.textoDescripcion = panelJuego.medicoDescripcion;
+		} else if((entidad.getNombreEntidad()).equalsIgnoreCase("Enfermera Auxiliar")) {
+			this.textoDescripcion = panelJuego.auxiliarDescripcion;
+		} else if((entidad.getNombreEntidad()).equalsIgnoreCase("Enfermera Licenciada")) {
+			this.textoDescripcion = panelJuego.licenciadaDescripcion;
+		}
 	}
 
 	/*
@@ -66,7 +79,8 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 		while (true) {
 
 			monitorHayPacienteTriaje.obtenerPermiso("estoy parada");
-			textoDescripcion.append("Enfermera Licenciada: preparando para la evaluacion del paciente\n");
+			textoDescripcion.append(entidad.getNombreEntidad() + 
+					": preparando para la evaluacion del paciente\n");
 			realizarEvaluacion();
 			monitorPermisoACubiculo.cederPermiso("puedes ir a cubiculo");
 			monitorPermisoEntrada.cederPermiso("hay espacio entra chango");
@@ -98,9 +112,11 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 			}
 
 		}
-		textoDescripcion.append("Enfermera Licenciada: realizando la evaluacion del paciente\n");
+		textoDescripcion.append(entidad.getNombreEntidad() +
+				": realizando la evaluacion del paciente\n");
 		atenderPaciente(tiempoAtencion);
-		textoDescripcion.append("Enfermera Licenciada: designando al paciente al cubiculo de quemados\n");
+		textoDescripcion.append(entidad.getNombreEntidad() +
+				": designando al paciente al cubiculo de quemados\n");
 	}
 
 	public void atenderPaciente(int tiempo) {
