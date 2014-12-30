@@ -56,11 +56,16 @@ public class ManualDeUsuario extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		contentPanel.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		contentPanel.add(scrollPane);
+		
+		panel_pdf = new PagePanel();
+		scrollPane.setViewportView(panel_pdf);
 		{
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(12, 12, 175, 284);
-			contentPanel.add(scrollPane);
+			JScrollPane scrollPane_1 = new JScrollPane();
+			contentPanel.add(scrollPane_1, BorderLayout.WEST);
 			{
 				JList list = new JList();
 				list.addMouseListener(new MouseAdapter() {
@@ -78,7 +83,7 @@ public class ManualDeUsuario extends JDialog {
 					}
 				});
 				list.setModel(new AbstractListModel() {
-					String[] values = new String[] {"1 Instalacion y Ejecucion", "2 Descripcion de los Procesos simulados", "3 Reportes"};
+					String[] values = new String[] {"1 Instalacion y Ejecucion", "2 Menú y opciones", "3 Reportes", "4 Descripción de los Procesos simulados"};
 					public int getSize() {
 						return values.length;
 					}
@@ -86,35 +91,12 @@ public class ManualDeUsuario extends JDialog {
 						return values[index];
 					}
 				});
-				scrollPane.setViewportView(list);
-			}
-		}
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(199, 26, 534, 270);
-		contentPanel.add(scrollPane);
-		
-		panel_pdf = new PagePanel();
-		scrollPane.setViewportView(panel_pdf);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				scrollPane_1.setViewportView(list);
 			}
 		}
 	}
 
-	protected void mostrarPDF(MouseEvent e) throws IOException {
+	protected void mostrarPDF(MouseEvent e) throws IOException  {
 		  JList theList = (JList) e.getSource();
 	        if (e.getClickCount() == 2) {
 	          int index = theList.locationToIndex(e.getPoint());
@@ -124,30 +106,44 @@ public class ManualDeUsuario extends JDialog {
 	           // System.out.println("Double-clicked on: " + pos);
              if(pos==49)
 	            {
-            	 String file = "documentos/1.pdf";
-                 RandomAccessFile raf = new RandomAccessFile(file, "r");
-                 FileChannel channel = raf.getChannel();
-                 ByteBuffer buf = channel.map(FileChannel.MapMode.READ_ONLY,0,channel.size());
-                 PDFFile pdfFile = new PDFFile(buf);
-                 PDFPage page = pdfFile.getPage(0);
-                 panel_pdf.useZoomTool(false);
-                 panel_pdf.showPage(page);
+            	 mostrarPdf("documentos/1.pdf",1);
 	             
                  
 	            }else
 	              {
 	            	if(pos==50)
 	            	 {
+	            		mostrarPdf("documentos/1.pdf",2);
 	            		
 	            	}else
 	            	   {
 	            		if(pos==51){
 	            			
-	            	    }
+		            		mostrarPdf("documentos/1.pdf",3);
+
+	            	    }else
+		            	   {
+		            		if(pos==52){
+		            			
+		            	    }
+		            	  }
 	            	  }
 	              }
 	            
 	          }
 	        }
+	}
+
+	private void mostrarPdf(String nombreArchivo, int numPagina) throws IOException {
+		//panel_pdf= new PagePanel();
+		String file = nombreArchivo;
+        RandomAccessFile raf = new RandomAccessFile(file, "r");
+        FileChannel channel = raf.getChannel();
+        ByteBuffer buf = channel.map(FileChannel.MapMode.READ_ONLY,0,channel.size());
+        PDFFile pdfFile = new PDFFile(buf);
+        PDFPage page = pdfFile.getPage(numPagina);
+       // panel_pdf.useZoomTool(true); para el zoom
+        panel_pdf.showPage(page);
+		
 	}
 }
