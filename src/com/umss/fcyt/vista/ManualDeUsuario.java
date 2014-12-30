@@ -52,7 +52,7 @@ public class ManualDeUsuario extends JDialog {
 	 */
 	public ManualDeUsuario(VentanaPrincipal ventanaPrincipal) {
 	    super(ventanaPrincipal);
-		setBounds(100, 100, 740, 377);
+		setBounds(100, 100, 1000, 477);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
