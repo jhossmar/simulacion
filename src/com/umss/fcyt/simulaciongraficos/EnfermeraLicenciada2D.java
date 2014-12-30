@@ -17,7 +17,7 @@ public class EnfermeraLicenciada2D implements ElementoAnimable,
 
 	int velocidad = 100;
 	int avance = 5;
-	int tiempoAtencion = 2000;
+	int tiempoAtencion = 3000;
 
 	private ImageIcon imagen;
 	private PanelSimulacion panelJuego;

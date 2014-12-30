@@ -25,7 +25,7 @@ public class EnfermeraAxiliar2D implements ElementoAnimable, ElementoDibujable,
 
 	Monitor monitorPermisoAtenderAuxiliar;
 	Monitor monitorPermisoAtenderDoctor;
-	int tiempoAtencion = 2000;
+	int tiempoAtencion = 3000;
 	public Thread hilo;
 
 	StringBuffer textoDescripcion;
