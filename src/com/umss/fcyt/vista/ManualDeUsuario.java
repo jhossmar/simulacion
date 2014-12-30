@@ -83,7 +83,7 @@ public class ManualDeUsuario extends JDialog {
 					}
 				});
 				list.setModel(new AbstractListModel() {
-					String[] values = new String[] {"1 Instalacion y Ejecucion", "2 Menú y opciones", "3 Reportes", "4 Descripción de los Procesos simulados"};
+					String[] values = new String[] {"1 Instalacion y Ejecucion", "2 Menú y opciones", "3 Reportes"};
 					public int getSize() {
 						return values.length;
 					}
