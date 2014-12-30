@@ -93,7 +93,7 @@ public class ControladorPanelSimulacion implements ItemListener, ActionListener 
 				} else if(tipo.equalsIgnoreCase("Enfermera Auxiliar")) {
 					entidadTriaje.setNombreImagen("imagenes/enfermeraTriaje.png");
 				} else if(tipo.equalsIgnoreCase("Enfermera Licenciada")) {
-					entidadTriaje.setNombreImagen("imagenes/enfermeraLicenciadaTriaje.gif");
+					entidadTriaje.setNombreImagen("imagenes/enfermeraLicenciadaTriaje.png");
 				}
 				entidadTriaje.setNombreEntidad(tipo);
 				ProcesoAtencionTriaje proceso = new ProcesoAtencionTriaje();
