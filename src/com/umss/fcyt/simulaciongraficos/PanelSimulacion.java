@@ -39,8 +39,11 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 
 	public Thread graficador;
 	
+	//la del triaje
 	public StringBuffer licenciadaDescripcion = new StringBuffer();
+	//la del cubiculo
 	public StringBuffer auxiliarDescripcion = new StringBuffer();
+	//el del cubiculo en pocision del doctor
 	public StringBuffer medicoDescripcion = new StringBuffer();
 
 	//Doctor2D representa como un proceso y lo mismo en las enfermeras
@@ -49,6 +52,8 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	private EnfermeraLicenciada2D enfermeraTriaje;
 
 	private EnfermeraAxiliar2D enfermeraCubiculo;
+	
+	boolean terminadoAsignacion = false;
 	
 	public PanelSimulacion() {
 
@@ -116,19 +121,18 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	public void agregarDoctores() {
 		doctor = new Doctor2D(this);
 		//doctores.add(doctor);
-		doctor.iniciarMovimiento();
 	}
 	
 	public void agregarEnfermeras() {
 		enfermeraTriaje = new EnfermeraLicenciada2D(this, 285, 290, "imagenes/enfermeraLicenciadaTriaje.gif");
 		//enfermerasLicenciadas.add(enfermeraCubiculo);
-		enfermeraTriaje.iniciarMovimiento();
+		
 		
 		enfermeraCubiculo = new EnfermeraAxiliar2D(this,365,100, "imagenes/enfermeraCubiculo.png");
 		enfermeraCubiculo.setAncho(45);
 		enfermeraCubiculo.setLargo(45);
 		//enfermeras.add(enfermeraTriaje);
-		enfermeraCubiculo.iniciarMovimiento();
+		
 	}
 	
 	public void cambiarImagen(String nombreIm) {
@@ -150,6 +154,9 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 			objeto.dibujar(g);
 		}
 		
+		if(terminadoAsignacion) {
+			
+		
 		//for (EnfermeraAxiliar2D enfermera : enfermeras) {
 			enfermeraCubiculo.dibujar(g);
 		//}
@@ -161,12 +168,17 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 		//for (Doctor2D doctor : doctores) {
 			doctor.dibujar(g);
 		//}
+		}
 	}
 
 	public void iniciarSimulacionGrafica() {
 		if(!simulacionIniciada) {
 			//this.temporizador.start();
+			this.terminadoAsignacion = true;
 			this.graficador.start();
+			doctor.iniciarMovimiento();
+			enfermeraCubiculo.iniciarMovimiento();
+			enfermeraTriaje.iniciarMovimiento();
 			simulacionIniciada = true;
 		}
 		
@@ -242,13 +254,7 @@ public class PanelSimulacion extends JPanel implements ActionListener {
 	//puede ser un metodo que agrega unicamente pacientes segun el tiempo (ES MUCHO MAS REAL)
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-//		if(contador < 3) {
-//			Paciente2D nuevoPaciente = new Paciente2D(this);
-//			this.pacientes.add(nuevoPaciente);
-//			
-//			nuevoPaciente.iniciarMovimiento();
-//			contador++;
-//		} 
+
 	}
 
 }

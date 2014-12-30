@@ -162,7 +162,7 @@ public class SimuladorDos {
 			descripcionSimulacion.append(ProcesoAtencionAGraves.atenderAPaciente(paciente));
 			break;
 		case QUEMADURAS:
-			descripcionSimulacion.append(ProcesoAtencionAQuemados.atenderAPaciente(paciente));
+			//descripcionSimulacion.append(ProcesoAtencionAQuemados.atenderAPaciente(paciente));
 			break;
 		default:
 			break;
